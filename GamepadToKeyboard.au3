@@ -98,6 +98,12 @@ global $LSXaxisInverted=IniRead($inifile,"Analogs","LSXaxisInverted",0), $LSYaxi
 $wheelstepup=IniRead($inifile,"[Other]","WheelStepUp",1)
 $wheelstepdown=IniRead($inifile,"[Other]","WheelStepDown",1)
 
+Global $WheelSpeedLimiterUp = IniRead($inifile,"[Other]","WheelSpeedLimiterUp",8500)
+Global $WheelSpeedlimiterDown = IniRead($inifile,"[Other]","WheelSpeedLimiterDown",8500)
+Global $UseSameWheelSpeedLimiter = IniRead($inifile,"[Other]","UseSameWheelSpeedLimiter",1)
+Global $WheelSpeedLimiter = IniRead($inifile,"[Other]","WheelSpeedLimiter",8500)
+Global $WheelAnalogMode = IniRead($inifile,"[Other]","WheelAnalogMode",1)
+
 If $AnalogToMouse <> "1" and $AnalogToMouse <> "0" Then
 	$AnalogToMouse=0
 	endif
@@ -182,7 +188,7 @@ While 1
 	buttons()
 
 
-local $keys[16+1+8]   =[$A, $B, $X, $Y, $LB, $RB, $LT, $RT, $back, $start, $LS, $RS, $Up, $Down, $Left, $Right, $Home, $LSup, $LSdown, $LSleft, $LSright, $RSup, $RSdown, $RSleft, $RSright]
+global $keys[16+1+8]   =[$A, $B, $X, $Y, $LB, $RB, $LT, $RT, $back, $start, $LS, $RS, $Up, $Down, $Left, $Right, $Home, $LSup, $LSdown, $LSleft, $LSright, $RSup, $RSdown, $RSleft, $RSright]
 
 sleep(1)
 
@@ -233,10 +239,9 @@ Else
 		Case "MBmouse"
 		MouseDown("middle")
 		Case "WheelUp"
-		MouseWheel("up", $wheelstepup)
+		ScrollWheel($i,"up")
 		Case "WheelDown"
-		MouseWheel("down", $wheelstepdown)
-
+		ScrollWheel($i,"down")
 	endswitch
 	$pressed[$i]=True
 	endif
@@ -539,6 +544,11 @@ $wheelstepup=IniRead($inifile,"[Other]","WheelStepUp",1)
 $wheelstepdown=IniRead($inifile,"[Other]","WheelStepDown",1)
 
 
+Global $WheelSpeedLimiterUp = IniRead($inifile,"[Other]","WheelSpeedLimiterUp",8500)
+Global $WheelSpeedlimiterDown = IniRead($inifile,"[Other]","WheelSpeedLimiterDown",8500)
+Global $UseSameWheelSpeedLimiter = IniRead($inifile,"[Other]","UseSameWheelSpeedLimiter",1)
+Global $WheelSpeedLimiter = IniRead($inifile,"[Other]","WheelSpeedLimiter",8500)
+Global $WheelAnalogMode = IniRead($inifile,"[Other]","WheelAnalogMode",1)
 
 
 switch $MouseDeadzoneType
@@ -598,10 +608,9 @@ Else
 		Case "MBmouse"
 		MouseDown("middle")
 		Case "WheelUp"
-		MouseWheel("up", $wheelstepup)
+		ScrollWheel($i,"up")
 		Case "WheelDown"
-		MouseWheel("down", $wheelstepdown)
-
+		ScrollWheel($i,"down")
 	endswitch
 	$pressed[$i]=True
 	endif
@@ -629,6 +638,54 @@ next
 endfunc
 
 
+Func ScrollWheel($k,$dir)
+local $ver
+if $WheelAnalogMode=1 and $k>=17 then
+
+
+	$k=$k-17
+	local $values=[$LSY, $LSY, $LSX, $LSX,   $RSY,$RSY, $RSX,$RSX]
+	$value=$values[$k]
+
+	;if $dir="down" Then
+	;	$ver=$MOUSE_WHEEL_DOWN
+	;	endif
+
+		 if $UseSameWheelSpeedLimiter = 1 then
+			$WheelSpeedLimiterUp=$WheelSpeedLimiter
+			$WheelSpeedLimiterDown=$WheelSpeedLimiter
+		 endif
+
+		Local $stepsUp = Ceiling(Abs($value)/ $WheelSpeedLimiterUp)
+		Local $stepsDown = Ceiling(Abs($value)/ $WheelSpeedLimiterDown)
+
+	if $dir = "up" Then
+	$steps=$stepsUp
+	elseif $dir = "down" Then
+	$steps=$stepsDown
+	endif
+
+
+        If $value < 0 Then
+			MouseWheel($dir, $steps)
+			;MouseWheel($MOUSE_WHEEL_DOWN, $steps)
+            ;MouseWheel($MOUSE_WHEEL_DOWN, $steps+$wheelstepdown)
+			Else
+			MouseWheel($dir, $steps)
+			;MouseWheel($MOUSE_WHEEL_UP, $steps)
+            ;MouseWheel($MOUSE_WHEEL_UP, $steps+$wheelstepup)
+        EndIf
+else
+
+		if $dir="down" then
+			MouseWheel($MOUSE_WHEEL_DOWN, $wheelstepdown)
+		Elseif $dir="up" then
+            MouseWheel($MOUSE_WHEEL_UP, $wheelstepup)
+		endif
+
+endif
+	;sleep(1)
+EndFunc
 
 
 
@@ -686,9 +743,11 @@ func keysDesktop()
 				Case "MBmouse"
 					MouseDown("middle")
 				Case "WheelUp"
-					MouseWheel("up", $wheelstepup)
+				;MouseWheel("up", $wheelstepup)
+				ScrollWheel($i,"up")
 				Case "WheelDown"
-					MouseWheel("down",$wheelstepdown)
+				;MouseWheel("down",$wheelstepdown)
+				ScrollWheel($i,"down")
 			EndSwitch
 			$pressed[$i] = True
 			$sentKeys[$i]=True
@@ -774,9 +833,11 @@ func keysDesktop2()
 				Case "MBmouse"
 					MouseDown("middle")
 				Case "WheelUp"
-					MouseWheel("up", $wheelstepup)
+				;MouseWheel("up", $wheelstepup)
+				ScrollWheel($i,"up")
 				Case "WheelDown"
-					MouseWheel("down",$wheelstepdown)
+				;MouseWheel("down",$wheelstepdown)
+				ScrollWheel($i,"down")
 			EndSwitch
 			$pressed[$i] = True
 			$sentKeys[$i]=True

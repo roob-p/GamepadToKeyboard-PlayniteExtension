@@ -969,6 +969,16 @@ Home	=
 
 SendKeysType   = 1
 
+ ; WheelAnalogMode = 1  Enables progressive behavior when the wheel is assigned to an analog axis. Digital inputs always use step values.
+WheelAnalogMode = 1
+
+UseSameWheelSpeedLimiter  = 1
+WheelSpeedLimiter	      = 8500
+
+WheelSpeedLimiterUp 	  = 8500
+WheelSpeedLimiterDown 	  = 8500
+
+ ;  Wheel step amount when scrolling
 WheelStepUp    = 5
 WheelStepDown  = 5
 
