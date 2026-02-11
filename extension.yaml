@@ -1,0 +1,7 @@
+﻿Id: GamepadToKeyboard
+Name: GamepadToKeyboard
+Author: roob-p
+Version: 1.0.1
+Module: GamepadToKeyboard.psm1
+Type: Script
+Icon: icon.png
