@@ -19,7 +19,7 @@
 - Use a personal, external config that can be used for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the config in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` with a click. The sub-menu is dinamically: its size varies with the number of elements.
-- In a multiple selection, if the selected games are in a mixed state (some games activated, some games disactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
+- In a multiple selection, if the games are in a mixed state (some games activated, some games disactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
 
 
 
