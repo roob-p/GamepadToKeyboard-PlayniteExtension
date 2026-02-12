@@ -31,16 +31,16 @@ Values you can assign to the buttons:
 - Mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
 default.ini example:
 
-| Button      | Keys      |        | Button | Keys    |       |Button  | Keys|   | Button     | Keys        |  
-| ------------| ----------|--------|--------| --------|-------|--------|-----|---|------------| ------------|
-|A            |Enter     |        |Back    | Esc     |       |LSup    | W   |   |Home        |Esc          | 
-|B            |Space     |        |Start   | Enter   |       |LSdown  | S   |
-|X            |LAlt      |        |LS      | MBmouse |       |LSleft  | A   |            
-|Y            |Esc       |        |RS      | F1      |       |LSright | D   |
-|LB           |Q         |        |Dup     | Up      |       |RSup    |     |
-|RB           |E         |        |Ddown   | Down    |       |RSdown  |     |
-|LT           |RBmouse   |        |Dleft   | Left    |       |RSleft  |     |
-|RT           |RBmouse   |        |Dright  | Right   |       |RSright |     |
+|Button       |Keys         |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button  | Keys    |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys        |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys         |  
+|-------------|-------------|-----------|--------|---------|-----------|-------------|------------|-----------|-------------|-------------|
+|`A`          |Enter        |           |Back    | Esc     |           |LSup         | W          |           |Home         |Esc          | 
+|`B`          |Space        |           |Start   | Enter   |           |LSdown       | S          |
+|`X`          |LAlt         |           |LS      | MBmouse |           |LSleft       | A          |            
+|`Y`          |Esc          |           |RS      | F1      |           |LSright      | D          |
+|`LB`         |Q            |           |Dup     | Up      |           |RSup         |            |
+|`RB`         |E            |           |Ddown   | Down    |           |RSdown       |            |
+|`LT`         |RBmouse      |           |Dleft   | Left    |           |RSleft       |            |
+|`RT`         |RBmouse      |           |Dright  | Right   |           |RSright      |            |
 
 
 ## Controller options  
