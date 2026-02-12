@@ -20,6 +20,7 @@
 - Use a personal, external config for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the file in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` voice menu. The sub-menu is dinamically built: its size varies with the number of elements.
+- The program can also load an ini if executed by command line and passing the config as parameter, by drag and drop the ini to `GamepadToKeyboard.exe`. However, turn off the program first, if you want to launch it manually.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games disactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
 
 
