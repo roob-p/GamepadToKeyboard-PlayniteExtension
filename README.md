@@ -24,7 +24,25 @@
 
 
 
-## 🕹️ Button assignments and Controller info
+## 🕹️ Button assignments
+Values you can assign to the buttons: 
+- `A..Z`, `0..9`, `F1..F12`,
+- common buttons: `Enter`, `Space`, `Esc`, `Lalt`, `Lshift`, `Lctrl`, `Lwin`
+- Mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
+default.ini example:
+
+| Button      | Keys      |        | Button     | Keys        |          
+| ------------| ----------|--------|------------| ------------|
+|A | Enter|                        |Back    | Esc     |
+|B | Space|                        |Start   | Enter   |
+|X | LAlt |                        |LS      | MBmouse |                   
+|Y | Esc  |                        |RS      | F1      |    
+|LB |Q    |                        |Dup     | Up      |
+|RB |E    |                        |Ddown   | Down    |
+|LT | RBmouse|                     |Dleft   | Left    |
+|RT | RBmouse|                     |Dright  | Right   |
+
+
 ## Controller options  
 
 | Option                         | Values / Description                                                                                                       |
