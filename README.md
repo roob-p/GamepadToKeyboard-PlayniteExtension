@@ -54,6 +54,7 @@ Values you can assign to the buttons:
 |Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.          |
 |                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
+|                                 |Sensitivity                     |                                                                      |
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion                                 | 
 |Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
@@ -88,8 +89,9 @@ Values you can assign to the buttons:
   - 2 = Continuous press on desktop, same as type 1 in games
   - 3 = Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
   - 4 = Desktop-alt: experimental/alternative desktop mode (but useless). In-game behavior same as previous types.
-- Other option absent in the table are:
- -  [Other] -> UseSameWheelSpeedLimiter  = 1| WheelSpeedLimiter	  = 8500| WheelSpeedLimiterUp 	  = 8500| WheelSpeedLimiterDown 	  = 8500
- -  [Mouse] -> Sensitivity   = 50| SmoothFactor  = 0.2
+- Other option absent in the table:
+ -  `[Other]` -> `UseSameWheelSpeedLimiter`: `1|0` (use same value for WheelUp and WheelDown); `WheelSpeedLimiter:` limit the speed of scroll; `WheelSpeedLimiterUp`: Up Limiter; `WheelSpeedLimiterDown`: Down limiter
+ -  `[Mouse]` -> Sensitivity   = 50| SmoothFactor  = 0.2
+
 
  
