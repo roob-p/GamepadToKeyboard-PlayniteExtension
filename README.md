@@ -1,7 +1,7 @@
  # 🎮 GamepadToKeyboard-PlayniteExtension
 🕹️ *Emulate keyboard and mouse with your gamepad in a quick, easy and really customizable manner.*
 
-- This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gameppad support, or where some controller buttons (in particular `LT` and `RT`) do not work (for example in `Legacy of Kain: Defiance` and `Assassin's Creed`).   
+- This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work (for example in `Legacy of Kain: Defiance` and `Assassin's Creed`).   
 ***Useful for old games without proper Xinput support.***
 - The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
 - A dedicated config can be created per game, or a global config can be used for all games.
@@ -22,7 +22,7 @@
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dynamically built: its size varies with the number of elements.
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
-- In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activate all of them.
+- In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activates all of them.
 
 
 
@@ -68,7 +68,7 @@ Values you can assign to the buttons:
 
 
 ## ⚠️ Notes
-- The exe that comes with the extension is 64bit. The reason is that the x64 version of Autoit programs receive minor flags from AV engines. If you need the x86 one you can dowload it from the main in the repo, or from the attached files in the releases.  
+- The exe that comes with the extension is 64bit. The reason is that the x64 version of Autoit programs receive minor flags from AV engines. If you need the x86 one you can download it from the main in the repo, or from the attached files in the releases.  
 - The program does not contain any malicious behaviour. If your AV engine flags it as malware it's a false positive. If so, please send `GamepadTokeyboard.exe` (or any associated flagged file) to your AV vendor asking for a false positive review request.
 
 
