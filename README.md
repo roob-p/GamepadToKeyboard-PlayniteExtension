@@ -10,9 +10,12 @@
 - Or edit a list (`QuickIniProfile.ini`) adding your "favorite" configs that you'll can switch via `Quick ini profiles (all gamea)` quick a click.
 
 
-## How it works 
-- Everytime you activate a game for wich 
-- Add the game in the list of games that GamepadToKeyboard `Gamelist.ini` file simply clicking the 2nd menu voice. 
+## ⚙️ How it works 
+- Activate a game with the 2nd menu voice, and it be will be added in `Gamelist.ini` (with it's name, id, platform and/or source). An assignment config (gameid.ini) for that game will be created.
+- You can open the created game config by clicking `Edit game config`
+- Edit `Gamelist.ini` by clicking the 3rd menu voice.
+- `Gamelist.ini` contains the games for which GamepadToKeyboard will work. When an idgame is setted to `1` the game is active; when setted to `0` the game is not active and GamepadToKeyboard will not be launched. 
+
 
 
 
