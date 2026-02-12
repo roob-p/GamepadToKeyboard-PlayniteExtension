@@ -1011,7 +1011,7 @@ Deadzone        = 2000
 
 [Analogs]
    ; DeadzoneType: 1 = Global (one value for both sticks and both axes), 2 = PerStick (LS and RS have different deadzones), 4 = PerAxis (X and Y Deadzones per stick), 8 = PerDirection (left/right/up/down deadzones per stick)
-DeadzoneType     =  1
+DeadzoneType      =  1
 
    ; Used when DeadzoneType = 1 (Global)
 Deadzone          = 1000
@@ -1030,11 +1030,11 @@ RSYdeadzone       = 0
 LSleftDeadzone    = 0
 LSrightDeadzone   = 0
 LSupDeadzone      = 0
-LSYdownDeadzone   = 0
+LSdownDeadzone    = 0
 RSleftDeadzone    = 0
 RSrightDeadzone   = 0
 RSupDeadzone      = 0
-RSYdownDeadzone   = 0
+RSdownDeadzone    = 0
 
 LSXaxisInverted	  = 0
 LSYaxisInverted   = 0
