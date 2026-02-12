@@ -25,7 +25,7 @@
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activates all of them.
 
-## 🔄 Live config reload
+### 🔄 Live config reload
 
 - Configuration files can be edited while the game is running.  
 - Press `Shift`+`Ctrl`+`5` to reload the current `.ini` instantly, without restarting the application.  
