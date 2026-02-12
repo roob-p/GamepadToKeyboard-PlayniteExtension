@@ -53,12 +53,14 @@ Values you can assign to the buttons:
 |                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion                                 | 
-|[Analogs]                        |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*          |    
+|[Analogs]                        |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion.                                |   
 |[Other]                          |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.| 
 |                                 |                                |                                                                      |
 |                                 |                                |*Assign the value to `Deadzone` / `XDeadzone, YDeadzone` / `XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`    |
-|                                 |                                |*Assign the value to `Deadzone` / `LSDeadzone, RSDeadzone` / `LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone` /  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`          |
+|                                 |                                |**Assign the value to `Deadzone` / `LSDeadzone, RSDeadzone` / `LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone` /  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`     |
+                                                                   |
+
 
 
 
