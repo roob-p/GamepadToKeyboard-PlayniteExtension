@@ -16,10 +16,10 @@
 - Turn `On|Off` the program by clicking the 1st menu item. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
 - Activate a game by clicking the 2nd menu item, and the game will be added in `Gamelist.ini` (with its name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
 - You can open the game config by clicking `Edit game config`.
-- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When a gameid is set to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
+- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When a gameid is set to `1` the game is active; when set to `0` the game is not active and `GamepadToKeyboard` will not be launched.
 - Use a personal, external config for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the file in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
-- In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dinamically built: its size varies with the number of elements.
+- In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dynamically built: its size varies with the number of elements.
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activate all of them.
 
@@ -57,16 +57,8 @@ Values you can assign to the buttons:
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion                                 | 
 |[Analogs]                        |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion.                                |   
-|[Other]                          |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.| 
-|                                 |                                |                                                                      |
-|                                 |                                |*Assign the value to `Deadzone` / `XDeadzone, YDeadzone` / `XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`    |
-|                                 |                                |**Assign the value to `Deadzone` / `LSDeadzone, RSDeadzone` / `LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone` /  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`     |
+|[Other]                          |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
                                                                    
-
-
-
-
-
 
 
 
@@ -76,5 +68,11 @@ Values you can assign to the buttons:
 
 ## ⌨️ List of assignable keys:
 `SPACE`, `ENTER`, `ALT`, `BACKSPACE`, `BS`, `DELETE`, `DEL`, `UP`, `DOWN`, `LEFT`, `RIGHT`, `HOME`, `END`, `ESCAPE`, `ESC`, `INSERT`, `INS`, `PGUP`, `PGDN`, `F1`, `F2`, `F3`, `F4`, `F5`, `F6`, `F7`, `F8`, `F9`, `F10`, `F11`, `F12`, `TAB`, `PRINTSCREEN`, `LWIN`, `RWIN`, `NUMLOCK on`, `CAPSLOCK off`, `SCROLLLOCK toggle`, `BREAK`, `PAUSE`, `NUMPAD0`, `NUMPAD1`, `NUMPAD2`, `NUMPAD3`, `NUMPAD4`, `NUMPAD5`, `NUMPAD6`, `NUMPAD7`, `NUMPAD8`, `NUMPAD9`, `NUMPADMULT`, `NUMPADADD`, `NUMPADSUB`, `NUMPADDIV`, `NUMPADDOT`, `NUMPADENTER`, `APPSKEY`, `LALT`, `RALT`, `LCTRL`, `RCTRL`, `LSHIFT`, `RSHIFT`, `SLEEP`, `ALTDOWN`, `ALTUP`, `SHIFTDOWN`, `SHIFTUP`, `CTRLDOWN`, `CTRLUP`, `LWINDOWN`, `LWINUP`, `RWINDOWN`, `RWINUP`, `ASC nnnn`, `BROWSER_BACK`, `BROWSER_FORWARD`, `BROWSER_REFRESH`, `BROWSER_STOP`, `BROWSER_SEARCH`, `BROWSER_FAVORITES`, `BROWSER_HOME`, `VOLUME_MUTE`, `VOLUME_DOWN`, `VOLUME_UP`, `MEDIA_NEXT`, `MEDIA_PREV`, `MEDIA_STOP`, `MEDIA_PLAY_PAUSE`, `LAUNCH_MAIL`, `LAUNCH_MEDIA`, `LAUNCH_APP1`, `LAUNCH_APP2`, `OEM_102`
+
+
+
+### ⚙️ Assignment notes
+* Assign the value to `Deadzone` / `XDeadzone, YDeadzone` / `XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`
+** Assign the value to `Deadzone` / `LSDeadzone, RSDeadzone` / `LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone` / `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`
 
  
