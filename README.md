@@ -11,13 +11,12 @@
 
 
 ## ⚙️ How it works 
-- Turn On/Off the program clicking the first menu voice. When turned on, the program is executed by launching the "activated" games.
-- Activate a game clicking the 2nd menu voice, and it be will be added in `Gamelist.ini` (with it's name, id, platform and/or source). An assignment config (gameid.ini) for that game will be created.
+- Turn `On|Off` the program by clicking the 1st menu voice. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
+- Activate a game by clicking the 2nd one, and the game will be added in `Gamelist.ini` (with it's name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
 - You can open the created game config by clicking `Edit game config`
-- Edit `Gamelist.ini` by clicking the 3rd menu voice.
-- `Gamelist.ini` contains the games for which GamepadToKeyboard will work. When an idgame is setted to `1` the game is active; when setted to `0` the game is not active and GamepadToKeyboard will not be launched.
-- You can also decide to use a personal, external file ini by setting `UseCustomIni = 1` (manually in `Gamelist.ini`, or through the menu panel) and specifying  the config in `FileIni`
-- In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched via `Quick ini profiles (all games)` voice menu with a click.
+- Edit `Gamelist.ini` by clicking the 3rd menu voice. `Gamelist.ini` contains the games for which GamepadToKeyboard will work. When an idgame is setted to `1` the game is active; when setted to `0` the game is not active and GamepadToKeyboard will not be launched.
+- Use a personal, external file ini by setting `UseCustomIni = 1` (manually in `Gamelist.ini`, or through the menu panel) and specifying the config in `FileIni`.
+- In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched via `Quick ini profiles (all games)` voice menu with a click. The sub-menu are created dinamically: its size varies with the number of elements.
 
 ## Button assignments and controller info
 
