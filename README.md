@@ -79,8 +79,8 @@ Values you can assign to the buttons:
 
 
 ### 📝 Assignment notes
-- *Assign the value for mouse to: `Deadzone`|`XDeadzone, YDeadzone`|`XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`.  
-- **Assign the value for analogs to:`Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|`LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.  
+- *Assign the value to: `Deadzone`|`XDeadzone, YDeadzone`|`XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`.  
+- **Assign the value to:`Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|`LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.  
 - Other option absent in the table are:
  -  [Other] -> UseSameWheelSpeedLimiter  = 1| WheelSpeedLimiter	  = 8500| WheelSpeedLimiterUp 	  = 8500| WheelSpeedLimiterDown 	  = 8500
  -  [Mouse] -> Sensitivity   = 50| SmoothFactor  = 0.2
