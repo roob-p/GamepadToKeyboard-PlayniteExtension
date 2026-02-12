@@ -1,3 +1,7 @@
+<!--[🔙 Back](https://roob-p.github.io)--> 
+<!--[![🔙 Back](https://img.shields.io/badge/🔙-Back-blue)](https://roob-p.github.io)-->
+[![🔙 Back](https://img.shields.io/badge/🔙-Back-white?style=flat-square&logoColor=blue&color=blue)](https://roob-p.github.io)
+
  # 🎮 GamepadToKeyboard-PlayniteExtension
 🕹️ *Emulate keyboard and mouse with your gamepad in a quick, easy and really customizable manner.*
 
