@@ -5,7 +5,7 @@
 ***Useful for old games without proper xinput support.***
 - The program is very easy to use and configure: just edit the assignments in the .ini file and the application will be started automatically after launching the game. 
 - You can create a config per game or use a global config for all games.
-- Super clear: the "Led" icons indicate the state of the program, the active config and much more.
+- Clear and intuitive: "Led" icons indicate the state of the program, the active config and much more.
 - You can change the state of the program and its functionalities with a click through the menu panel.
 - Possibility to explore the config file to use or edit a list of favourite configs that can be switched via menu panel, with a click.
 - You can select multiple games at once. Every new config will be created.
