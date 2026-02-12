@@ -10,6 +10,7 @@
 - The program's functionalities can be changed with a click through the menu.
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
 - The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction), axis inversion and more.
+- Config files can be edited and reloaded on-the-fly using a hotkey, without restarting the application.
 - **In future I'll add MACRO, COMBO and TURBO functionalities. Stay tuned.**
 
 
@@ -24,6 +25,10 @@
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activates all of them.
 
+## 🔄 Live config reload
+
+Configuration files can be edited while the game is running.  
+Press `Shift+Ctrl+5` to reload the current `.ini` instantly, without restarting the application.
 
 
 ## 🕹️ Button assignments
