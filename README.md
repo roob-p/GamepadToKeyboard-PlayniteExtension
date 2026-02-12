@@ -74,7 +74,7 @@ Values you can assign to the buttons:
 
 <br>  
 
-**If you enjoy GamepadDesktop, you can buy me a coffee. It will be very appreciated ;)**  
+**If you enjoy GamepadToKeyboard, you can buy me a coffee. It will be very appreciated ;)**  
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E214R1KB)  
 
