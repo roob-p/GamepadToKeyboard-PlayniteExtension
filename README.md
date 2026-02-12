@@ -59,7 +59,7 @@ Values you can assign to the buttons:
 |                                 |                                |                                                                      |
 |                                 |                                |*Assign the value to `Deadzone` / `XDeadzone, YDeadzone` / `XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`    |
 |                                 |                                |**Assign the value to `Deadzone` / `LSDeadzone, RSDeadzone` / `LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone` /  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`     |
-                                                                   |
+                                                                   
 
 
 
