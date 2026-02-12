@@ -58,6 +58,7 @@ Values you can assign to the buttons:
 |Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
 |Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
+|                                 |SendTypes                       |`1`: default; `2`: alternative; `3`: desktop mode (keyboard-style delay and repeat)| 
                                                                    
 
 <br>
@@ -81,7 +82,12 @@ Values you can assign to the buttons:
 ### 📝 Assignment notes
 - *Assign the value to: `Deadzone`|`XDeadzone, YDeadzone`|`XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`.  
 - **Assign the value to: `Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|  
-  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.  
+  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.
+- ***Sendtypes:
+  - 1 = Simple press (desktop single press, works well in games)
+  - 2 = Continuous press on desktop, same as type 1 in games
+  - 3 = Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
+  - 4 = Desktop-alt: experimental/alternative desktop mode (but useless). In-game behavior same as previous types.
 - Other option absent in the table are:
  -  [Other] -> UseSameWheelSpeedLimiter  = 1| WheelSpeedLimiter	  = 8500| WheelSpeedLimiterUp 	  = 8500| WheelSpeedLimiterDown 	  = 8500
  -  [Mouse] -> Sensitivity   = 50| SmoothFactor  = 0.2
