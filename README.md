@@ -29,7 +29,8 @@ Values you can assign to the buttons:
 - `A..Z`, `0..9`, `F1..F12`,
 - common buttons: `Enter`, `Space`, `Esc`, `Lalt`, `Lshift`, `Lctrl`, `Lwin`
 - Mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
-default.ini example:
+
+`default.ini` example:
 
 |Button       |Keys         |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button  | Keys    |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys        |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys         |  
 |-------------|-------------|-----------|--------|---------|-----------|-------------|------------|-----------|-------------|-------------|
