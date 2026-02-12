@@ -44,14 +44,16 @@ Values you can assign to the buttons:
 |`RT`         |RBmouse      |           |`Dright`| Right   |           |`RSright`    |            |
 
 
-## Controller options  
+## Common controller options  
 
-| Option                         | Values / Description                                                                                                       |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-|[Mouse] section|                                                                                                                                            
-|AnalogToMouse                   |`1/0`:     Turn On/Off the mouse movement via analog sticks.|
-|Stick 	                         |`RS/LS`:    Analog to use.|
-|[]|
+ Section                          | Option                         | Values / Description                                                                                                       |
+| --------------------------------| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+|                                 |                                                                                                                                            
+|[Mouse]                          |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.   |
+|                                 |Stick 	                         |`RS/LS`  : Analog to use.                                      |
+|[Analogs]                        |DeadzoneType                    |`1/2/4/8`: Both sticks/ Per stick/ Per axis/ Per direction.    |    
+|                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion                          |   
+|[Other]                          |WheelAnalogvalues               |`1/0`  :  Progressive/Digital values when wheel is assigned to stick.| 
 
 
 
