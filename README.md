@@ -16,11 +16,11 @@
 - Turn `On|Off` the program by clicking the 1st menu item. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
 - Activate a game by clicking the 2nd menu item, and the game will be added in `Gamelist.ini` (with it's name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
 - You can open the game config by clicking `Edit game config`.
-- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When an idgame is setted to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
+- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When a gameid is setted to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
 - Use a personal, external config for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the file in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dinamically built: its size varies with the number of elements.
-- The program can also load a config if oassed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. However, be sure that `GamepadToKeyboard` is turned off in Playnite, or the game to be played is deactivated.
+- The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that `GamepadToKeyboard` is turned off in Playnite or that the game to be played is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
 
 
@@ -30,6 +30,7 @@ Values you can assign to the buttons:
 - `A..Z`, `0..9`, `F1..F12`
 - common buttons: `Enter`, `Space`, `Esc`, `Lalt`, `Lshift`, `Lctrl`, `Lwin`
 - mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
+- Please check the bottom of this page to find the possible key assignments.
 
 `default.ini` example:
 
