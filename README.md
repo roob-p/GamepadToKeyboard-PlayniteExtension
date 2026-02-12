@@ -8,7 +8,8 @@
 - Super clear: the "Led" icon indicates the state of the program, the active config and much more.
 - Change the state of fucntionality with a click through the menu panel.
 - Possibility to explore the config file to use or edit a list of favourite config that can be switch via menu panel with a click.
-- You can select multiple games at once. Every new config will be created. 
+- You can select multiple games at once. Every new config will be created.
+- The program permits to adjust several aspects of the controller: deadzones (per stick, axis or direction) axis inversions
 
 
 ## ⚙️ How it works 
@@ -24,6 +25,16 @@
 
 
 ## 🕹️ Button assignments and Controller info
+## Controller options  
+
+| Option                         | Values / Description                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+|[Mouse] section:                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|AnalogToMouse                   |1:     Turn On|Off the mouse movement via analog sticks.|
+|Stick 	                         |RS|LS: Analog to use.|
+|[]|
+
 
 
 
