@@ -29,6 +29,7 @@
 
 
 ## ⚠️ Notes
-- The exe include in the extesion is in 64bit. The reason is that the x64 version of Autoit programs receive minor flag from av engines. If you need the x86 one you can dowload from the main in the repo, of from the attached file in the releases.
-- The program is clean and does not cotain any malicious behaviour. If your av engine flag it as malware is a simple false positive. If so, send the `GamepadTokeyboard` (or any associated flagged file) to your av asking for a review request for false positive.
+- The exe that comes with the extension is in 64bit. The reason is that the x64 version of Autoit programs receive minor flags from av engines. If you need the x86 one you can dowload it from the main in the repo, of from the attached files in the releases.
+- The program does not cotain any malicious behaviour. If your av engine flags it as malware it's a simple false positive. If so, please send `GamepadTokeyboard.exe` (or any associated flagged file) to your av vendor asking a review request for false positive.
+  This is the Microsoft portal for submit:  - ➤ [Microsoft Security Intelligence Portal](https://www.microsoft.com/en-us/wdsi/filesubmission)  
  
