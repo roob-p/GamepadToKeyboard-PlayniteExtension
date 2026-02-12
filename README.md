@@ -26,7 +26,7 @@
 
 ## 🕹️ Button assignments
 Values you can assign to the buttons: 
-- `A..Z`, `0..9`, `F1..F12`,
+- `A..Z`, `0..9`, `F1..F12`
 - common buttons: `Enter`, `Space`, `Esc`, `Lalt`, `Lshift`, `Lctrl`, `Lwin`
 - mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
 
