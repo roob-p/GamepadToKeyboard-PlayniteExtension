@@ -56,7 +56,7 @@ Values you can assign to the buttons:
 |                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                | 
-|                                 |Sensitivity                     |Mouse movement speed.                                                 |
+|                                 |Sensitivity                     |`value`  : Mouse movement speed.                                      |
 |Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
 |Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
