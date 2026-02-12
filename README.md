@@ -18,7 +18,7 @@
 - Use a personal, external file ini by setting `UseCustomIni = 1` (manually in `Gamelist.ini`, or through the menu panel) and specifying the config in `FileIni`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched via `Quick ini profiles (all games)` voice menu with a click. The sub-menu are created dinamically: its size varies with the number of elements.
 
-## 🕹️ Button assignments and controller info
+## 🕹️ Button assignments and Controller info
 
 
 
