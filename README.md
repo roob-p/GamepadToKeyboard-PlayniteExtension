@@ -7,9 +7,9 @@
 - You can create a config per game or use a global config for all games.
 - Clear and intuitive: "Led" icons indicate the state of the program, the active config and much more.
 - You can change the state of the program and its functionalities with a click through the menu panel.
-- Possibility to explore the config file to use or edit a list of favourite configs that can be switched via menu panel, with a click.
+- You can browse the config file to use or edit a list of favourite configs that can be switched via menu panel, with a click.
 - You can select multiple games at once. Every new config will be created.
-- The program permits to adjust several aspects of the controller: deadzones (per stick, axis, or direction) axis inversions and more.
+- The program allows fine control over several controller aspects: deadzones (per stick, axis, or direction) axis inversions and more.
 
 
 ## ⚙️ How it works 
@@ -20,8 +20,8 @@
 - Use a personal, external config for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the file in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dinamically built: its size varies with the number of elements.
-- The program can also load a config if oassed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. However, be sure that `GamepadToKeyboard` is turned off in Playnite, or the game to be played is disactivated.
-- In a multiple selection, if the games are in a mixed state (some games activated, some games disactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
+- The program can also load a config if oassed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. However, be sure that `GamepadToKeyboard` is turned off in Playnite, or the game to be played is deactivated.
+- In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
 
 
 
