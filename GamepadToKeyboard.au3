@@ -1,5 +1,5 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
-#AutoIt3Wrapper_Icon=iconB2T.ico
+#AutoIt3Wrapper_Icon=prova1.ico
 #AutoIt3Wrapper_UseX64=y
 #AutoIt3Wrapper_Res_Description=GamepadToKeyboard (64 bit)
 #AutoIt3Wrapper_Res_Fileversion=1.0.1.0
@@ -341,7 +341,7 @@ func mouse()
     $newY = Clip($newY, 0, @DesktopHeight) ;1080
 
 	; Smooth movement - interpolation between current and target position
-	; $smoothFactor = 0.1 ; How smooth should the movement be? (0 = no smoothing, 1 = very smooth)
+	; How smooth should the movement be? (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow, 0 blocks the cursor – be cautious)
 
 
     ; Gradually calculate the mouse position
