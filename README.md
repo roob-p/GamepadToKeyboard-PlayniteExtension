@@ -58,7 +58,7 @@ Values you can assign to the buttons:
 |Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
 |Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
-|                                 |SendTypes                       |`1`: default; `2`: alternative; `3`: desktop mode (keyboard-style delay and repeat)| 
+|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).| 
                                                                    
 
 <br>
