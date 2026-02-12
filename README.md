@@ -5,11 +5,11 @@
 ***Useful for old games without proper xinput support.***
 - The program is very easy to use and configure: just edit the assignments in the .ini file and the application will be started automatically after launching the game. 
 - You can create a config per game or use a global config for all games.
-- Clear and intuitive: "Led" icons indicate the state of the program, the active config and much more.
-- Program state and functionalities can be changed with a single click through the menu panel
-- You can browse the config file to use or edit a list of favourite configs that can be switched via menu panel, with a click.
+- Also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
 - Multiple games can be selected at once. Every new config will be created.
-- The program allows fine control over several controller aspects: deadzones (per stick, axis, or direction) axis inversions and more.
+- The program's functionalities can be changed with a click through the menu.
+- Clear and intuitive: "led" icons indicate the state of the program, the active config and much more.
+- The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction) axis inversions and more.
 
 
 ## ⚙️ How it works 
