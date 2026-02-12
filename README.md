@@ -24,5 +24,5 @@
 
 
 
-
-The extension include the .exe in 64bit. The reason is that the x64 version of Autoit programs receive minor flag from av engines. If you need the x86 one you can dowload from the main in the repo, of from the attached file in release.
+## ⚠️  
+- The exe include in the extesion is in 64bit. The reason is that the x64 version of Autoit programs receive minor flag from av engines. If you need the x86 one you can dowload from the main in the repo, of from the attached file in the releases.
