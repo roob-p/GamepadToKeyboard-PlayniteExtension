@@ -7,7 +7,8 @@
 - You can create a config per game or use a global config for all games.
 - Super Clean: the "Led" icon indicates the state of the program, the active config and much more.
 - Change the state of fucntionality with a click through the menu panel.
-- Possibility to explore the config file to use or edit a list of favourite config that can be switch via menu panel with a click 
+- Possibility to explore the config file to use or edit a list of favourite config that can be switch via menu panel with a click.
+- You can select multiple games at once. Every new config will be created. 
 
 
 ## ⚙️ How it works 
@@ -16,7 +17,9 @@
 - You can open the game config by clicking `Edit game config`
 - Edit `Gamelist.ini` by clicking the 3rd menu voice. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When an idgame is setted to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
 - Use a personal, external config that can be used for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the config in `FileIni`).
+- You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` with a click. The sub-menu is dinamically: its size varies with the number of elements.
+
 
 ## 🕹️ Button assignments and Controller info
 
