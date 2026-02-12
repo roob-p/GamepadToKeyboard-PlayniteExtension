@@ -85,7 +85,7 @@ Values you can assign to the buttons:
 - *Assign the value to: `Deadzone`|`XDeadzone, YDeadzone`|`XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`.  
 - **Assign the value to: `Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|  
   `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.
-- ***Sendtypes:
+- ***SendTypes:
   - `1`: Simple press (desktop single press, works well in games).
   - `2`: Continuous press on desktop, same as type 1 in games.  
   - `3`: Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
