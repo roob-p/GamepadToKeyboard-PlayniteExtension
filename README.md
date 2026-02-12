@@ -10,6 +10,7 @@
 - The program's functionalities can be changed with a click through the menu.
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
 - The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction), axis inversion and more.
+- *In future I'll add MACRO, COMBO and TURBO functions. Stay tuned.*
 
 
 ## ⚙️ How it works 
