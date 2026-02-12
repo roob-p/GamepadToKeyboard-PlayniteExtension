@@ -1,27 +1,27 @@
  # 🎮 GamepadToKeyboard-PlayniteExtension
 🕹️ *Emulate keyboard and mouse with your gamepad in a quick, easy and really customizable manner.*
 
-- This extension lets use send mouse and keyboard input with your controller, so you can use it in games without pad support, or where some controller buttons (in particular `LT` and `RT`) do not work (for example in `Legacy of Kain: Defiance` and `Assassin's Creed`).   
-***Useful for old games without proper xinput support.***
-- The program is very easy to use and configure: just edit the assignments in the .ini file and the application will be started automatically after launching the game. 
-- You can create a config per game or use a global config for all games.
+- This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gameppad support, or where some controller buttons (in particular `LT` and `RT`) do not work (for example in `Legacy of Kain: Defiance` and `Assassin's Creed`).   
+***Useful for old games without proper Xinput support.***
+- The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
+- A dedicated config can be created per game, or a global config can be used for all games.
 - Also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
 - Multiple games can be selected at once. Every new config will be created.
 - The program's functionalities can be changed with a click through the menu.
-- Clear and intuitive: "led" icons indicate the state of the program, the active config and much more.
-- The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction) axis inversions and more.
+- Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
+- The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction), axis inversion and more.
 
 
 ## ⚙️ How it works 
 - Turn `On|Off` the program by clicking the 1st menu item. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
-- Activate a game by clicking the 2nd menu item, and the game will be added in `Gamelist.ini` (with it's name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
+- Activate a game by clicking the 2nd menu item, and the game will be added in `Gamelist.ini` (with its name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
 - You can open the game config by clicking `Edit game config`.
-- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When a gameid is setted to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
+- Edit `Gamelist.ini` by clicking the 3rd menu item. `Gamelist.ini` contains the games for which `GamepadToKeyboard` will work. When a gameid is set to `1` the game is active; when setted to `0` the game is not active and `GamepadToKeyboard` will not be launched.
 - Use a personal, external config for all games by setting `UseCustomIni = 1` (editing `Gamelist.ini`, or through the menu panel) and specifying the file in `FileIni`).
 - You can also explore and select it via `Select custom ini file (all games)`.
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dinamically built: its size varies with the number of elements.
-- The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that `GamepadToKeyboard` is turned off in Playnite or that the game to be played is deactivated.
-- In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically add the new entries in `Gamelist.ini` and activate all of them.
+- The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
+- In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activate all of them.
 
 
 
