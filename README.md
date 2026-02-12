@@ -21,6 +21,7 @@
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` with a click. The sub-menu is dinamically: its size varies with the number of elements.
 
 
+
 ## 🕹️ Button assignments and Controller info
 
 
