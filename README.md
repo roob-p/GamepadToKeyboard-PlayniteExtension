@@ -11,7 +11,8 @@
 
 
 ## How it works 
-- You can add the game in the `Gamelist.ini` file 
+- Everytime you activate a game for wich 
+- Add the game in the list of games that GamepadToKeyboard `Gamelist.ini` file simply clicking the 2nd menu voice. 
 
 
 
