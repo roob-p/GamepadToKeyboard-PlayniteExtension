@@ -30,9 +30,9 @@
 | Option                         | Values / Description                                                                                                       |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
 |[Mouse] section:                                                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|AnalogToMouse                   |1:     Turn On|Off the mouse movement via analog sticks.|
-|Stick 	                         |RS|LS: Analog to use.|
+| ----- |
+|AnalogToMouse                   |`1/0`:     Turn On/Off the mouse movement via analog sticks.|
+|Stick 	                         |`RS/LS`:    Analog to use.|
 |[]|
 
 
