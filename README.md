@@ -51,13 +51,13 @@ Values you can assign to the buttons:
  Section                          | Option                         | Values / Description                                                                                                       |
 | --------------------------------| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
 |                                 |                                                                                                                                            
-|[Mouse]                          |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.          |
+|Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.          |
 |                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion                                 | 
-|[Analogs]                        |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
+|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
 |                                 |(Stickdir)AxisInverted          |`1/0`    : Turn On/off axis inversion.                                |   
-|[Other]                          |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
+|Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
                                                                    
 
 <br>
