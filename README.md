@@ -95,16 +95,14 @@ Values you can assign to the buttons:
 
 ### 📝 Assignment notes  
 |   |  |  |  |  |  
-|:---|--|--|--|:---|  
+|:---:|:---:|:---:|:---:|:---:|  
 |Mouse‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
 |Analogs‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`    |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone`  `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
+|SendTypes|`1` Simple press (desktop single press, works well in games)|`2` Continuous press on desktop, same as type 1 in games|`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types|
 
-|  |  |  |
-|:---|--|--|
-|SendTypes|`1` Simple press (desktop single press, works well in games)|`2` Continuous press on desktop, same as type 1 in games| b  |
-|         |`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types| c  |
-
-| `UseSameWheelSpeedLimiter`: `1/0` (use same value for WheelUp and WheelDown)     |`WheelSpeedLimiter:` limit the speed of scroll             |`WheelSpeedLimiterUp`: Up Limiter                                                                 | `WheelSpeedLimiterDown`: Down limiter       |
+|   |  |  |  | | 
+|:---|:---|:---|:---|-|
+| `UseSameWheelSpeedLimiter`: `1/0`     (use same value for Up and Down)|`WheelSpeedLimiter:`       limit the speed of scroll|`WheelSpeedLimiterUp`: WheelUp Limiter | `WheelSpeedLimiterDown`: WheelDown limiter       | |
 
 - *Assign the value to: |  |  |  |    
                         |--|--|--|    
