@@ -114,5 +114,10 @@ Values you can assign to the buttons:
 |**Mouse**|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow. 0 blocks the cursor, be cautious)|
 
 
+- Github repo: 🐙 [roop-p/GamepadToKeyboard](https://github.com/roob-p/GamepadToKeyboard/)
+- Download last version:
+ <!-- [v1.0.1]( https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.0.1/GamepadToKeyboard_v1.0.1.pext)
+
+
 
  
