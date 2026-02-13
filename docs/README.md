@@ -115,7 +115,7 @@ Values you can assign to the buttons:
 
 | | | |
 |-|-|-|
-|Mouse|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow. 0 blocks the cursor, be cautious)|
+|**Mouse**|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow. 0 blocks the cursor, be cautious)|
 
 
  
