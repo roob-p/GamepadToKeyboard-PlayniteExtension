@@ -100,8 +100,8 @@ Values you can assign to the buttons:
 
 ### 📝 *Option notes and other settings    
 
-|     |     |     |     |     |  
-|-----|-----|-----|-----|-----|  
+|           |          |                         |                                                                  |                                                                                                                                     |  
+|-----------|----------|-------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|  
 |**Mouse**‎  |`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                                                                                                                     |    
 |**Analogs**‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`           |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
   
