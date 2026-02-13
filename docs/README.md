@@ -62,7 +62,7 @@ Values you can assign to the buttons:
 
  Section                          | Option                         | Values / Description                                                                                                       |
 | --------------------------------| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-|                                 |                                                                                                                                            
+|                                 |                                |                                                                      |                                                                                                                         
 |Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.          |
 |                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
@@ -98,10 +98,10 @@ Values you can assign to the buttons:
 
 
 
-### 📝 *Option notes and other settings  
-|   |  |  |  |  |  
-|:---:|:---:|:---:|:---:|:---:|  
-|**Mouse**‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
+### 📝 *Option notes and other settings    
+|   |  |  |  |  |    
+|:---:|:---:|:---:|:---:|:---:|    
+|**Mouse**‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |    
 |**Analogs**‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`    |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
 
 |   |  |  | |
