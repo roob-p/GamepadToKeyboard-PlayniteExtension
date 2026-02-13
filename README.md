@@ -93,7 +93,7 @@ Values you can assign to the buttons:
 
 
 
-### 📝 Option notes* and other settings  
+### 📝 *Option notes and other settings  
 |   |  |  |  |  |  
 |:---:|:---:|:---:|:---:|:---:|  
 |**Mouse**‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
