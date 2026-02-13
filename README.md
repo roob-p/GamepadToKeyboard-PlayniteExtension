@@ -63,10 +63,10 @@ Values you can assign to the buttons:
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                | 
 |                                 |Sensitivity                     |`value`  : Mouse movement speed.                                      |
-|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
+|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*          |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
 |Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
-|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).***| 
+|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).| 
                                                                    
 
 <br>
@@ -93,7 +93,7 @@ Values you can assign to the buttons:
 
 
 
-### 📝 Assignment notes  
+### 📝 Option notes* and other settings  
 |   |  |  |  |  |  
 |:---:|:---:|:---:|:---:|:---:|  
 |**Mouse**‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
