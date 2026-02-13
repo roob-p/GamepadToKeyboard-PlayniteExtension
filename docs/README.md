@@ -60,7 +60,7 @@ Values you can assign to the buttons:
 
 ## ⚙️ Common controller options  
 
-| Section                         | Option                         | Values / Description                                                                                                       |
+| Section                         | Option                         |                                         Values / Description                                                               |
 |---------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 |                                 |                                |                                                                                                                            |
 |Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.                                                                |
