@@ -4,7 +4,7 @@
   
 # 🎮 GamepadToKeyboard-PlayniteExtension  
 🕹️ *Emulate keyboard and mouse with your gamepad in a quick, easy and really customizable manner.*  
-  
+
 - This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work (for example in `Legacy of Kain: Defiance` and `Assassin's Creed`).   
 ***Useful for old games without proper Xinput support.***
 - The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
@@ -67,10 +67,10 @@ Values you can assign to the buttons:
 |                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                | 
 |                                 |Sensitivity                     |`value`  : Mouse movement speed.                                      |
-|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.**         |    
+|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*          |    
 |                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
 |Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
-|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).***| 
+|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).*| 
                                                                    
 
 <br>
@@ -97,19 +97,24 @@ Values you can assign to the buttons:
 
 
 
-### 📝 Assignment notes  
--  *Assign the value to: |`Deadzone`|`XDeadzone, YDeadzone`|`XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone`.|  
-- **Assign the value to: `Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|  
-  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.
-- ***SendTypes:
-  - `1`: Simple press (desktop single press, works well in games).
-  - `2`: Continuous press on desktop, same as type 1 in games.  
-  - `3`: Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
-  - `4`: Desktop-alt: experimental/alternative desktop mode (not recommended). In-game behavior same as previous types.
-- Other options absent in the table:
-  - `[Other]` -> `UseSameWheelSpeedLimiter`: `1|0` (use same value for WheelUp and WheelDown).
-  -  `WheelSpeedLimiter:` limit the speed of scroll; `WheelSpeedLimiterUp`: Up Limiter; `WheelSpeedLimiterDown`: Down limiter.
-  - `[Mouse]` -> `SmoothFactor`: How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow, 0 blocks the cursor – be cautious).
+### 📝 *Option notes and other settings  
+|   |  |  |  |  |  
+|:---:|:---:|:---:|:---:|:---:|  
+|**Mouse**‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
+|**Analogs**‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`    |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
+
+|   |  |  | |
+|   -|-  |-  |- |
+|**Other**|`Sendtypes`:|`1` Simple press (desktop single press, works well in games)                                    |`2` Continuous press on desktop, same as type 1 in games|
+||         |`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types|
+
+|   |  |  |  | | 
+|:---|:---:|:---:|:---:|-|
+| `UseSameWheelSpeedLimiter`: `1\|0` -->  Use same value for WheelUp and WheelDown|`WheelSpeedLimiter`: limit scroll speed|`WheelSpeedLimiterUp`: WheelUp limiter | `WheelSpeedLimiterDown`: WheelDown limiter       | |
+
+| | | |
+|-|-|-|
+|Mouse|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow. 0 blocks the cursor, be cautious)|
 
 
  
