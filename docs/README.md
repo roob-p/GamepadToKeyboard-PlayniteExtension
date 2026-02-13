@@ -111,7 +111,7 @@ Values you can assign to the buttons:
 
 |     |     |     |     |     | 
 |:---:|:---:|:---:|:---:|:---:|
-| `UseSameWheelSpeedLimiter`: `1\|0` -->  Use same value for WheelUp and WheelDown|`WheelSpeedLimiter`: limit scroll speed|`WheelSpeedLimiterUp`: WheelUp limiter | `WheelSpeedLimiterDown`: WheelDown limiter       | |
+| `UseSameWheelSpeedLimiter`: `1\|0` -->  Use same value for WheelUp and WheelDown|`WheelSpeedLimiter`: limit scroll speed|`WheelSpeedLimiterUp`: WheelUp limiter | `WheelSpeedLimiterDown`: WheelDown limiter       |                                    |
 
 | | | |
 |-|-|-|
