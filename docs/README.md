@@ -49,29 +49,28 @@ Values you can assign to the buttons:
 |Button       |Keys         |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button  | Keys    |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys        |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys         |  
 |-------------|-------------|-----------|--------|---------|-----------|-------------|------------|-----------|-------------|-------------|
 |`A`          |Enter        |           |`Back`  | F1      |           |`LSup`       | W          |           |`Home`       |Esc          | 
-|`B`          |Space        |           |`Start` | Esc     |           |`LSdown`     | S          |
-|`X`          |Lshift       |           |`LS`    | LShift  |           |`LSleft`     | A          |            
-|`Y`          |LCtrl        |           |`RS`    | MBmouse |           |`LSright`    | D          |
-|`LB`         |Q            |           |`Dup`   | Up      |           |`RSup`       |            |
-|`RB`         |E            |           |`Ddown` | Down    |           |`RSdown`     |            |
-|`LT`         |RBmouse      |           |`Dleft` | Left    |           |`RSleft`     |            |
-|`RT`         |LBmouse      |           |`Dright`| Right   |           |`RSright`    |            |
+|`B`          |Space        |           |`Start` | Esc     |           |`LSdown`     | S          |           |             |             |
+|`X`          |Lshift       |           |`LS`    | LShift  |           |`LSleft`     | A          |           |             |             |      
+|`Y`          |LCtrl        |           |`RS`    | MBmouse |           |`LSright`    | D          |           |             |             |
+|`LB`         |Q            |           |`Dup`   | Up      |           |`RSup`       |            |           |             |             |
+|`RB`         |E            |           |`Ddown` | Down    |           |`RSdown`     |            |           |             |             |
+|`LT`         |RBmouse      |           |`Dleft` | Left    |           |`RSleft`     |            |           |             |             |
+|`RT`         |LBmouse      |           |`Dright`| Right   |           |`RSright`    |            |           |             |             |
 
 
 ## ⚙️ Common controller options  
 
- Section                          | Option                         | Values / Description                                                                                                       |
-| --------------------------------| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-|                                 |                                |                                                                      |                                                                                                                         
-|Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.          |
-|                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                 |
-|                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                       |
-|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                | 
-|                                 |Sensitivity                     |`value`  : Mouse movement speed.                                      |
-|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*          |    
-|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                |   
-|Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.|   
-|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).*| 
+| Section                         | Option                         | Values / Description                                                                                                       |
+|---------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|                                             
+|Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.                                                                |
+|                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                                                                       |
+|                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                                                                             |
+|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                                                                      | 
+|                                 |Sensitivity                     |`value`  : Mouse movement speed.                                                                                            |
+|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*                                                                |    
+|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                                                                      |   
+|Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.                                                      |   
+|                                 |SendTypes                       |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).*                                         | 
                                                                    
 
 <br>
@@ -100,7 +99,7 @@ Values you can assign to the buttons:
 
 ### 📝 *Option notes and other settings    
 |     |     |     |     |     |    
-|:---:|:---:|:---:|:---:|:---:|    
+|-----|-----|-----|-----|-----|    
 |**Mouse**‎  |`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                                                                                                                     |    
 |**Analogs**‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`           |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
 
