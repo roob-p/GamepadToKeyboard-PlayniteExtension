@@ -28,7 +28,7 @@
 ### 🔄 Live config reload
 
 - Configuration files can be edited while the game is running.
-- Just press the Hotkey (`Shift`+`Ctrl`+`5` by default)  to reload the current `.ini` instantly, without restarting the application.
+- Just press the Hotkey (`Shift`+`Ctrl`+`5` by default) to instantly reload the current `.ini`, without restarting the application.
 - The Hotkey can be customized in `GamepadToKeyboard.config`. 
 <br>  
 
