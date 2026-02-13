@@ -97,27 +97,21 @@ Values you can assign to the buttons:
 |   |  |  |  |  |  
 |:---:|:---:|:---:|:---:|:---:|  
 |Mouse‎|`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                 |  
-|Analogs‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`    |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone`  `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
-|SendTypes|`1` Simple press (desktop single press, works well in games)|`2` Continuous press on desktop, same as type 1 in games|`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types|
+|Analogs‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`    |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
+
+|   |  |  | 
+|   -|-  |-  | 
+|SendTypes|`1` Simple press (desktop single press, works well in games)                                    |`2` Continuous press on desktop, same as type 1 in games|
+|         |`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types|
 
 |   |  |  |  | | 
-|:---|:---|:---|:---|-|
-| `UseSameWheelSpeedLimiter`: `1/0`     (use same value for Up and Down)|`WheelSpeedLimiter:`       limit the speed of scroll|`WheelSpeedLimiterUp`: WheelUp Limiter | `WheelSpeedLimiterDown`: WheelDown limiter       | |
+|:---|:---:|:---:|:---:|-|
+| `UseSameWheelSpeedLimiter`: `1\|0` -->  Use same value for WheelUp and WheelDown|`WheelSpeedLimiter`: limit scroll speed|`WheelSpeedLimiterUp`: WheelUp limiter | `WheelSpeedLimiterDown`: WheelDown limiter       | |
 
-- *Assign the value to: |  |  |  |    
-                        |--|--|--|    
-                        | `Deadzone` | `XDeadzone, YDeadzone` | `XleftDeadzone, XrightDeadzone, YleftDeadzone, YrightDeadzone` |     
-- **Assign the value to: |`Deadzone`|`LSDeadzone, RSDeadzone`|`LSXDeadzone, LSYDeadzone, RSXDeadzone, RSYDeadzone`|  
-  `LSleftDeadzone, LSrightDeadzone, LSupDeadzone, LSdownDeadzone, RSleftDeadzone, RSrightDeadzone, RSupDeadzone, RSdownDeadzone`.
-- ***SendTypes:
-  - `1`: Simple press (desktop single press, works well in games).
-  - `2`: Continuous press on desktop, same as type 1 in games.  
-  - `3`: Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
-  - `4`: Desktop-alt: experimental/alternative desktop mode (not recommended). In-game behavior same as previous types.
-- Other options absent in the table:
-  - `[Other]` -> `UseSameWheelSpeedLimiter`: `1|0` (use same value for WheelUp and WheelDown).
-  -  `WheelSpeedLimiter:` limit the speed of scroll; `WheelSpeedLimiterUp`: Up Limiter; `WheelSpeedLimiterDown`: Down limiter.
-  - `[Mouse]` -> `SmoothFactor`: How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow, 0 blocks the cursor – be cautious).
+| | | 
+|-|-|
+|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow, 0 blocks the cursor – be cautious)|
+
 
 
  
