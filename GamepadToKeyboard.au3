@@ -29,17 +29,21 @@ $buttons = _XInputButtons($input[2])
 $analogdeadzone=1
 local $ignoreIndices[4]
 
+$programName="GamepadToKeyboard"
+
 
 if $cmdline[0]>0 then
 if StringInStr($cmdline[1],".ini") then
 	$inifile=$cmdline[1]
 	else
 ;$inifile=@ScriptDir & "\configs.ini"
-$inifile=IniRead(@ScriptDir & "\Standalone Profile Loader.config","configToLoad","configToLoad","")
+;$inifile=IniRead(@ScriptDir & "\Standalone Profile Loader.config","configToLoad","configToLoad","")
+$inifile=IniRead(@ScriptDir & "\" & $programName &".config","configToLoad","configToLoad","default.ini")
 endif
 	Else
 	;$inifile=@ScriptDir & "\default.ini"
-	$inifile=IniRead(@ScriptDir & "\Standalone Profile Loader.config","configToLoad","configToLoad","")
+	;$inifile=IniRead(@ScriptDir & "\Standalone Profile Loader.config","configToLoad","configToLoad","")
+	$inifile=IniRead(@ScriptDir & "\" & $programName &".config","configToLoad","configToLoad","default.ini")
 	endif
 
 
@@ -121,6 +125,11 @@ endif
 ;dim $remap=Iniread($inifile, "Remap", "Remap",0), $remapLSX = Iniread($inifile, "Remap", "LSX",""), $remapLSY= Iniread($inifile, "Remap", "LSY","")
 $sendkeystype = Iniread($inifile, "Other","SendKeysType",1)
 
+global $hotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","Hotkey","^+5")
+;$hotkey= '"'&$hotkey&'"'
+$hotkey=String($hotkey)
+HotKeySet($hotkey, reloadini)
+
 
 
 
@@ -181,7 +190,6 @@ Global $firstPressDone[UBound($keys)] = [False]  ; indica se è passato il delay
 ;msgbox("","",$values[0])
 
 
-HotKeySet("^+5", reloadini)
 
 
 While 1
@@ -571,6 +579,7 @@ endfunc
 
 
 func reloadini()
+	;msgbox("","","Config reloaded!",1)
 	loadini()
 global $values[16+1+8]=[iniR("A"),IniR("B"),IniR("X"),IniR("Y"),IniR("LB"),IniR("RB"),IniR("LT"),IniR("RT"),IniR("Back"),IniR("Start"),IniR("LS"),IniR("RS") _
 ,IniR("Dup"),IniR("Ddown"),IniR("Dleft"),IniR("Dright"),IniR("Home"),IniR("LSup"),IniR("LSdown"),IniR("LSleft"),IniR("LSright"),IniR("RSup"),IniR("RSdown"),IniR("RSleft"),IniR("RSright")]
