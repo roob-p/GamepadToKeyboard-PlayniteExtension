@@ -11,8 +11,9 @@
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
 - The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction), axis inversion and more.
 - Config files can be edited and reloaded on-the-fly using a hotkey, without restarting the application.
-- **In future I'll add MACRO, COMBO and TURBO functionalities. Stay tuned.**
+- **In future I'll add MACRO, COMBO and TURBO functionalities. Stay tuned.**  
 
+  ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc).  
 
 ## ⚙️ How it works 
 - Turn `On|Off` the program by clicking the 1st menu item. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
