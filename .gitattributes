@@ -4,4 +4,5 @@ media/ export-ignore
 manifest.yaml export-ignore
 "ini, include and other files"/ export-ignore
 "ini, include and other files" export-ignore
+'ini, include and other files' export-ignore
 .gitattributes export-ignore
