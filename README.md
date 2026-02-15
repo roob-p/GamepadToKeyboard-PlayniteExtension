@@ -126,7 +126,7 @@ Values you can assign to the buttons:
 
 ### 🎖️ Credits
 This gamepad script was written in AutoIt.  
-The program makes use of a remodified version of the XInput UDF by Oxin8 (xoninx@gmail.com) to read XInput states.
+The program makes use of a remodified version of the XInput UDF by Oxin8 (xoninx@gmail.com) to read Xinput states.
 
 
 
