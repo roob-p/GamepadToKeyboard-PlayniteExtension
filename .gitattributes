@@ -2,3 +2,4 @@ docs/ export-ignore
 media/ export-ignore
 .github/ export-ignore
 manifest.yaml export-ignore
+"ini, include and other files/" export-ignore
