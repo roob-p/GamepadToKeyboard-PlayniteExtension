@@ -37,13 +37,18 @@ $gamed = $gamel.id
 		$ini=get-content "$PSScriptRoot\gamelist.ini" -EA 0
 	$ini = $ini -replace("\\","\\")
 	$ini = $ini |ForEach-Object { ($_ -replace '\s*#.*$','').Trim() } | Where-Object { $_ -match '=' }| ConvertFrom-StringData
+	#$ini = $ini |ForEach-Object { ($_ -replace '\s*#.*$','') } | Where-Object { $_ -match '=' }| ConvertFrom-StringData
 	
 	$inii=get-content "$PSScriptRoot\gamelist.ini" -EA 0
-	if (($ini."UseCustomIni" -eq "On")){
+	if (($ini."UseCustomIni" -eq "On") -or ($ini."UseCustomIni " -eq "On")){
 		$global:initoload=$ini."CustomIniFile"
-		$global:initoload=[string]$global:initoload
+		#$global:initoload=[string]$global:initoload
+	
+$global:initoload = $global:initoload.Trim()
+$global:initoload = $global:initoload.Trim('"')
+$global:initoload= '"'+$global:initoload+'"'
 
-	start-process "$PSScriptRoot\$global:program_filename.exe" -Argument "$PSScriptRoot\$global:initoload"
+	start-process "$PSScriptRoot\$global:program_filename.exe" -Argument "$($global:initoload)"
 	}
 	else {
 	
@@ -558,6 +563,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
 	$global:UseIni="On"
 	#$global:inistate="ON"
 	$inii=get-content "$PSScriptRoot\gamelist.ini" -EA 0
+	$inii = $inii.Replace("UseCustomIni  = Off", "UseCustomIni  = On")
 	$inii = $inii.Replace("UseCustomIni = Off", "UseCustomIni = On")
 	set-content $inii -Path "$PSScriptRoot\gamelist.ini" -Force
 	
@@ -565,6 +571,7 @@ if ($dialog.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
 	$global:UseIni="Off"
 	#$global:inistate="OFF"
 	$inii=get-content "$PSScriptRoot\gamelist.ini" -EA 0
+	$inii = $inii.Replace("UseCustomIni  = On", "UseCustomIni = Off")
 	$inii = $inii.Replace("UseCustomIni = On", "UseCustomIni = Off")
 	set-content $inii -Path "$PSScriptRoot\gamelist.ini" -Force
 	}
@@ -934,17 +941,17 @@ platformsource
 $gameinicontent = "Title: $game | Id: $gamed | $global:platformsource
 [Buttons]
 A       =  Enter
-B       =  Space
-X       =  LShift
-Y       =  LCtrl
-LB      =  Q
-RB      =  E
+B       =  
+X       =  
+Y       =  
+LB      =  
+RB      =  
 LT      =  RBmouse
 RT      =  LBmouse
 Back    =  F1
 Start   =  Esc
 LS      =  LShift
-RS      =  MBmouse
+RS      =  
 Dup     =  Up
 Ddown   =  Down
 Dleft   =  Left
@@ -987,7 +994,7 @@ WheelStepDown  = 5
 AnalogToMouse = 1
 Stick 	      = RS
 
-Sensitivity   = 50
+Sensitivity   = 100
 SmoothFactor  = 0.2
 
 LSXaxisInverted	= 0
@@ -1001,7 +1008,7 @@ DeadzoneType 	= 2
 Deadzone        = 2000
 
 Xdeadzone       = 2000
-Ydeadzone       = 2500
+Ydeadzone       = 2300
 
 XleftDeadzone   = 2000
 XrightDeadzone  = 2000
