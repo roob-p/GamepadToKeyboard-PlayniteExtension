@@ -1,7 +1,8 @@
  # 🎮 GamepadToKeyboard-PlayniteExtension
 🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*
 
-- This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.   
+- This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.
+- **Perfect for old games without native controller support, or games where Xinput support is incomplete.**   
 - The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
 - A dedicated config can be created per game, or a global config can be used for all games.
 - Also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
