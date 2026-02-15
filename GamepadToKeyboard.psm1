@@ -995,18 +995,18 @@ LSYaxisInverted = 0
 RSXaxisInverted = 0
 RSYaxisInverted = 0
 
-   ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction
-DeadzoneType 	= 1
+  ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction
+DeadzoneType 	= 2
+
+Deadzone        = 2000
+
+Xdeadzone       = 2000
+Ydeadzone       = 2500
 
 XleftDeadzone   = 2000
 XrightDeadzone  = 2000
 YleftDeadzone   = 2000
 YrightDeadzone  = 2000
-
-Xdeadzone       = 2000
-Ydeadzone       = 2000
-
-Deadzone        = 2000
 
 
 [Analogs]

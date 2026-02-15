@@ -285,12 +285,7 @@ func mouse()
         Return
     EndIf
 
-	;$mousemovx=$valx
-	;$mousemovy=$valy
 
-
-	;$mousemovx=$RSX
-	;$mousemovy=$RSY
 
 	if $Stick="LS" then
 		if $LSXinverted="1" Then
@@ -318,27 +313,36 @@ func mouse()
 
 
 
-		;if $RSXinverted="True" Then
-		;$mousemovx=-$mousemovx
-		;endif
-
 
     $mousePos = MouseGetPos()
 
 	;If Abs($mousemovx) < $deadZone And Abs($mousemovy) < $deadZone Then
-	if $mousemovx<$Xrightdeadzone and $mousemovy<$Yupdeadzone and $mousemovx>-$Xleftdeadzone and $mousemovy>-$Ydowndeadzone then
+	;if $mousemovx<$Xrightdeadzone and $mousemovy<$Yupdeadzone and $mousemovx>-$Xleftdeadzone and $mousemovy>-$Ydowndeadzone then
+
+
+	if $mousemovx<$Xrightdeadzone and $mousemovx>-$Xleftdeadzone then
+		$mousemovx=0
+		;$prevX = $mousePos[0]
+	endif
+
+	if $mousemovy<$Yupdeadzone and $mousemovy>-$Ydowndeadzone then
+		$mousemovy=0
+		;$prevY = $mousePos[1]
+	endif
+
+
+	If $mousemovx = 0 And $mousemovy = 0 Then
+    $prevX = $mousePos[0]
+    $prevY = $mousePos[1]
+    Return
+EndIf
 
 
 
+	;Rescale: output = (input - deadzone) / (max - deadzone)
 
-
-			$prevX = $mousePos[0]
-			$prevY = $mousePos[1]
-
-        ;;Sleep(50)
-        ;;ContinueLoop
-		return ;;instead of ContinueLoop
-    EndIf
+$mousemovx = DeadzoneRescale($mousemovx, $XleftDeadzone, $XrightDeadzone)
+$mousemovy = DeadzoneRescale($mousemovy, $YdownDeadzone, $YupDeadzone)
 
 
 	$newX = $mousePos[0] + ($mousemovx / 32768) * $sensitivity
@@ -350,7 +354,6 @@ func mouse()
 
 	; Smooth movement - interpolation between current and target position
 	; How smooth should the movement be? (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow, 0 blocks the cursor – be cautious)
-
 
     ; Gradually calculate the mouse position
     $finalX = $prevX + ($newX - $prevX) * $smoothFactor
@@ -369,21 +372,29 @@ func mouse()
 ;sleep(1)
 endfunc
 
-		;If  $mousemovx <  $xrightdeadzone _
-		;And $mousemovx > -$xleftdeadzone _
-		;Then
-		;;$mousemovx = 0
-		;$prevX = $mousePos[0]
-		;EndIf
 
-		;If  $mousemovy <  $yupdeadzone _
-		;And $mousemovy > -$ydowndeadzone _
-		;Then
-		;;$mousemovy = 0
-		;$prevY = $mousePos[1]
-		;EndIf
+func DeadzoneRescale($mousemov,$deadzone1,$deadzone2)
+
+	Local $max = 32768
+	local $deadzone=0
 
 
+	if ($mousemov<0) then
+	$adjusted = $mousemov + $deadzone1
+	$deadzone = $deadzone1
+ If $adjusted > 0 Then $adjusted = 0
+else
+	;elseif($mousemov>=0) then
+	 $adjusted = $mousemov - $deadzone2
+	 $deadzone = $deadzone2
+	  If $adjusted < 0 Then $adjusted = 0
+	EndIf
+
+	$adjusted=(($adjusted)/($max - $deadzone))*$max
+
+	return $adjusted
+
+	endfunc
 
 
 
@@ -546,7 +557,6 @@ endif
 
 
 
-;dim $remap=Iniread($inifile, "Remap", "Remap",0), $remapLSX = Iniread($inifile, "Remap", "LSX",""), $remapLSY= Iniread($inifile, "Remap", "LSY","")
 $sendkeystype = Iniread($inifile, "Other","SendKeysType",1)
 $wheelstepup=IniRead($inifile,"[Other]","WheelStepUp",1)
 $wheelstepdown=IniRead($inifile,"[Other]","WheelStepDown",1)
@@ -677,12 +687,8 @@ if $WheelAnalogMode=1 and $k>=17 then
 
         If $value < 0 Then
 			MouseWheel($dir, $steps)
-			;MouseWheel($MOUSE_WHEEL_DOWN, $steps)
-            ;MouseWheel($MOUSE_WHEEL_DOWN, $steps+$wheelstepdown)
 			Else
 			MouseWheel($dir, $steps)
-			;MouseWheel($MOUSE_WHEEL_UP, $steps)
-            ;MouseWheel($MOUSE_WHEEL_UP, $steps+$wheelstepup)
         EndIf
 else
 
