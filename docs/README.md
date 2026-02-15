@@ -3,8 +3,9 @@
 [![🔙 Back](https://img.shields.io/badge/🔙-Back-white?style=flat-square&logoColor=blue&color=blue)](https://roob-p.github.io)  
   
 # 🎮 GamepadToKeyboard-PlayniteExtension  
-🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*
 ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)  
+
+🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
 
 - This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.  
 ***Perfect for old games without native controller support or with incomplete Xinput functionality.***    
