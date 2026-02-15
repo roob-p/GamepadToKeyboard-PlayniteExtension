@@ -1,4 +1,4 @@
- # 🎮 GamepadToKeyboard-PlayniteExtension  
+ # 🎮 GamepadToKeyboard-PlayniteExtension   
  ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)  
  
 🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
