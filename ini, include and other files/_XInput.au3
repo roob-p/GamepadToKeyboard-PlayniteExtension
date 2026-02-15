@@ -8,7 +8,7 @@
 ;;		email: caveatsemporium@gmail.com
 ;;			thanks to posts at this url for finding the 'secret' function to get the xbox guide button state:
 ;;				http://forums.tigsource.com/index.php?topic=26792.0
-;;					 ;;
+;;					modified again ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -116,4 +116,5 @@ EndFunc
 
 Func _XInputOff($thedll)
    DllCall($thedll,"int",103,"int",0)
+
 EndFunc
