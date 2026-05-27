@@ -968,26 +968,31 @@ Home	=
 
 
 [Other]
- ; SendKeysType:
-; 1 = Simple press (desktop single press, works well in games)
-; 2 = Continuous press on desktop, same as type 1 in games
-; 3 = Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.
-; 4 = Desktop-alt: experimental/alternative desktop mode. In-game behavior same as previous types.
+ ; SendKeysType: 1 = Game mode; 2 = Desktop mode (with windows-style keypress delay + repeat)
+SendKeysType    	 	 = 1
+TurboRepeatTime		 	 = 50
+ShowConfigReloadMessage  = 1
+ShowForceQuitMessage	 = 1
+ComboAsyncDelay		 	 = 50
+SequenceTime		 	 = 50
 
-SendKeysType   = 1
-
+[Wheel]
  ; WheelAnalogMode = 1  Enables progressive behavior when the wheel is assigned to an analog axis. Digital inputs always use step values.
-WheelAnalogMode = 1
+WheelAnalogvalues 		  = 1
 
 UseSameWheelSpeedLimiter  = 1
-WheelSpeedLimiter	      = 8500
+WheelSpeedLimiter	  	  = 16000
 
-WheelSpeedLimiterUp 	  = 8500
-WheelSpeedLimiterDown 	  = 8500
+ ;analog values
+WheelSpeedLimiterUp 	  = 8000
+WheelSpeedLimiterDown 	  = 8000
 
- ;  Wheel step amount when scrolling
-WheelStepUp    = 5
-WheelStepDown  = 5
+ ;digital values
+WheelStepUp		  		  = 2
+WheelStepDown		      = 2
+
+DigitalScrollRepeat       = 1
+AnalogScrollRepeat	      = 1
 
 [Mouse]
  ; Activating AnalogToMOuse will ignore the buttons assignments in Buttons section and the deadzone values used in the Analogs section for the selected stick.
@@ -1002,13 +1007,17 @@ LSYaxisInverted = 0
 RSXaxisInverted = 0
 RSYaxisInverted = 0
 
-  ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction
+  ; DeadzoneShape; 1: Square/Rectangular; 2: Circular (no rescale); 3: Circular (with rescale).
+DeadzoneShape 	= 1
+
+; ===SQUARE===
+   ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction.
 DeadzoneType 	= 2
 
 Deadzone        = 2000
 
 Xdeadzone       = 2000
-Ydeadzone       = 2300
+Ydeadzone       = 2000
 
 XleftDeadzone   = 2000
 XrightDeadzone  = 2000
@@ -1017,11 +1026,11 @@ YrightDeadzone  = 2000
 
 
 [Analogs]
-   ; DeadzoneType: 1 = Global (one value for both sticks and both axes), 2 = PerStick (LS and RS have different deadzones), 4 = PerAxis (X and Y Deadzones per stick), 8 = PerDirection (left/right/up/down deadzones per stick)
+   ; DeadzoneType: 1 = Global (one value for both sticks and both axes), 2 = PerStick (LS and RS have different deadzones), 4 = PerAxis (X and Y Deadzones per stick), 8 = PerDirection (left/right/up/down deadzones per stick).
 DeadzoneType      =  1
 
    ; Used when DeadzoneType = 1 (Global)
-Deadzone          = 1000
+Deadzone          = 4000
 
    ; Used when DeadzoneType = 2 (PerStick)
 LSDeadzone        = 0
