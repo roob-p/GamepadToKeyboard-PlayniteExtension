@@ -11,8 +11,8 @@ Packages:
     ReleaseDate: 2026-05-27
     PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext
     Changelog:
-      - "New update comes with improvements and new features:"
-      - "--- Modifiers ---"
+      - New update comes with improvements and new features.
+      - "--- Modifiers: ---"
       - "Toggle, Turbo, TurboToggle"
       - "Execute - launch programs"
       - "Combo - send multiple keypresses"
@@ -20,11 +20,11 @@ Packages:
       - "ToggleCombo, TurboCombo, TurboToggleCombo"
       - "Sequence - sends keys in sequence (no hold)"
       - "-----------------"
-      - Added circular deadzone support (with and without rescaling) in addition to the square/rectangular one
-      - Mouse wheel supports both digital (when assigned to a button) and analog (when assigned to a stick or trigger) input
-      - Dedicated repeat variables have also been added (do not use Turbo-based modifiers)
-      - Added splash text when reloading the config
+      - Added circular deadzone support (with and without rescaling) in addition to the square/rectangular one.
+      - Mouse wheel supports both digital (when assigned to a button) and analog (when assigned to a stick or trigger) input.
+      - Dedicated repeat variables have also been added (do not use Turbo-based modifiers).
+      - Added splash text when reloading the config.
       - "SendKeysType now supports only two values.  1 Game mode,  2 Desktop mode (with Windows-style keypress delay and repeat)"
-      - Improved input management and better Desktop mode compatibility
-      - Improved button release cleanup on exit
-      - Code optimized, fixed and restructured
+      - Improved input management and better Desktop mode compatibility.
+      - Improved button release cleanup on exit.
+      - Code optimized, fixed and restructured.
