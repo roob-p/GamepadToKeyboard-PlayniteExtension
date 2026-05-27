@@ -14,14 +14,14 @@ Packages:
       https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext
     Changelog:
       - "New update comes with improvements and new features"
-      - "- Modifiers - "
+      - "--- Modifiers ---"
       - "Toggle, Turbo, TurboToggle"
       - "Execute - launch programs"
       - "Combo - send multiple keypresses"
       - "ComboAsync - send multiple keys with delay"
       - "ToggleCombo, TurboCombo, TurboToggleCombo"
       - "Sequence - sends keys in sequence (no hold)"
-      
+      - "-----------------"
       - Added circular deadzone support (with and without rescaling) in addition to the square/rectangular one
       - Mouse wheel supports both digital (when assigned to a button) and analog (when assigned to a stick or trigger) input
       - Dedicated repeat variables have also been added (do not use Turbo-based modifiers)
