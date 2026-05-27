@@ -11,7 +11,7 @@ Packages:
     ReleaseDate: 2026-05-27
     PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext
     Changelog:
-      - "New update comes with improvements and new features"
+      - "New update comes with improvements and new features:"
       - "--- Modifiers ---"
       - "Toggle, Turbo, TurboToggle"
       - "Execute - launch programs"
