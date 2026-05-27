@@ -969,50 +969,50 @@ Home	=
 
 [Other]
  ; SendKeysType: 1 = Game mode; 2 = Desktop mode (with windows-style keypress delay + repeat)
-SendKeysType    	 	 = 1
-TurboRepeatTime		 	 = 50
+SendKeysType             = 1
+TurboRepeatTime          = 50
 ShowConfigReloadMessage  = 1
-ShowForceQuitMessage	 = 1
-ComboAsyncDelay		 	 = 50
-SequenceTime		 	 = 50
+ShowForceQuitMessage     = 1
+ComboAsyncDelay          = 50
+SequenceTime             = 50
 
 [Wheel]
  ; WheelAnalogMode = 1  Enables progressive behavior when the wheel is assigned to an analog axis. Digital inputs always use step values.
-WheelAnalogvalues 		  = 1
+WheelAnalogvalues        = 1
 
-UseSameWheelSpeedLimiter  = 1
-WheelSpeedLimiter	  	  = 16000
+UseSameWheelSpeedLimiter = 1
+WheelSpeedLimiter        = 16000
 
  ;analog values
-WheelSpeedLimiterUp 	  = 8000
-WheelSpeedLimiterDown 	  = 8000
+WheelSpeedLimiterUp      = 8000
+WheelSpeedLimiterDown    = 8000
 
  ;digital values
-WheelStepUp		  		  = 2
-WheelStepDown		      = 2
+WheelStepUp              = 2
+WheelStepDown            = 2
 
-DigitalScrollRepeat       = 1
-AnalogScrollRepeat	      = 1
+DigitalScrollRepeat      = 1
+AnalogScrollRepeat       = 1
 
 [Mouse]
  ; Activating AnalogToMOuse will ignore the buttons assignments in Buttons section and the deadzone values used in the Analogs section for the selected stick.
-AnalogToMouse = 1
-Stick 	      = RS
+AnalogToMouse   = 1
+Stick           = RS
 
-Sensitivity   = 100
-SmoothFactor  = 0.2
+Sensitivity     = 50
+SmoothFactor    = 0.2
 
-LSXaxisInverted	= 0
+LSXaxisInverted = 0
 LSYaxisInverted = 0
 RSXaxisInverted = 0
 RSYaxisInverted = 0
 
-  ; DeadzoneShape; 1: Square/Rectangular; 2: Circular (no rescale); 3: Circular (with rescale).
-DeadzoneShape 	= 1
+   ; DeadzoneShape; 1: Square; 2: Circular (no rescale); 3: Circular (with rescale).
+DeadzoneShape   = 2
 
 ; ===SQUARE===
-   ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction.
-DeadzoneType 	= 2
+   ; DeadzoneType: 1 = one value for both axes, 2 = one value per axis, 4 = one value per direction
+DeadzoneType    = 1
 
 Deadzone        = 2000
 
@@ -1026,36 +1026,36 @@ YrightDeadzone  = 2000
 
 
 [Analogs]
-   ; DeadzoneType: 1 = Global (one value for both sticks and both axes), 2 = PerStick (LS and RS have different deadzones), 4 = PerAxis (X and Y Deadzones per stick), 8 = PerDirection (left/right/up/down deadzones per stick).
-DeadzoneType      =  1
+   ; DeadzoneType: 1 = Global (one value for both sticks and both axes), 2 = PerStick (LS and RS have different deadzones), 4 = PerAxis (X and Y Deadzones per stick), 8 = PerDirection (left/right/up/down deadzones per stick)
+DeadzoneType    =  1
 
    ; Used when DeadzoneType = 1 (Global)
-Deadzone          = 4000
+Deadzone        = 4000
 
    ; Used when DeadzoneType = 2 (PerStick)
-LSDeadzone        = 0
-RSDeadzone        = 0
+LSDeadzone      = 0
+RSDeadzone      = 0
 
    ; Used when DeadzoneType = 4 (PerAxis)
-LSXdeadzone       = 0
-LSYdeadzone       = 0
-RSXdeadzone       = 0
-RSYdeadzone       = 0
+LSXdeadzone     = 0
+LSYdeadzone     = 0
+RSXdeadzone     = 0
+RSYdeadzone     = 0
 
    ; Used when DeadzoneType = 8 (PerDirection)
-LSleftDeadzone    = 0
-LSrightDeadzone   = 0
-LSupDeadzone      = 0
-LSdownDeadzone    = 0
-RSleftDeadzone    = 0
-RSrightDeadzone   = 0
-RSupDeadzone      = 0
-RSdownDeadzone    = 0
+LSleftDeadzone  = 0
+LSrightDeadzone = 0
+LSupDeadzone    = 0
+LSdownDeadzone  = 0
+RSleftDeadzone  = 0
+RSrightDeadzone = 0
+RSupDeadzone    = 0
+RSdownDeadzone  = 0
 
-LSXaxisInverted	  = 0
-LSYaxisInverted   = 0
-RSXaxisInverted   = 0
-RSYaxisInverted   = 0
+LSXaxisInverted = 0
+LSYaxisInverted = 0
+RSXaxisInverted = 0
+RSYaxisInverted = 0
 "
 
 
