@@ -2,27 +2,30 @@
 <!--[![🔙 Back](https://img.shields.io/badge/🔙-Back-blue)](https://roob-p.github.io)-->  
 [![🔙 Back](https://img.shields.io/badge/🔙-Back-white?style=flat-square&logoColor=blue&color=blue)](https://roob-p.github.io)  
   
-# 🎮 GamepadToKeyboard-PlayniteExtension  
-![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)  
-
+ # 🎮 GamepadToKeyboard-PlayniteExtension   
+ ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)   
+ 
 🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
 
 - This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.  
-***Perfect for old games without native controller support or with incomplete Xinput functionality.***    
+***Perfect for old games without native controller support or with incomplete Xinput functionality.***  
 - The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
 - A dedicated config can be created per game, or a global config can be used for all games.
-- Also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
+- It's also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
 - Multiple games can be selected at once. Every new config will be created.
 - The program's functionalities can be changed with a click through the menu.
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
-- The program also allows fine control over several controller aspects: deadzones (per stick, axis, or direction), axis inversion and more.
 - Config files can be edited and reloaded on-the-fly using a hotkey, without restarting the application.
-- **In future I'll add MACRO, COMBO and TURBO functionalities. Stay tuned.**
+- **The program allows fine control over several controller aspects: deadzone types (square/rectangular, circular with and without rescale), deadzone values (per stick, axis, or direction), axis inversion, modifiers (`[Toggle],[Turbo],[TurboToggle],[Combo],[Comboasync],[Sequence]` and others) and more.**
+- Future updates will include `[MACRO]` and `[TEXT]` modifiers.
+
+
+  
 
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.).  
 
 
-## ⚙️ How it works 
+## 🧩 How it works (Playnite side)
 - Turn `On|Off` the program by clicking the 1st menu item. When `Enabled`, the program is automatically executed after launching the defined (activated) games.
 - Activate a game by clicking the 2nd menu item, and the game will be added in `Gamelist.ini` (with its name, id, source and/or platform). An assignment config (gameid.ini) for that game will be created.
 - You can open the game config by clicking `Edit game config`.
@@ -33,12 +36,25 @@
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activates all of them.
 
+
+## 📝 Controller configuration
+- The program includes several modifiers, which change the button behaviour.  
+  **Just add one of these modifiers before the assigned keys:**
+ - `[Toggle], [Turbo], [TurboToggle]`
+ - `[Combo]`: send multiple keys at once
+ - `[Execute]`: run programs (e.g. Notepad)
+ - `[ComboAsync]`: send multiple keys with a delay (defined with `ComboKeysDelay`)
+ - `[ToggleCombo], [TurboCombo], [TurboToggleCombo]`
+ - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `[Sequence]` sends simple presses.
+- Set `AnalogToMouse = 1` (enabled by default) to move the mouse with the analog stick defined in `Stick` (default: `Stick = RS` )
+- Mouse wheel input is digital when assigned to buttons, and analog/progressive when assigned to sticks or triggers.
+
+
 ### 🔄 Live config reload
 
 - Configuration files can be edited while the game is running.
 - Just press the Hotkey (`Shift`+`Ctrl`+`5` by default) to instantly reload the current `.ini`, without restarting the application.
 - The Hotkey can be customized in `GamepadToKeyboard.config`. 
-<br>  
 
 
 ## 🕹️ Button assignments
@@ -46,43 +62,59 @@ Values you can assign to the buttons:
 - `A..Z`, `0..9`, `F1..F12`
 - common buttons: `Enter`, `Space`, `Esc`, `Lalt`, `Lshift`, `Lctrl`, `Lwin`
 - mouse buttons: `LBmouse`, `RBmouse`, `MBmouse`, `WheelUp`, `WheelDown`  
-- Please check the bottom of this page to find the possible key assignments.
+##### Additional assignable keys are listed at the bottom of this page.
 
-`default.ini` example:
+### 📘 Syntax
+- Just add one modifier to button assignments, placing it before the keys (e.g `A = [Turbo]c`).
+- Each key must be separated with `,`. Extra spaces are ignored (e.g `A = [COMBO] c,S, L,Lbmouse`).
+- Modifiers are case-insensitive (`[Turbo]`, `[TURBO]` and `[turbo]` are equivalent).
+- Spaces after modifiers are optional (`[Turbo]k` and `[Turbo] k` are both valid).
+- Combo-based modifiers support up to 10 buttons, while `[Sequence]` supports up to 15. Any additional keys are ignored.
 
-|Button       |Keys         |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button  | Keys    |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys        |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ |Button       |Keys         |  
-|-------------|-------------|-----------|--------|---------|-----------|-------------|------------|-----------|-------------|-------------|
-|`A`          |Enter        |           |`Back`  | F1      |           |`LSup`       | W          |           |`Home`       |Esc          | 
-|`B`          |Space        |           |`Start` | Esc     |           |`LSdown`     | S          |           |             |             |
-|`X`          |Lshift       |           |`LS`    | LShift  |           |`LSleft`     | A          |           |             |             |      
-|`Y`          |LCtrl        |           |`RS`    | MBmouse |           |`LSright`    | D          |           |             |             |
-|`LB`         |Q            |           |`Dup`   | Up      |           |`RSup`       |            |           |             |             |
-|`RB`         |E            |           |`Ddown` | Down    |           |`RSdown`     |            |           |             |             |
-|`LT`         |RBmouse      |           |`Dleft` | Left    |           |`RSleft`     |            |           |             |             |
-|`RT`         |LBmouse      |           |`Dright`| Right   |           |`RSright`    |            |           |             |             |
+
+**Example syntax:**
+
+|Button   |Assignment              |      |‎Button   | Assignment          |‎     |Button   |Assignment  |‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎   
+|---------|------------------------|------|---------|---------|-----------|-----|---------|------------|
+|`A`      |Enter                   |      |`Back`   | F1                  |     |`LSup`   | Up         |           
+|`B`      |[Turbo] Space           |      |`Start`  | Esc                 |     |`LSdown` | Down       |
+|`X`      |[ComboAsync] S, Space,r |      |`LS`     | [Toggle]LShift      |     |`LSleft` | Left       |                    
+|`Y`      |[COMBO]A,x,F,LBmouse    |      |`RS`     | [execute] calc.exe  |     |`LSright`| Right      |
+|`LB`     |RBmouse                 |      |`Dup`    | Up                  |     |`RSup`   |            |
+|`RB`     |LBmouse                 |      |`Ddown`  | Down                |     |`RSdown` |            |
+|`LT`     |Wheelup                 |      |`Dleft`  | Left                |     |`RSleft` |            |
+|`RT`     |WheelDown               |      |`Dright` | Right               |     |`RSright`|            |
+|`Home`   |Lwin                    |
 
 
 ## ⚙️ Common controller options  
 
-| Section                         | Option                         |                                         Values / Description                                                               |
-|---------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Section                         | Option                         | Values / Description                                                                                                       |
+|---------------------------------|--------------------------------|------------------------------------------------------------------------------------------------------------
 |                                 |                                |                                                                                                                            |
 |Mouse                            |AnalogToMouse                   |`1/0`    : Turn On/Off the mouse movement via analog sticks.                                                                |
-|                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.                                                                       |
-|                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.*                                                                             |
-|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                                                                      | 
-|                                 |Sensitivity                     |`value`  : Mouse movement speed.                                                                                            |
-|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.*                                                                |    
-|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion.                                                                                      |   
-|Other                            |WheelAnalogvalues               |`1/0`    : Progressive/Digital values when wheel is assigned to stick.                                                      |   
-|                                 |SendKeysTypes                   |`1`: default; `2`: alternate; `3`: desktop mode (keyboard-style delay and repeat).*                                         | 
+|                                 |Stick 	                         |`RS/LS`  : Analog to use. Button assignments ignored.         
+|                                 |Deadzoneshape                   |`1/2/3`  : `Square/Rectangular`,`Circular`,`Circular (with rescale)`.     |
+|                                 |DeadzoneType                    |`1/2/4`  : Both axis/ per axis/ per direction.                                                                              |
+|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion. 4 options available.                                             | 
+|                                 |Sensitivity                     |`Value`  : Mouse movement speed.                                                                                            |
+|Analogs                          |DeadzoneType                    |`1/2/4/8`: Both sticks/ per stick/ per axis/ per direction.                                                                |    
+|                                 |(Stick)AxisInverted             |`1/0`    : Turn On/off axis inversion. 4 options available.                               
+|Other                            |SendKeysTypes                   |`1`: Game mode; `2`: Desktop (with windows-style keypress delay + repeat)   
+
+                                                 
+
                                                                    
 
 <br>
 
+### 🧪 Technical Notes
+- Please don't assign `[Turbo]` and other Turbo-based modifiers to Wheel, since it has dedicated repetition variables.
+- `[ComboAsync]` and `[Sequence]` timing can be customized through their dedicated delay variables (expressed in ms).
+- Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).
 
 
-## ⚠️ Notes
+### ⚠️ Notes
 - The exe that comes with the extension is 64bit. The reason is that the x64 version of Autoit programs receive minor flags from AV engines. If you need the x86 one you can download it from the main in the repo, or from the attached files in the releases.  
 - The program does not contain any malicious behaviour. If your AV engine flags it as malware it's a false positive. If so, please send `GamepadTokeyboard.exe` (or any associated flagged file) to your AV vendor asking for a false positive review request.
 
@@ -97,12 +129,12 @@ Values you can assign to the buttons:
 
 - Github repo: 🐙 [roop-p/GamepadToKeyboard](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/)
 - Install directly:
-  [GamepadToKeyboard](https://playnite.link/addons.html#GGamepadToKeyboard)
+  [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - Download last version:
-[v1.0.1](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.0.1/GamepadToKeyboard_v1.0.1.pext)
+[v1.2.1](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext)
+
 
 <br>
-
 
 ## ⌨️ List of assignable keys
 `SPACE`, `ENTER`, `ALT`, `BACKSPACE`, `BS`, `DELETE`, `DEL`, `UP`, `DOWN`, `LEFT`, `RIGHT`, `HOME`, `END`, `ESCAPE`, `ESC`, `INSERT`, `INS`, `PGUP`, `PGDN`, `F1`, `F2`, `F3`, `F4`, `F5`, `F6`, `F7`, `F8`, `F9`, `F10`, `F11`, `F12`, `TAB`, `PRINTSCREEN`, `LWIN`, `RWIN`, `NUMLOCK on`, `CAPSLOCK off`, `SCROLLLOCK toggle`, `BREAK`, `PAUSE`, `NUMPAD0`, `NUMPAD1`, `NUMPAD2`, `NUMPAD3`, `NUMPAD4`, `NUMPAD5`, `NUMPAD6`, `NUMPAD7`, `NUMPAD8`, `NUMPAD9`, `NUMPADMULT`, `NUMPADADD`, `NUMPADSUB`, `NUMPADDIV`, `NUMPADDOT`, `NUMPADENTER`, `APPSKEY`, `LALT`, `RALT`, `LCTRL`, `RCTRL`, `LSHIFT`, `RSHIFT`, `SLEEP`, `ALTDOWN`, `ALTUP`, `SHIFTDOWN`, `SHIFTUP`, `CTRLDOWN`, `CTRLUP`, `LWINDOWN`, `LWINUP`, `RWINDOWN`, `RWINUP`, `ASC nnnn`, `BROWSER_BACK`, `BROWSER_FORWARD`, `BROWSER_REFRESH`, `BROWSER_STOP`, `BROWSER_SEARCH`, `BROWSER_FAVORITES`, `BROWSER_HOME`, `VOLUME_MUTE`, `VOLUME_DOWN`, `VOLUME_UP`, `MEDIA_NEXT`, `MEDIA_PREV`, `MEDIA_STOP`, `MEDIA_PLAY_PAUSE`, `LAUNCH_MAIL`, `LAUNCH_MEDIA`, `LAUNCH_APP1`, `LAUNCH_APP2`, `OEM_102`  
@@ -111,29 +143,17 @@ Values you can assign to the buttons:
 
 
 
-### 📝 *Option notes and other settings    
-
-|           |          |                         |                                                                  |                                                                                                                                     |  
-|-----------|----------|-------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|  
-|**Mouse**‎  |`Deadzone`|`XDeadzone` `YDeadzone`  |`XleftDeadzone` `XrightDeadzone` `YleftDeadzone` `YrightDeadzone` |                                                                                                                                     |    
-|**Analogs**‎|`Deadzone`|`LSDeadzone` `RSDeadzone`|`LSXDeadzone` `LSYDeadzone` `RSXDeadzone` `RSYDeadzone`           |`LSleftDeadzone` `LSrightDeadzone` `LSupDeadzone` `LSdownDeadzone` `RSleftDeadzone` `RSrightDeadzone` `RSupDeadzone` `RSdownDeadzone`|  
-  
-|   |   |   |   |  
-|  -|-  |-  |-  |  
-|**Other**|`SendKeysTypes`:|`1` Simple press (desktop single press, works well in games).                                    |`2` Continuous press on desktop, same as type 1 in games.|
-|         |            |`3` Desktop-like behavior (keyboard-style delay and repeat). Same as the previous types in games.|`4` Desktop-alt experimental (not recommended). In-game behavior as previous types.|
-
-|     |     |     |     |     | 
-|:---:|:---:|:---:|:---:|:---:|
-| `UseSameWheelSpeedLimiter`: `1\|0` -->  Use same value for WheelUp and WheelDown|`WheelSpeedLimiter`: limit scroll speed|`WheelSpeedLimiterUp`: WheelUp limiter | `WheelSpeedLimiterDown`: WheelDown limiter       |                                    |
-
-| | | |
-|-|-|-|
-|**Mouse**|`SmoothFactor`:|How smooth the movement should be (1 = no smoothing, near 0 = very smooth, values below 0.1 may make the cursor too slow. 0 blocks the cursor, be cautious)|  
-
 ### 🎖️ Credits
 This gamepad script was written in AutoIt.  
 The program makes use of a remodified version of the XInput UDF by Oxin8 (xoninx@gmail.com) to read Xinput states.
+
+
+
+
+
+
+ 
+
 
 
 
