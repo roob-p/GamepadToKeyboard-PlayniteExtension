@@ -12,7 +12,7 @@
 - The program's functionalities can be changed with a click through the menu.
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
 - Config files can be edited and reloaded on-the-fly using a hotkey, without restarting the application.
-- **The program allows fine control over several controller aspects: deadzone types (square/rectangular, circular with and without rescale), deadzone values (per stick, axis, or direction), axis inversion, modifiers (`[Toggle],[Turbo],[TurboToggle],[Execute],[Combo],[Comboasync],[Sequence]` and others) and more.**
+- **The program allows fine control over several controller aspects: deadzone types (square/rectangular, circular with and without rescale), deadzone values (per stick, axis, or direction), axis inversion, modifiers (`[Toggle], [Turbo], [TurboToggle], [Execute], [Combo], [Comboasync], [Sequence]` and others) and more.**
 - Future updates will include `[MACRO]` and `[TEXT]` modifiers.
 
 
