@@ -38,7 +38,7 @@
   **Just add one of these modifiers before the assigned keys:**
  - `[Toggle], [Turbo], [TurboToggle]`
  - `[Combo]`: send multiple keys at once
- - `[Execute]`: run programs (e.g. Notepad)
+ - `[Execute]`: run programs (e.g. `notepad`, `calc.exe`, `c:\yourfolder\yourprogram.exe`)
  - `[ComboAsync]`: send multiple keys with a delay (defined with `ComboKeysDelay`)
  - `[ToggleCombo], [TurboCombo], [TurboToggleCombo]`
  - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `[Sequence]` sends simple presses.
