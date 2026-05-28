@@ -2,7 +2,7 @@
 <!--[![🔙 Back](https://img.shields.io/badge/🔙-Back-blue)](https://roob-p.github.io)-->  
 [![🔙 Back](https://img.shields.io/badge/🔙-Back-white?style=flat-square&logoColor=blue&color=blue)](https://roob-p.github.io)  
   
- # 🎮 GamepadToKeyboard-PlayniteExtension   
+# 🎮 GamepadToKeyboard-PlayniteExtension    
  ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)   
  
 🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
@@ -42,7 +42,7 @@
   **Just add one of these modifiers before the assigned keys:**
  - `[Toggle], [Turbo], [TurboToggle]`
  - `[Combo]`: send multiple keys at once
- - `[Execute]`: run programs (e.g. Notepad)
+ - `[Execute]`: run programs (e.g. `notepad`, `calc.exe`, `c:\yourfolder\yourprogram.exe`)
  - `[ComboAsync]`: send multiple keys with a delay (defined with `ComboKeysDelay`)
  - `[ToggleCombo], [TurboCombo], [TurboToggleCombo]`
  - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `[Sequence]` sends simple presses.
@@ -126,6 +126,7 @@ Values you can assign to the buttons:
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E214R1KB)  
 
 <br>
+
 
 - Github repo: 🐙 [roop-p/GamepadToKeyboard](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/)
 - Install directly:
