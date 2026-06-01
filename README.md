@@ -108,6 +108,7 @@ Values you can assign to the buttons:
 - Please don't assign `[Turbo]` and other Turbo-based modifiers to Wheel, since it has dedicated repetition variables.
 - `[ComboAsync]` and `[Sequence]` timing can be customized through their dedicated delay variables (expressed in ms).
 - Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).
+- **The Windows key may not behave exactly like a physical key due to Windows focus-handling limitations.**
 
 
 ### ⚠️ Notes
@@ -127,7 +128,7 @@ Values you can assign to the buttons:
 - Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - Download last version:
-[v1.2.1](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext)
+[v1.2.2](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.2/GamepadToKeyboard_v1.2.2.pext)
 
 
 <br>
