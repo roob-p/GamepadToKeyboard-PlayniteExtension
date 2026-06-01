@@ -16,6 +16,9 @@
 - Future updates will include `[MACRO]` and `[TEXT]` modifiers.
 
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.).  
+### 🚀 Standalone version
+A standalone version is also available for users who don't use Playnite:
+https://github.com/roob-p/GamepadToKeyboard
 
 
 ## 🧩 How it works (Playnite side)
@@ -28,10 +31,6 @@
 - In `QuickIniProfile.ini` you can edit a list of "favourite" configs that can be switched through `Quick ini profiles (all games)` item menu. The sub-menu is dynamically built: its size varies with the number of elements.
 - The program can also load a config if passed as parameter via command line, or by drag and drop it to `GamepadToKeyboard.exe`. Make sure that GamepadToKeyboard is disabled in Playnite, or that the target game is deactivated.
 - In a multiple selection, if the games are in a mixed state (some games activated, some games deactivated, others not added) the extension automatically adds the new entries in `Gamelist.ini` and activates all of them.
-
-#### 🚀 Standalone version
-A standalone version is also available for users who don't use Playnite:
-https://github.com/roob-p/GamepadToKeyboard
 
 ## 📝 Controller configuration
 - The program includes several modifiers, which change the button behaviour.  
