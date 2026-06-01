@@ -109,6 +109,7 @@ Values you can assign to the buttons:
 - `[ComboAsync]` and `[Sequence]` timing can be customized through their dedicated delay variables (expressed in ms).
 - Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).
 - **The Windows key may not behave exactly like a physical key due to Windows focus-handling limitations.**
+- Please don't use `CTRLDOWN`, `ALTDOWN`, `SHIFTDOWN`, `LWINDOWN`, `RWINDOWN` in the assignments. These special keys are handled through `LAlt`, `LCtrl`, `RAlt`, `RCtrl`, `LWin`, and `RWin`.
 
 
 ### ⚠️ Notes
