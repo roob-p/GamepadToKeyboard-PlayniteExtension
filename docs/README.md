@@ -3,7 +3,7 @@
 [![🔙 Back](https://img.shields.io/badge/🔙-Back-white?style=flat-square&logoColor=blue&color=blue)](https://roob-p.github.io)  
  # 🎮 GamepadToKeyboard-PlayniteExtension    
  ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)   
-  
+ 
 🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
 
 - This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.  
@@ -111,6 +111,8 @@ Values you can assign to the buttons:
 - Please don't assign `[Turbo]` and other Turbo-based modifiers to Wheel, since it has dedicated repetition variables.
 - `[ComboAsync]` and `[Sequence]` timing can be customized through their dedicated delay variables (expressed in ms).
 - Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).
+- **The Windows key may not behave exactly like a physical key due to Windows focus-handling limitations.**
+- Please don't use `CTRLDOWN`, `ALTDOWN`, `SHIFTDOWN`, `LWINDOWN`, `RWINDOWN` in the assignments. These special keys are handled through `LAlt`, `LCtrl`, `RAlt`, `RCtrl`, `LWin`, and `RWin`.
 
 
 ### ⚠️ Notes
@@ -124,13 +126,13 @@ Values you can assign to the buttons:
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E214R1KB)  
 
-
+<br>
 
 - Github repo: 🐙 [roop-p/GamepadToKeyboard](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/)
 - Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - Download last version:
-[v1.2.1](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.1/GamepadToKeyboard_v1.2.1.pext)
+[v1.2.2](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.2/GamepadToKeyboard_v1.2.2.pext)
 
 
 <br>
