@@ -15,10 +15,8 @@
 - **The program allows fine control over several controller aspects: deadzone types (square/rectangular, circular with and without rescale), deadzone values (per stick, axis, or direction), axis inversion, modifiers (`[Toggle], [Turbo], [TurboToggle], [Execute], [Combo], [ComboAsync], [Sequence]` and others) and more.**
 - Future updates will include `[MACRO]` and `[TEXT]` modifiers.
 
+#### 🚀 A Standalone version is also available for users who don't use Playnite: https://github.com/roob-p/GamepadToKeyboard  
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.).  
-### 🚀 Standalone version
-A standalone version is also available for users who don't use Playnite:
-https://github.com/roob-p/GamepadToKeyboard
 
 
 ## 🧩 How it works (Playnite side)
