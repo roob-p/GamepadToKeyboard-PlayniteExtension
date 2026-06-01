@@ -28,3 +28,10 @@ Packages:
       - Improved input management and better Desktop mode compatibility.
       - Improved button release cleanup on exit.
       - Code optimized, fixed and restructured.
+  - Version: 1.2.2
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2026-06-01
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.2/GamepadToKeyboard_v1.2.2.pext
+    Changelog:
+      - Fixed the issue where some special keys (LCtrl, LAlt, LWin, RCtrl, RAlt, RWin) remained stuck when pressed.
+      - Fixed mouse wheel repeat functionality (this fix was already included in the corrected v1.2.1 package uploaded shortly after 1.2.1 release, but some users may still have downloaded the original version).
