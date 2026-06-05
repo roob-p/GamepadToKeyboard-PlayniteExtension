@@ -18,7 +18,7 @@
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.). 
 #### 🚀 Standalone version
 A standalone version is also available for users who don't use Playnite:
-https://github.com/roob-p/GamepadToKeyboard
+[GamepadToKeyboard](https://github.com/roob-p/GamepadToKeyboard)
 
 
 ## 🧩 How it works (Playnite side)
