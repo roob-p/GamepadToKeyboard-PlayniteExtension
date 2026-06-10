@@ -41,7 +41,7 @@ A standalone version is also available for users who don't use Playnite:
  - `[ComboAsync]`: send multiple keys with a delay (defined with `ComboKeysDelay`)
  - `[ToggleCombo], [TurboCombo], [TurboToggleCombo]`
  - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `[Sequence]` sends simple presses.
- - `[TEXT]`: send up to 200 characters (e.g. `[TEXT]this is a string`). Not intended for games.
+ - `[Text]`: send up to 200 characters (e.g. `[TEXT]this is a string`). Not intended for games.
 - Set `AnalogToMouse = 1` (enabled by default) to move the mouse with the analog stick defined in `Stick` (default: `Stick = RS` )
 - Mouse wheel input is digital when assigned to buttons, and analog/progressive when assigned to sticks or triggers.
 
