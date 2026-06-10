@@ -2,9 +2,9 @@
 #AutoIt3Wrapper_Icon=icon.ico
 #AutoIt3Wrapper_UseX64=y
 #AutoIt3Wrapper_Res_Description=GamepadToKeyboard (64 bit)
-#AutoIt3Wrapper_Res_Fileversion=1.2.1.0
+#AutoIt3Wrapper_Res_Fileversion=1.2.3.0
 #AutoIt3Wrapper_Res_ProductName=GamepadToKeyboard
-#AutoIt3Wrapper_Res_ProductVersion=1.2.1
+#AutoIt3Wrapper_Res_ProductVersion=1.2.3
 #AutoIt3Wrapper_Res_CompanyName=roob-p (author)
 #AutoIt3Wrapper_Res_LegalCopyright=roob-p (author)
 #AutoIt3Wrapper_Res_LegalTradeMarks=roob-p (author)
@@ -14,7 +14,6 @@
 #include <AutoItConstants.au3>
 #include <Misc.au3>
 #include <WinAPI.au3>
-#include <SendEx.au3>
 #include <WinAPIProc.au3>
 #include <Timers.au3>
 #include <ColorConstants.au3>
@@ -34,7 +33,7 @@ $input = _XInputGetInput($inputhwnd)
 $buttons = _XInputButtons($input[2])
 
 
-global $analogdeadzone=1, $sentKeys[256], $ignoreIndices[4], $sentkeyss[256]
+global $analogdeadzone=1, $sentKeys[256], $ignoreIndices[4]
 
 $programName="GamepadToKeyboard"
 
@@ -51,8 +50,8 @@ endif
 	$inifile=IniRead(@ScriptDir & "\" & $programName &".config","configToLoad","configToLoad","default.ini")
 	endif
 
+	;$inifile=@ScriptDir & "\" & "s.ini"
 
-;$inifile=@ScriptDir & "\" & "MaxPayne2.ini"
 
 global $A=$buttons[12],$B=$buttons[13],$X=$buttons[14],$Y=$buttons[15],$start=$buttons[5],$back=$buttons[6],$LS=$buttons[7],$RS=$buttons[8],$LB=$buttons[9],$RB=$buttons[10],$Home=$buttons[11],$Up=$buttons[1],$Down=$buttons[2],$Left=$buttons[3],$Right=$buttons[4]
 global $LT=$input[3],$RT=$input[4],	$LSX=$input[5], $LSY=$input[6], $RSX=$input[7], $RSY=$input[8], $LS=$buttons[7], $RS=$buttons[8]
@@ -160,6 +159,8 @@ global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $co
 global $ToggleComboOn=$ef, $ToggleCombo=$ef, $TurboCombo=$ef, $TurboToggleCombo=$ef,	$TurboComboOn=$ef, $TurboToggleOn=$ef, $TurboToggleComboOn=$ef
 global $keysfromcombo[$asize], $combokeys[$asize][$combosize], $keysfromcomboup[$asize], $keysfromcombodown[$asize]
 global $keysfromcomboasync[$asize], $combokeysasync[$asize][$combosize], $keysfromcomboupasync[$asize], $keysfromcombodownasync[$asize], $combK[$asize]
+global $MacroOn=$ef, $macrosize=25, $Macrokeys[$asize][$macrosize]
+global $stringmax=200,  $text=$ef ; $textOn=$ef, $textkeys[$asize][$stringsize]
 
 global $Togglekeysfromcombo[$asize],$Togglecombokeys[$asize][$combosize],$Togglekeysfromcomboup[$asize],$Togglekeysfromcombodown[$asize]
 global $Turbokeysfromcombo[$asize],$Turbocombokeys[$asize][$combosize],$Turbokeysfromcomboup[$asize],$Turbokeysfromcombodown[$asize]
@@ -181,6 +182,7 @@ global $mousemovv[2]
 global $alreadytimerscroll=$ef, $timerscroll[$asize]
 Global $hNTDLL = DllOpen("ntdll.dll")
 global $fkeys, $DW=@DesktopWidth/15,$DH=@DesktopHeight/18
+global $specialkeys=$ef, $specialkeys2DCombo[$asize][$combosize], $specialkeys2DSequence[$asize][$SequenceMax]
 
 
 parse()
@@ -258,7 +260,7 @@ if $keys[$i] and $pressed[$i]=False then
 	$pressed[$i]=True
 	$sentKeys[$i]=True
 
-	inpt($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])
+	inpt($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 
 	endif
 
@@ -267,7 +269,7 @@ endif
 if $pressed[$i]=True and not $keys[$i] Then
 	if $skip=False then
 		if $values[$i]="" then ContinueLoop
-	if $buttonaction[$i]<>3 and $buttonaction[$i]<>4 and $buttonaction[$i]<>7 and $buttonaction[$i]<>9 then inpt($i,$values[$i],1,$buttontype[$i],$buttonaction[$i])
+	if $buttonaction[$i]<>3 and $buttonaction[$i]<>4 and $buttonaction[$i]<>7 and $buttonaction[$i]<>9 then inpt($i,$values[$i],1,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 	$pressed[$i]=False
 	$sentkeys[$i]=False
 
@@ -329,9 +331,9 @@ func keysDesktop()
 	; ===== Ciclo principale =====
 	If $keys[$i] Then
 		if $values[$i]="" then ContinueLoop
-				if $pressed[$i]=False and $buttonaction[$i]=4 then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])	;Executes, no repeat
-				if $buttontype[$i]=1 and $pressed[$i]=False then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])		;Mousebuttons (no repeat)
-				if $buttontype[$i]=2 and $pressed[$i]=False then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])		;Scrollwheel
+				if $pressed[$i]=False and $buttonaction[$i]=4 then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])	;Executes, no repeat
+				if $buttontype[$i]=1 and $pressed[$i]=False then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])		;Mousebuttons (no repeat)
+				if $buttontype[$i]=2 and $pressed[$i]=False then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])		;Scrollwheel
             ; Se è la prima volta che premiamo il tasto
             If Not $pressed[$i] Then
                 $pressed[$i] = True
@@ -339,7 +341,7 @@ func keysDesktop()
                 $lastPressTime[$i] = TimerInit()  ; inizializza timer
                 $firstPressDone[$i] = False
 
-				if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])
+				if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
             Else
                 ; se il delay iniziale è già passato
                 If Not $firstPressDone[$i] Then
@@ -347,7 +349,7 @@ func keysDesktop()
                         $lastPressTime[$i] = TimerInit()
                         $firstPressDone[$i] = True
 
-						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])
+						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 						$sentKeys[$i]=True
                     EndIf
                 Else
@@ -355,7 +357,7 @@ func keysDesktop()
                     If TimerDiff($lastPressTime[$i]) >= $RepeatDelay Then
                         $lastPressTime[$i] = TimerInit()
 
-						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i])
+						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 						$sentKeys[$i]=True
                     EndIf
                 EndIf
@@ -367,7 +369,7 @@ func keysDesktop()
 If $pressed[$i] and not $keys[$i] Then
 
 			if $values[$i]="" then ContinueLoop
-			if $buttonaction[$i]<>4 then inptD($i,$values[$i],1,$buttontype[$i],$buttonaction[$i])
+			if $buttonaction[$i]<>4 then inptD($i,$values[$i],1,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 			$sentKeys[$i]=False
 
         $pressed[$i] = False
@@ -395,11 +397,12 @@ endfunc
 
 
 
-func inpt($ix,$value,$state,$btype,$baction)
+func inpt($ix,$value,$state,$btype,$baction,$specialkey)
 
 switch $baction
 	case 0 ; normal key
-		sender($ix,$value,$state,$btype)
+		;sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 1 ; Toggle
 		Toggle($ix,$value,0,$btype)
 	case 2 ; Turbo
@@ -420,31 +423,56 @@ $TurboToggleOn[$ix]=not $TurboToggleOn[$ix]
 	case 9 ; TurboToggleCombo
 $released[$ix]=False
 $TurboToggleComboOn[$ix]=not $TurboToggleComboOn[$ix]
-	case 10; SimpleMacro
+	case 10; Sequence
 		Sequence($ix,$value,$state,$btype)
+	case 11; Text
+		senderText($ix,$value,$state)
 endswitch
 
 endfunc
 
 
-
-
-func sender($ix,$value,$state,$btype)
+func sender($ix,$value,$state,$btype,$specialkey)
 
 switch $btype
 	Case 0
 		switch $state
 		  case 0
+			if $specialkey=False then
 		   send ("{" & $value & " down}")
+			else
+		   local $val=exception($value)
+		   $value=$val[0]
+		   $code=$val[1]
+		   $flags=$val[2]
+		   DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long", $flags, "ptr", 0)
+		  endif
 		  case 1
+			if $specialkey=False then
 		   send ("{" & $value & " up}")
+			else
+			local $val=exception($value)
+		   $value=$val[0]
+		   $code=$val[1]
+		   $flags=$val[2]
+			 DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+		  endif
 		  case 2
 		   ;$$value=Stringlower($value)
 		   send("{"&$value&"}")
 		  case 3
+		   if $specialkey=False then
 		   send ("{" & $value & " down}")
 		   send ("{" & $value & " up}")
-		  endswitch
+		   else
+			local $val=exception($value)
+		   $value=$val[0]
+		   $code=$val[1]
+		   $flags=$val[2]
+		   DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long", $flags, "ptr", 0)
+		   DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+		   endif
+		endswitch
 	Case 1
 		switch $state
 		  case 0
@@ -462,13 +490,54 @@ endswitch
 
 endfunc
 
+func exception($value)
+
+Switch $value
+	case "Lctrl"
+		$value = $VK_LCONTROL
+		$code  = 0x1D
+		$flags = 0
+	case "LAlt"
+		$value = $VK_LMENU
+		$code  = 0x38
+		$flags = 0
+	case "RAlt"
+		$value = $VK_RMENU
+		$code  = 0x38
+		$flags = 0x0001
+	case "Rctrl"
+		$value = $VK_RCONTROL
+		$code  = 0x1D
+		$flags = 0x0001
+	case "Lwin"
+		$value = $VK_LWIN
+		$code  = 0x5B
+		$flags = 0x0001
+	case "Rwin"
+		$value = $VK_RWIN
+		$code  = 0x5C
+		$flags = 0x0001
+endswitch
+
+	local $val[3]
+	$val[0]=$value
+	$val[1]=$code
+	$val[2]=$flags
+
+	return $val
+endfunc
 
 
+func sendertext($ix,$value, $state)
+
+if $state=0 then send($value)
+
+endfunc
 
 func scrollwheelT($ix,$value)
 
 	if ($Analogscrollrepeat=1 and ($ix>=17 or $ix=6 or $ix=7)) or ($Digitalscrollrepeat=1 and $ix<17 and $ix<>6 and $ix<>7) then
-		if $ToggleOn=False then $pressed[$ix]=False
+		if $ToggleOn[$ix]=False then $pressed[$ix]=False
 
 		if $alreadytimerscroll[$ix]=False then
 		scrollwheel($ix,$value)
@@ -493,12 +562,11 @@ func Toggle($ix,$value,$state,$btype)
 	if $toggleOn[$ix]=False and $keys[$ix]=True Then
 	$toggleOn[$ix]=True
 
-	sender($ix,$value,0,$btype)
+	sender($ix,$value,0,$btype,$specialkeys[$ix])
 
 	elseif $toggleOn[$ix]=True and $keys[$ix]=True then
-	;elseif $toggleOn[$ix]=True then  ; WRONG!
 	$toggleOn[$ix]=False
-	sender($ix,$value,1,$btype)
+	sender($ix,$value,1,$btype,$specialkeys[$ix])
 	endif
 
 endfunc
@@ -506,13 +574,13 @@ endfunc
 
 func Turbo($ix,$value,$state,$btype)
 	if $alreadyTimer[$ix]=False then
-	sender($ix,$value,$state,$btype)
+	sender($ix,$value,$state,$btype,$specialkeys[$ix])
 	$alreadyTimer[$ix]=True
 	$timerT[$ix]=_Timer_Init()
 	endif
 
 	if _Timer_Diff($timerT[$ix])>$repeatTime then
-	sender($ix,$value,$state,$btype)
+	sender($ix,$value,$state,$btype,$specialkeys[$ix])
 	$timerT[$ix]=_Timer_Init()
 	endif
 endfunc
@@ -520,14 +588,14 @@ endfunc
 
 func Turbo3($ix,$value,$state,$btype)
 	if $alreadyTimer[$ix]=False then
-	sender($ix,$value,0,$btype)
+	sender($ix,$value,0,$btype,$specialkeys[$ix])
 	$alreadyTimer[$ix]=True
 	$timerT[$ix]=_Timer_Init()
 	endif
 
 	if _Timer_Diff($timerT[$ix])>$repeatTime then
-	sender($ix,$value,0,$btype)
-	sender($ix,$value,1,$btype)
+	sender($ix,$value,0,$btype,$specialkeys[$ix])
+	sender($ix,$value,1,$btype,$specialkeys[$ix])
 	$timerT[$ix]=_Timer_Init()
 	endif
 endfunc
@@ -541,8 +609,7 @@ func TurboCombo($ix,$value,$state,$btype)
 	for $k=1 to Ubound($Turbocombokeys,$UBOUND_COLUMNS)-1
 
 			if $Turbocombokeys[$ix][$k] then
-				;sender($ix,$Turbocombokeys[$ix][$k],$state,$btype)
-				sender($ix,$Turbocombokeys[$ix][$k],$state,$TurbocomboType[$ix][$k])
+				sender($ix,$Turbocombokeys[$ix][$k],$state,$TurbocomboType[$ix][$k],$specialkeys2DCombo[$ix][$k])
 				$sentkeys[$ix]=True
 			endif
 	next
@@ -557,8 +624,7 @@ func TurboCombo($ix,$value,$state,$btype)
 	for $ki=1 to Ubound($Turbocombokeys,$UBOUND_COLUMNS)-1
 
 			if $Turbocombokeys[$ix][$ki] then
-				;sender($ix,$Turbocombokeys[$ix][$ki],$state,$btype)
-				sender($ix,$Turbocombokeys[$ix][$ki],$state,$TurbocomboType[$ix][$ki])
+				sender($ix,$Turbocombokeys[$ix][$ki],$state,$TurbocomboType[$ix][$ki],$specialkeys2DCombo[$ix][$k])
 				$sentkeys[$ix]=True
 			endif
 	next
@@ -570,17 +636,17 @@ func TurboCombo($ix,$value,$state,$btype)
 endfunc
 
 
-func inptD($ix,$value,$state,$btype,$baction)
+func inptD($ix,$value,$state,$btype,$baction,$specialkey)
 
 switch $baction
 	case 0 ; normal key
-		sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 1 ; Toggle
 		Toggle($ix,$value,0,$btype)
 	case 2 ; Turbo not available in keysDesktop
-		sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 3 ; TurboToggle not available in keysDesktop
-		sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 4 ; executes
 		executes($ix,$value)
 	case 5 ; combo
@@ -590,11 +656,13 @@ switch $baction
 	case 7 ; ToggleCombo
 		ToggleCombo($ix,$value,0,$btype)
 	case 8 ; TurboCombo not available
-		sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 9 ; TurboToggleCombo not available
-		sender($ix,$value,$state,$btype)
+		sender($ix,$value,$state,$btype,$specialkey)
 	case 10; Sequence
 		Sequence($ix,$value,$state,$btype)
+	case 11; Text
+		senderText($ix,$value,$state)
 endswitch
 
 endfunc
@@ -608,8 +676,7 @@ func ToggleCombo($ix,$value,$state,$btype)
 
 	for $k=1 to Ubound($Togglecombokeys,$UBOUND_COLUMNS)-1
 		if $Togglecombokeys[$ix][$k] then
-			;sender($ix,$Togglecombokeys[$ix][$k],0,$btype)
-			sender($ix,$Togglecombokeys[$ix][$k],0,$TogglecomboType[$ix][$k])
+			sender($ix,$Togglecombokeys[$ix][$k],0,$TogglecomboType[$ix][$k],$specialkeys2DCombo[$ix][$k])
 			$sentkeys[$ix]=True
 		endif
 	next
@@ -619,7 +686,7 @@ func ToggleCombo($ix,$value,$state,$btype)
 	$toggleComboOn[$ix]=False
 
 	for $k=1 to Ubound($combokeys,$UBOUND_COLUMNS)-1
-			if $Togglecombokeys[$ix][$k] then sender($ix,$Togglecombokeys[$ix][$k],1,$TogglecomboType[$ix][$k])
+			if $Togglecombokeys[$ix][$k] then sender($ix,$Togglecombokeys[$ix][$k],1,$TogglecomboType[$ix][$k],$specialkeys2DCombo[$ix][$k])
 	next
 
 
@@ -631,7 +698,7 @@ func COMBO($ix,$value,$state,$btype)
 	for $k=1 to Ubound($combokeys,$UBOUND_COLUMNS)-1
 		if $combokeys[$ix][$k]="" then continueloop
 			$sentkeys[$ix]=True
-			sender($ix,$combokeys[$ix][$k],$state,$combotype[$ix][$k])
+			sender($ix,$combokeys[$ix][$k],$state,$combotype[$ix][$k],$specialkeys2DCombo[$ix][$k])
 	next
 endfunc
 
@@ -643,8 +710,7 @@ if $state=1 then return
 	if $alreadytimerasync[$ix]=False then
 	$comboasyncOn[$ix]=True
 		if $combokeysasync[$ix][1] then
-			;sender($ix,$combokeysasync[$ix][1],0,$btype)
-			sender($ix,$combokeysasync[$ix][1],0,$comboAsyncType[$ix][1])
+			sender($ix,$combokeysasync[$ix][1],0,$comboAsyncType[$ix][1],$specialkeys2DCombo[$ix][1])
 			$sentkeys[$ix]=True
 		endif
 	$timerasync[$ix]=TimerInit()
@@ -657,8 +723,7 @@ if $comboasyncOn[$ix]=True then
 	if TimerDiff($timerasync[$ix])>$combotime then
 			if $combK[$ix]<$comboasyncNum[$ix] then $combK[$ix]+=1
 		if $combokeysasync[$ix][$combK[$ix]] then
-			;sender($ix,$combokeysasync[$ix][$combK[$ix]],0,$btype)
-			sender($ix,$combokeysasync[$ix][$combK[$ix]],0,$comboAsyncType[$ix][$combK[$ix]])
+			sender($ix,$combokeysasync[$ix][$combK[$ix]],0,$comboAsyncType[$ix][$combK[$ix]],$specialkeys2DCombo[$ix][$combK[$ix]])
 			$sentkeys[$ix]=True
 		endif
 	$timerasync[$ix]=TimerInit()
@@ -668,7 +733,7 @@ if $comboasyncOn[$ix]=True then
 	if $combK[$ix]>=$comboasyncNum[$ix] then
 	for $k=1 to $comboasyncNum[$ix]
 		if $combokeysasync[$ix][$k]="" then ContinueLoop
-			sender($ix,$combokeysasync[$ix][$k],1,$comboAsyncType[$ix][$k])
+			sender($ix,$combokeysasync[$ix][$k],1,$comboAsyncType[$ix][$k],$specialkeys2DCombo[$ix][$k])
 			$sentkeys[$ix]=True
 	next
 	$comboasyncOn[$ix]=False
@@ -689,7 +754,7 @@ if $state=1 then return
 	if $alreadytimerSimplemacro[$ix]=False then
 	$simpleMacroOn[$ix]=True
 		if $simpleMacrokeys[$ix][1] then
-			sender($ix,$simpleMacrokeys[$ix][1],3,$simpleMacroType[$ix][1])
+			sender($ix,$simpleMacrokeys[$ix][1],3,$simpleMacroType[$ix][1],$specialkeys2DSequence[$ix][1])
 			$sentkeys[$ix]=True
 		endif
 	$timerSimpleMacro[$ix]=TimerInit()
@@ -703,7 +768,7 @@ if $simpleMacroOn[$ix]=True then
 	if TimerDiff($timerSimpleMacro[$ix])>$SequenceTime then
 			if $SmacroK[$ix]<$SequenceNum[$ix] then $SmacroK[$ix]+=1
 		if $simpleMacrokeys[$ix][$SmacroK[$ix]] then
-			sender($ix,$simpleMacrokeys[$ix][$SmacroK[$ix]],$state,$simpleMacroType[$ix][$SmacroK[$ix]])
+			sender($ix,$simpleMacrokeys[$ix][$SmacroK[$ix]],$state,$simpleMacroType[$ix][$SmacroK[$ix]],$specialkeys2DSequence[$ix][$SmacroK[$ix]])
 			$sentkeys[$ix]=True
 		endif
 	$timerSimpleMacro[$ix]=TimerInit()
@@ -828,6 +893,8 @@ for $i=0 to Ubound($values)-1
 			local $val=buttontype($combokeys,$combotype,$i,$j)
 			$combokeys[$i][$j]=$val[0]
 			$combotype[$i][$j]=$val[1]
+
+			if $combokeys[$i][$j]= "Lctrl" or $combokeys[$i][$j]="Lalt" or $combokeys[$i][$j]="Lwin" or $combokeys[$i][$j]="Rwin" or $combokeys[$i][$j]="Rctrl" or $combokeys[$i][$j]="Ralt" then $specialkeys2DCombo[$i][$j]=True
 		next
 
 		$values[$i]=$keysfromcombo[$i]
@@ -857,6 +924,8 @@ for $i=0 to Ubound($values)-1
 			local $val=buttontype($combokeysasync,$comboasynctype,$i,$j)
 			$combokeysasync[$i][$j]=$val[0]
 			$comboasynctype[$i][$j]=$val[1]
+
+			if $combokeysasync[$i][$j]= "Lctrl" or $combokeysasync[$i][$j]="Lalt" or $combokeysasync[$i][$j]="Lwin" or $combokeysasync[$i][$j]="Rwin" or $combokeysasync[$i][$j]="Rctrl" or $combokeysasync[$i][$j]="Ralt" then $specialkeys2DCombo[$i][$j]=True
 		next
 
 	$values[$i]=$keysfromcomboasync[$i]
@@ -886,6 +955,8 @@ for $i=0 to Ubound($values)-1
 			local $val=buttontype($Togglecombokeys,$Togglecombotype,$i,$j)
 			$Togglecombokeys[$i][$j]=$val[0]
 			$Togglecombotype[$i][$j]=$val[1]
+
+			if $Togglecombokeys[$i][$j]= "Lctrl" or $Togglecombokeys[$i][$j]="Lalt" or $Togglecombokeys[$i][$j]="Lwin" or $Togglecombokeys[$i][$j]="Rwin" or $Togglecombokeys[$i][$j]="Rctrl" or $Togglecombokeys[$i][$j]="Ralt" then $specialkeys2DCombo[$i][$j]=True
 		next
 
 		$values[$i]=$Togglekeysfromcombo[$i]
@@ -912,6 +983,8 @@ for $i=0 to Ubound($values)-1
 			local $val=buttontype($Turbocombokeys,$Turbocombotype,$i,$j)
 			$Turbocombokeys[$i][$j]=$val[0]
 			$Turbocombotype[$i][$j]=$val[1]
+
+			if $Turbocombokeys[$i][$j]= "Lctrl" or $Turbocombokeys[$i][$j]="Lalt" or $Turbocombokeys[$i][$j]="Lwin" or $Turbocombokeys[$i][$j]="Rwin" or $Turbocombokeys[$i][$j]="Rctrl" or $Turbocombokeys[$i][$j]="Ralt" then $specialkeys2DCombo[$i][$j]=True
 		next
 
 		$values[$i]=$Turbokeysfromcombo[$i]
@@ -941,11 +1014,13 @@ for $i=0 to Ubound($values)-1
 			local $val=buttontype($Turbocombokeys,$Turbocombotype,$i,$j)
 			$Turbocombokeys[$i][$j]=$val[0]
 			$Turbocombotype[$i][$j]=$val[1]
+
+			if $Turbocombokeys[$i][$j]= "Lctrl" or $Turbocombokeys[$i][$j]="Lalt" or $Turbocombokeys[$i][$j]="Lwin" or $Turbocombokeys[$i][$j]="Rwin" or $Turbocombokeys[$i][$j]="Rctrl" or $Turbocombokeys[$i][$j]="Ralt" then $specialkeys2DCombo[$i][$j]=True
 		next
 
 		$values[$i]=$Turbokeysfromcombo[$i]
-
 	$buttonaction[$i]=9
+
 		endif
 
 
@@ -966,12 +1041,25 @@ for $i=0 to Ubound($values)-1
 			$simpleMacroKeys[$i][$j]=$val[0]
 			$simpleMacrotype[$i][$j]=$val[1]
 
+			if $simpleMacroKeys[$i][$j]= "Lctrl" or $simpleMacroKeys[$i][$j]="Lalt" or $simpleMacroKeys[$i][$j]="Lwin" or $simpleMacroKeys[$i][$j]="Rwin" or $simpleMacroKeys[$i][$j]="Rctrl" or $simpleMacroKeys[$i][$j]="Ralt" then $specialkeys2DSequence[$i][$j]=True
+
 		next
 
 		$values[$i]=$KeysFromSimpleMacro[$i]
 
 	$buttonaction[$i]=10
 		endif
+
+
+
+		if (StringInStr($values[$i], "[TEXT]")) Then
+		$Text[$i]=True
+		$values[$i]=stringreplace($values[$i],"[TEXT]","")
+		if stringlen($values[$i])>=$stringmax then $values[$i]=Stringleft($values[$i],$stringmax)
+
+		$buttonaction[$i]=11
+		endif
+
 
 
 
@@ -992,9 +1080,17 @@ if $values[$i]="MBmouse" then $values[$i]="middle"
 if $values[$i]="WheelUp" then $values[$i]="up"
 if $values[$i]="WheelDown" then $values[$i]="down"
 
+
+if $values[$i]= "Lctrl" or $values[$i]="Lalt" or $values[$i]="Lwin" or $values[$i]="Rwin" or $values[$i]="Rctrl" or $values[$i]="Ralt" then $specialkeys[$i]=True
+
+
 endif
 
 ;#comments-end
+
+
+
+
 
 next
 
@@ -1387,6 +1483,8 @@ global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $co
 global $ToggleComboOn=$ef, $ToggleCombo=$ef, $TurboCombo=$ef, $TurboToggleCombo=$ef,	$TurboComboOn=$ef, $TurboToggleOn=$ef, $TurboToggleComboOn=$ef
 global $keysfromcombo[$asize], $combokeys[$asize][$combosize], $keysfromcomboup[$asize], $keysfromcombodown[$asize]
 global $keysfromcomboasync[$asize], $combokeysasync[$asize][$combosize], $keysfromcomboupasync[$asize], $keysfromcombodownasync[$asize], $combK[$asize]
+global $MacroOn=$ef, $macrosize=25, $Macrokeys[$asize][$macrosize]
+global $stringmax=200,  $text=$ef ; $textOn=$ef, $textkeys[$asize][$stringsize]
 
 global $Togglekeysfromcombo[$asize],$Togglecombokeys[$asize][$combosize],$Togglekeysfromcomboup[$asize],$Togglekeysfromcombodown[$asize]
 global $Turbokeysfromcombo[$asize],$Turbocombokeys[$asize][$combosize],$Turbokeysfromcomboup[$asize],$Turbokeysfromcombodown[$asize]
@@ -1408,6 +1506,7 @@ global $mousemovv[2]
 global $alreadytimerscroll=$ef, $timerscroll[$asize]
 Global $hNTDLL = DllOpen("ntdll.dll")
 global $fkeys, $DW=@DesktopWidth/15,$DH=@DesktopHeight/18
+global $specialkeys=$ef, $specialkeys2DCombo[$asize][$combosize], $specialkeys2DSequence[$asize][$SequenceMax]
 
 
 parse()
@@ -1499,6 +1598,50 @@ Elseif ($sendkeystype=1 and $buttonaction[$i]>4) or ($sendkeystype=2 and ($butto
 Endif
 	Next
 
+up()
+
 endfunc
+
+
+func up()
+
+		$value = $VK_LCONTROL
+		$code  = 0x1D
+		$flags = 0
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+		$value = $VK_LMENU
+		$code  = 0x38
+		$flags = 0
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+		$value = $VK_RMENU
+		$code  = 0x38
+		$flags = 0x0001
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+		$value = $VK_RCONTROL
+		$code  = 0x1D
+		$flags = 0x0001
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+		$value = $VK_LWIN
+		$code  = 0x5B
+		$flags = 0x0001
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+		$value = $VK_RWIN
+		$code  = 0x5C
+		$flags = 0x0001
+
+	DllCall("user32.dll", "none", "keybd_event", "byte", $value, "byte", $code, "long",  BitOR($flags, 0x0002), "ptr", 0)
+
+endfunc
+
 
 
