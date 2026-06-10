@@ -35,3 +35,10 @@ Packages:
     Changelog:
       - Fixed the issue where some special keys (LCtrl, LAlt, LWin, RCtrl, RAlt, RWin) remained stuck when pressed.
       - Fixed mouse wheel repeat functionality (this fix was already included in the corrected v1.2.1 package uploaded shortly after 1.2.1 release, but some users may still have downloaded the original version).
+  - Version: 1.2.3
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2026-06-10
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.3/GamepadToKeyboard_v1.2.3.pext
+    Changelog:
+      - Added Text modifier - send up to 200 characters (not intended for games).
+      - Added some missing variables to the reload function, which could cause missing reload of assignments using Sequence modifier.
