@@ -18,7 +18,7 @@
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.). 
 #### 🚀 Standalone version
 A standalone version (now renamed **Joynix**) is also available for users who don't use Playnite:
-[Joynix](https://github.com/roob-p/Joynix)
+[roob-p/Joynix](https://github.com/roob-p/Joynix)
 
 
 ## 🧩 How it works (Playnite side)
