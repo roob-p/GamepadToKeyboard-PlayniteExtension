@@ -2,9 +2,9 @@
 #AutoIt3Wrapper_Icon=icon.ico
 #AutoIt3Wrapper_UseX64=y
 #AutoIt3Wrapper_Res_Description=GamepadToKeyboard (64 bit)
-#AutoIt3Wrapper_Res_Fileversion=1.2.3.0
+#AutoIt3Wrapper_Res_Fileversion=1.2.4.0
 #AutoIt3Wrapper_Res_ProductName=GamepadToKeyboard
-#AutoIt3Wrapper_Res_ProductVersion=1.2.3
+#AutoIt3Wrapper_Res_ProductVersion=1.2.4
 #AutoIt3Wrapper_Res_CompanyName=roob-p (author)
 #AutoIt3Wrapper_Res_LegalCopyright=roob-p (author)
 #AutoIt3Wrapper_Res_LegalTradeMarks=roob-p (author)
