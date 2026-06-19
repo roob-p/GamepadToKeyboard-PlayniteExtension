@@ -38,19 +38,28 @@ A standalone version (now renamed **Joynix**) is also available for users who do
  - `[Toggle], [Turbo], [TurboToggle]`
  - `[Combo]`: send multiple keys at once
  - `[Execute]`: run programs (e.g. `notepad`, `calc.exe`, `c:\yourfolder\yourprogram.exe`)
- - `[ComboAsync]`: send multiple keys with a delay (defined with `ComboKeysDelay`)
+ - `[ComboAsync]`: send multiple keys with a delay between each key (defined with `ComboKeysDelay`)
  - `[ToggleCombo], [TurboCombo], [TurboToggleCombo]`
- - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `Sequence` sends simple presses.
+ - `[Sequence]`: send keys in sequence. Similar to `[ComboAsync]`, but ComboAsync sends and holds the keys, `[Sequence]` sends simple presses.
  - `[Text]`: send up to 200 characters (e.g. `[TEXT]this is a string`). Not intended for games.
-- Set `AnalogToMouse = 1` (enabled by default) to move the mouse with the analog stick defined in `Stick` (default: `Stick = RS` )
+ - `[Hold]`: perform different actions depending on how long the button is held. Short press sends the 1st key, medium press sends the 2nd key, long press sends the 3rd key. (e.g. `[Hold] a, b, c`)
+ - `[FastPress]`: repeatedly press the button to cycle through the keys to send (define the keys after the modifier, e.g. `[FastPress] a, b, c`).
+ - `[Shift]`: add a set of keys (up to 5, e.g. `[Shift] a, b, c, d, e`) and switch between them using the ShiftMode modifiers:
+   - `[ShiftMode]`: press and hold to change the active Shift key (define the target key number after the modifier, e.g. `[ShiftMode] 3`).
+   - `[ShiftModeToggle]`: same as above, but the button acts as a toggle.
+   - `[ShiftModeCycle-], [ShiftModeCyle+]` or `[ShiftModeCyle]`: cycle through the available Shift keys. These modifiers do not require a value (e.g. `LT = [ShiftModeCyle+]`).
+   - These modifiers can also be activated via configurable keyboard hotkeys.
+- Set `AnalogToMouse = 1` (enabled by default) to move the mouse with the analog stick defined in `Stick` (default: `Stick = RS` ).
 - Mouse wheel input is digital when assigned to buttons, and analog/progressive when assigned to sticks or triggers.
-
+#### Config loading
+- Configs can be loaded through `ConfigToLoad` in `GamepadToKeyboard.config`, via command line, or by drag and drop.  
 
 ### 🔄 Live config reload
 
 - Configuration files can be edited while the game is running.
 - Just press the Hotkey (`Shift`+`Ctrl`+`5` by default) to instantly reload the current `.ini`, without restarting the application.
 - The Hotkey can be customized in `GamepadToKeyboard.config`. 
+
 
 
 ## 🕹️ Button assignments
@@ -102,14 +111,30 @@ Values you can assign to the buttons:
 
                                                                    
 
-<br>
+<br>    
+
+ ### ⌨️ Hotkeys  
+The program supports several configurable hotkeys. They can be set in `GamepadToKeyboard.config` and disabled if needed.
+- **Configuration reload**: `Shift + Ctrl + 5` (already described above).  
+- **Stats system**: `Shift + Ctrl + 6` (default)
+- **ShiftMode controls**: `ShiftModeToggle`, `ShiftModeCycle-`, `ShiftModeCycle+`, disabled by default.
+- To enable/disable a hotkey, use the corresponding boolean flag in `GamepadToKeyboard.config`:
+  e.g. `KeyboardShiftEnabled = False`
+                                                                   
+
+<br>  
 
 ### 🧪 Technical Notes
+- **Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).**
 - Please don't assign `[Turbo]` and other Turbo-based modifiers to Wheel, since it has dedicated repetition variables.
-- `[ComboAsync]` and `[Sequence]` timing can be customized through their dedicated delay variables (expressed in ms).
-- Add only one modifier per assignment (e.g `[Turbo][Combo]` NOT supported).
+- When multiple `[Shift]` assignments are used together with ShiftModeCycle modifiers, it is recommended to use the same number of keys in each assignment. Different lengths are supported (e.g. `LT = [Shift] a,b,c,d,e` and `RT = [Shift] j,k,l`), but may produce less predictable results.
+- Timing-related modifiers can be customized through their dedicated variables:
+  * `[ComboAsync]` and `[Sequence]`: configurable delays through `ComboAsyncTime` and `SequenceTime` (ms).
+  * `[FastPress]`: configurable time window through `FastPressTime`.
+  * `[Hold]`: configurable hold duration thresholds through `HoldTime`.
 - **The Windows key may not behave exactly like a physical key due to Windows focus-handling limitations.**
 - Please don't use `CTRLDOWN`, `ALTDOWN`, `SHIFTDOWN`, `LWINDOWN`, `RWINDOWN` in the assignments. These special keys are handled through `LAlt`, `LCtrl`, `RAlt`, `RCtrl`, `LWin`, and `RWin`.
+
 
 
 ### ⚠️ Notes
@@ -129,7 +154,7 @@ Values you can assign to the buttons:
 - Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - Download last version:
-[v1.2.3](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.3/GamepadToKeyboard_v1.2.3.pext)
+[v1.2.4](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.4/GamepadToKeyboard_v1.2.4.pext)
 
 
 <br>
