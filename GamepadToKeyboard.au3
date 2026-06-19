@@ -95,7 +95,8 @@ global $dir, $steps, $td=128
 
 global $deadzoneshape = IniRead($inifile,"Mouse","DeadzoneShape",1)
 global $repeatTime = IniRead($inifile,"Other","TurboRepeatTime",50)
-global $combotime = IniRead($inifile,"Other","ComboAsyncDelay",50), $SequenceTime= IniRead($inifile,"Other","SequenceTime",50)
+global $combotime = IniRead($inifile,"Other","ComboAsyncDelay",50), $SequenceTime= IniRead($inifile,"Other","SequenceTime",50), $HoldTime= IniRead($inifile,"Other","HoldTime",300)
+global $fastPressTime = IniRead($inifile,"Other","fastPressTime",150)
 
 If $AnalogToMouse <> "1" and $AnalogToMouse <> "0" Then	$AnalogToMouse=0
 if $MouseDeadzoneType<> 1 and $MouseDeadzoneType <>  2 and $MouseDeadzoneType <>  4 then  $MouseDeadzoneType=1
@@ -103,9 +104,42 @@ if $AnalogsDeadzoneType<> 1 and $AnalogsDeadzoneType <>  2 and $AnalogsDeadzoneT
 
 
 global $sendkeystype = Iniread($inifile, "Other","SendKeysType",1)
-global $hotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","Hotkey","^+5") 	;default: Ctrl+Shift+5
+global $ReloadHotkeyEnabledWasTrue=False, $StatsHotkeyEnabledWasTrue=False, $KeyboardShiftEnabledWasTrue=False, $KeyboardShiftCycleEnabledWasTrue=False
+global $ReloadHotkeyEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ReloadHotkeyEnabled","True"), $StatsHotkeyEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","StatsHotkeyEnabled","True")
+
+if $ReloadHotkeyEnabled="True" then
+global $hotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ReloadHotkey","^+5") 	  ;default: Ctrl+Shift+5
 $hotkey=String($hotkey)
 HotKeySet($hotkey, reloadini)
+$ReloadHotkeyEnabledWasTrue=True
+endif
+
+if $StatsHotkeyEnabled="True" then
+global $statshotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","StatsHotkey","^+6") ;default: Ctrl+Shift+6
+$statshotkey=String($statshotkey)
+HotKeySet($statshotkey, statsstart)
+$StatsHotkeyEnabledWasTrue=True
+endif
+
+global $KeyboardShiftEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","KeyboardShiftEnabled","False") , $KeyboardShiftCycleEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","KeyboardShiftCycleEnabled","False")
+
+if $KeyboardShiftEnabled="True" then
+	global $ShiftModeTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeToggle","^+9")
+	hotkeyset(String($ShiftModeTogglehotkey),ShiftModeToggleK)
+	$KeyboardShiftEnabledWasTrue=True
+endif
+global $ShiftModeToggleKOn=false, $ShiftModeToggleKVal=IniRead($inifile,"Other","ShiftToggleKeyboardValue",3)
+
+if $KeyboardShiftCycleEnabled="True" then
+global $ShiftModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeCycle-","^+7"), $ShiftModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeCycle+","^+8")
+hotkeyset(String($ShiftModeCycleMinushotkey),ShiftModeCycleMinusK)
+hotkeyset(String($ShiftModeCyclePlushotkey),ShiftModeCyclePlusK)
+$KeyboardShiftCycleEnabledWasTrue=True
+endif
+
+
+;global $LayerModeTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeToggle","^+3"), $LayerModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeCycleMinus","^+1"), $LayerModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeCyclePlus","^+2")
+;global $SetTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeToggle","!^+3"), $SetModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeCycleMinus","!^+1"), $SetModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeCyclePlus","!^+2")
 
 global $lx=1,$ly=1,	$rx=1,$ry=1, $sticks=0, $mx=1, $my=1
 
@@ -143,6 +177,7 @@ endswitch
 global $asize=16+1+8
 global $ef[$asize] = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False ,False, False, False, False,False, False, False, False]
 global $ez[$asize] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+global $ee[$asize] = ["","","","","","","","","","","","","","","","","","","","","","","","",""]
 
 global $keys[16+1+8]   = [$A, $B, $X, $Y, $LB, $RB, $LT, $RT, $back, $start, $LS, $RS, $Up, $Down, $Left, $Right, $Home, $LSup, $LSdown, $LSleft, $LSright, $RSup, $RSdown, $RSleft, $RSright]
 global $pressed=$ef
@@ -152,6 +187,12 @@ global $pressed=$ef
 global $values[16+1+8]=[iniR("A"),IniR("B"),IniR("X"),IniR("Y"),IniR("LB"),IniR("RB"),IniR("LT"),IniR("RT"),IniR("Back"),IniR("Start"),IniR("LS"),IniR("RS") _
 ,IniR("Dup"),IniR("Ddown"),IniR("Dleft"),IniR("Dright"),IniR("Home"),IniR("LSup"),IniR("LSdown"),IniR("LSleft"),IniR("LSright"),IniR("RSup"),IniR("RSdown"),IniR("RSleft"),IniR("RSright")]
 
+global $valuesL[16+1+8]=[iniRR("A", 2),IniRR("B",2),IniRR("X",2),IniRR("Y",2),IniRR("LB",2),IniRR("RB",2),IniRR("LT",2),IniRR("RT",2),IniRR("Back",2),IniRR("Start",2),IniRR("LS",2),IniRR("RS",2) _
+,IniRR("Dup",2),IniRR("Ddown",2),IniRR("Dleft",2),IniRR("Dright",2),IniRR("Home",2),IniRR("LSup",2),IniRR("LSdown",2),IniRR("LSleft",2),IniRR("LSright",2),IniRR("RSup",2),IniRR("RSdown",2),IniRR("RSleft",2),IniRR("RSright",2)]
+
+
+global $buttonsname=["A","B","X","Y","LB","RB","LT","RT","Back","Start","LS","RS","Dup","Ddown","Dleft","Dright","Home","LSup","LSdown","LSleft","LSright","RSup","RSdown","RSleft","RSright"]
+
 global $toggle=$ef, $toggleOn=$ef,	$Turbo=$ef, $TurboToggle=$ef, $TurboToggleOn=$ef, $TurboOn=$ef, $alreadytimer=$ef, $alreadytimer2=$ef,		$TurboComboalreadyTimer=$ef, $TurboToggleComboalreadyTimer=$ef
 global $TimerT[$asize], $TimerT2[$asize], $Timer[$asize], $timersplash,		$TurboComboTimerT[$asize]
 global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $combosize=11,	$SequenceMax=16,		$comboasyncOn=$ef,	$simpleMacroOn=$ef
@@ -159,7 +200,7 @@ global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $co
 global $ToggleComboOn=$ef, $ToggleCombo=$ef, $TurboCombo=$ef, $TurboToggleCombo=$ef,	$TurboComboOn=$ef, $TurboToggleOn=$ef, $TurboToggleComboOn=$ef
 global $keysfromcombo[$asize], $combokeys[$asize][$combosize], $keysfromcomboup[$asize], $keysfromcombodown[$asize]
 global $keysfromcomboasync[$asize], $combokeysasync[$asize][$combosize], $keysfromcomboupasync[$asize], $keysfromcombodownasync[$asize], $combK[$asize]
-global $MacroOn=$ef, $macrosize=25, $Macrokeys[$asize][$macrosize]
+global $MacroOn=$ef, $macrosize=26, $Macrokeys[$asize][$macrosize]
 global $stringmax=200,  $text=$ef ; $textOn=$ef, $textkeys[$asize][$stringsize]
 
 global $Togglekeysfromcombo[$asize],$Togglecombokeys[$asize][$combosize],$Togglekeysfromcomboup[$asize],$Togglekeysfromcombodown[$asize]
@@ -183,12 +224,27 @@ global $alreadytimerscroll=$ef, $timerscroll[$asize]
 Global $hNTDLL = DllOpen("ntdll.dll")
 global $fkeys, $DW=@DesktopWidth/15,$DH=@DesktopHeight/18
 global $specialkeys=$ef, $specialkeys2DCombo[$asize][$combosize], $specialkeys2DSequence[$asize][$SequenceMax]
+global $textstats, $textstats2, $statsOn=False, $stats, $statstime[$asize], $statstimer, $splashreload=False
+global $holdmax=3+(1), $holdnum[$asize], $holdtype[$asize][$Holdmax],$hold=$ef,$holdOn=$ef, $KeysfromHold[$asize], $HoldKeys[$asize][$Holdmax], $specialkeys2DHold[$asize][$holdmax], $holdtimer=$ef
+global $shiftmax=5+1, $shiftNum[$asize], $shift=$ef, $ShiftKeys[$asize][$shiftmax], $KeysfromShift[$asize], $ShiftType[$asize][$shiftmax], $specialkeys2DShift[$asize][$shiftmax]
+global $ShiftMode=$ef, $ShiftModeToggle=$ef, $ShiftmodeCycle=$ef
+global $actionName=$ee, $actionNameS=$ee
+global $shinum=1, $tempshinum, $shiftModeToggleOn=$ef, $newshinum=1, $shilimit, $previouslimit
+global $FastpressMax=3+1, $FastpressNum=$ez, $Fastpress=$ef, $Fastpresstimer[$asize], $fastpressOn=$ef, $FastpressKeys[$asize][$FastpressMax], $fastpressOnH=$ef
+global $keysfromFastpress[$asize], $FastpressType[$asize][$FastpressMax], $specialkeys2DFastPress[$asize][$FastpressMax], $tap=$ez, $oldtap=$ez, $fastpressSent=$ef
+global $statepress=$ee
 
 
 parse()
 
 func iniR($key)
 	$temp=Iniread($inifile,"Buttons",$key,"")
+	return $temp
+endfunc
+
+func iniRR($key,$num)
+	$temp=Iniread($inifile,"Buttons"& $num,$key,"")
+	if $temp="" then Iniread($inifile,"Buttons",$key,"")
 	return $temp
 	endfunc
 
@@ -207,7 +263,6 @@ If $AnalogToMouse = "1" Then
 EndIf
 
 
-
 Global $pressed[UBound($keys)]
 Global $lastPress[UBound($keys)]
 Global $initialDelay = 500, $repeatDelay  = 15
@@ -223,6 +278,8 @@ Else
 $fkeys="keys"
 endif
 
+statsvar()
+
 AdlibRegister("mouse",1)
 
 While 1
@@ -236,7 +293,6 @@ if _IsPressed("1b") and _ispressed("10") and _isPressed("31") then  ;ESC+Shift+1
 endif
 
 call($fkeys)
-
 _HighPrecisionSleep(1)
 wend
 
@@ -259,6 +315,7 @@ if $keys[$i] and $pressed[$i]=False then
 	if $values[$i]="" then ContinueLoop
 	$pressed[$i]=True
 	$sentKeys[$i]=True
+	$statePress[$i]=0
 
 	inpt($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 
@@ -269,6 +326,7 @@ endif
 if $pressed[$i]=True and not $keys[$i] Then
 	if $skip=False then
 		if $values[$i]="" then ContinueLoop
+		$statePress[$i]=1
 	if $buttonaction[$i]<>3 and $buttonaction[$i]<>4 and $buttonaction[$i]<>7 and $buttonaction[$i]<>9 then inpt($i,$values[$i],1,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 	$pressed[$i]=False
 	$sentkeys[$i]=False
@@ -300,7 +358,10 @@ if $TurboToggleOn[$i]=true Then Turbo($i,$values[$i],3,$buttontype[$i])			  ; Tu
 if $TurboToggleComboOn[$i]=true Then TurboCombo($i,$values[$i],3,$buttontype[$i]) ; TurboToggleCombo
 if $ToggleOn[$i]=True and $buttontype[$i]=2 Then  scrollWheelT($i,$values[$i])    ; ToggleOn with Wheel
 if $comboasyncOn[$i]=True Then comboasync($i,$values[$i],0,$buttontype[$i])		  ; ComboAsyncOn
-if $SimpleMacroOn[$i]=True Then	Sequence($i,$values[$i],3,$buttontype[$i])		  ; $Sequence
+if $SimpleMacroOn[$i]=True Then	Sequence($i,$values[$i],3,$buttontype[$i])		  ; Sequence
+if $HoldOn[$i]=True then Hold($i,$values[$i],0,$buttontype[$i])					  ; Hold
+if $fastpressOn[$i] then fastpresscheck($i,$values[$i],0,$buttontype[$i])		  ; Fastpress
+if $fastpressOnH[$i] then fastpresscheckH($i,$values[$i],$statePress[$i],$buttontype[$i]) ; Fastpress "helper" for release
 ; buttonaction[9] uses the same arrays as buttonaction[8] except for $TurboToggleComboOn. This condition is only for standard TurboCombo:
 if $keys[$i] and $TurboCombo[$i]=True and $TurboToggleComboOn[$i]=False Then  TurboCombo($i,$values[$i],3,$buttontype[$i])
 
@@ -341,6 +402,7 @@ func keysDesktop()
                 $lastPressTime[$i] = TimerInit()  ; inizializza timer
                 $firstPressDone[$i] = False
 
+				$statepress[$i]=0
 				if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
             Else
                 ; se il delay iniziale è già passato
@@ -349,7 +411,7 @@ func keysDesktop()
                         $lastPressTime[$i] = TimerInit()
                         $firstPressDone[$i] = True
 
-						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
+						if $buttontype[$i]=0 and $buttonaction[$i]<>4 and $buttonaction[$i]<>12 and $buttonaction[$i]<>13 then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 						$sentKeys[$i]=True
                     EndIf
                 Else
@@ -357,7 +419,7 @@ func keysDesktop()
                     If TimerDiff($lastPressTime[$i]) >= $RepeatDelay Then
                         $lastPressTime[$i] = TimerInit()
 
-						if $buttontype[$i]=0 and $buttonaction[$i]<>4 then	inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
+						if $buttontype[$i]=0 and $buttonaction[$i]<>4 and $buttonaction[$i]<>12 and $buttonaction[$i]<>13 then inptD($i,$values[$i],0,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
 						$sentKeys[$i]=True
                     EndIf
                 EndIf
@@ -367,9 +429,10 @@ func keysDesktop()
 
 
 If $pressed[$i] and not $keys[$i] Then
-
+			$statepress[$i]=1
 			if $values[$i]="" then ContinueLoop
 			if $buttonaction[$i]<>4 then inptD($i,$values[$i],1,$buttontype[$i],$buttonaction[$i],$specialkeys[$i])
+
 			$sentKeys[$i]=False
 
         $pressed[$i] = False
@@ -390,6 +453,9 @@ endif
 		if $ToggleOn[$i]=True and $buttontype[$i]=2 Then  scrollWheelT($i,$values[$i])	  ; Toggle with ScrollWheel
 		if $SimpleMacroOn[$i]=True Then	Sequence($i,$values[$i],2,$buttontype[$i])		  ; Sequence
 		if $comboasyncOn[$i]=True Then comboasync($i,$values[$i],0,$buttontype[$i])		  ; ComboAsyncOn
+		if $HoldOn[$i]=True then Hold($i,$values[$i],0,$buttontype[$i])					  ; Hold
+		if $fastpressOn[$i] then fastpresscheck($i,$values[$i],0,$buttontype[$i])		  ; Fastpress
+		if $fastpressOnH[$i] then fastpresscheckH($i,$values[$i],$statePress[$i],$buttontype[$i]) ; Fastpress "helper" for release
 
 		if $combo[$i]=True and not $keys[$i] Then $pressed[$i] = False
 Next
@@ -398,7 +464,6 @@ endfunc
 
 
 func inpt($ix,$value,$state,$btype,$baction,$specialkey)
-
 switch $baction
 	case 0 ; normal key
 		;sender($ix,$value,$state,$btype)
@@ -427,9 +492,156 @@ $TurboToggleComboOn[$ix]=not $TurboToggleComboOn[$ix]
 		Sequence($ix,$value,$state,$btype)
 	case 11; Text
 		senderText($ix,$value,$state)
+	case 12; Hold
+		Hold($ix,$value,$state,$btype)
+	case 13; Fastpress
+		Fastpress($ix,$value,$state,$btype)
+	case 14; Shiftmode
+		ShiftMode($ix,$value,$state,$btype)
+	case 15; ShiftModeToggle
+		ShiftModeToggle($ix,$value,$state,$btype)
+	case 16; ShiftModeCycle-
+		ShiftModeCycleMinus($ix,$value,$state,$btype)
+	case 17; ShiftModeCycle+
+		ShiftModeCyclePlus($ix,$value,$state,$btype)
+	case 18; Shift
+		shift($ix,$value,$state,$btype)
 endswitch
 
 endfunc
+
+
+func fastpress($ix,$value,$state,$btype)
+
+if $state=0 then
+	if $fastpresson[$ix]=False then
+		$fastpresson[$ix]=True
+		$tap[$ix]=1
+		$fastpresstimer[$ix]=Timerinit()
+
+
+	elseif $fastpresson[$ix]=True then
+		if $keys[$ix] then
+			$tap[$ix]+=1
+			$fastpresstimer[$ix]=Timerinit()
+		endif
+	endif
+endif
+
+endfunc
+
+func fastpresscheckH($ix,$value,$state,$btype)
+	if $state=1 then
+sender($ix,$FastpressKeys[$ix][$oldtap[$ix]],1,$btype,$specialkeys2DFastpress[$ix][1])
+	$fastpressOnH[$ix]=False
+	endif
+
+endfunc
+
+func fastpresscheck($ix,$value,$state,$btype)
+
+if $tap[$ix]=1 and timerdiff($fastpresstimer[$ix])>$fastPressTime then
+sender($ix,$FastpressKeys[$ix][1],0,$btype,$specialkeys2DFastpress[$ix][1])
+$fastpresson[$ix]=False
+$fastpresstimer[$ix]=0
+$tap[$ix]=0
+$oldtap[$ix]=1
+$fastpressOnH[$ix]=True
+
+
+elseif $tap[$ix]=2 and timerdiff($fastpresstimer[$ix])>$fastPressTime then
+sender($ix,$FastpressKeys[$ix][2],0,$btype,$specialkeys2DFastpress[$ix][1])
+$fastpresson[$ix]=False
+$fastpresstimer[$ix]=0
+$tap[$ix]=0
+$oldtap[$ix]=2
+$fastpressOnH[$ix]=True
+
+elseif $tap[$ix]=3 and timerdiff($fastpresstimer[$ix])>$fastPressTime then
+sender($ix,$FastpressKeys[$ix][3],0,$btype,$specialkeys2DFastpress[$ix][1])
+$fastpresson[$ix]=False
+$fastpresstimer[$ix]=0
+$tap[$ix]=0
+$oldtap[$ix]=3
+$fastpressOnH[$ix]=True
+
+elseif $tap[$ix]>3 then
+	$tap[$ix]=1
+	$fastpresstimer[$ix]=TimerInit() ;probably not necessary
+endif
+
+endfunc
+
+
+func shift($ix,$value,$state,$btype)
+		if $state=0 then
+					$shilimit=$shiftnum[$ix]
+			$tempshinum=$shinum
+			if $tempshinum>$shiftnum[$ix] then $tempshinum=$shiftnum[$ix]
+			if $shinum>$shiftnum[$ix] then
+					$previouslimit=$shinum
+				$shinum=$shiftnum[$ix]
+				$shilimit=$shiftnum[$ix]
+			endif
+				if $previouslimit=$shiftnum[$ix] then
+					$shinum=$previouslimit
+					$shilimit=$shiftnum[$ix]
+					$previouslimit=""
+				endif
+				if $shinum<$shiftnum[$ix] and $previouslimit>$shinum  then
+					$shinum=$previouslimit
+					$shilimit=$shiftnum[$ix]
+					$previouslimit=""
+				endif
+			sender($ix,$shiftkeys[$ix][$shinum],$state,$shifttype[$ix][$shinum],$specialkeys2DShift[$ix][$shinum])
+		endif
+		if $state=1 Then sender($ix,$shiftkeys[$ix][$tempshinum],$state,$shifttype[$ix][$tempshinum],$specialkeys2DShift[$ix][$tempshinum])
+endfunc
+
+func ShiftMode($ix,$value,$state,$btype)
+	if $state=0 then $shinum=$values[$ix]
+	if $state=1 Then $shinum=$newshinum
+endfunc
+
+func ShiftModeToggle($ix,$value,$state,$btype)
+	if $ShiftModeToggleOn[$ix]=False and $keys[$ix] Then
+		$ShiftModeToggleOn[$ix]=True
+		$shinum=$values[$ix]
+		$newshinum=$shinum
+	elseif $ShiftModeToggleOn[$ix]=True and $keys[$ix] Then
+		$shinum=1
+		$newshinum=$shinum
+		$ShiftModeToggleOn[$ix]=False
+	endif
+
+endfunc
+
+
+func ShiftModeCyclePlus($ix,$value,$state,$btype)
+	if $state=0 then $shinum+=1
+	if $shinum>$shiLimit then
+		$shinum=1
+		$shiLimit=$shiftMax-1
+		$previouslimit=""
+		Return
+	endif
+
+endfunc
+
+
+func ShiftModeCycleMinus($ix,$value,$state,$btype)
+	if $state=0 and $shinum>=1 then
+		$shinum-=1
+		$previouslimit=""
+	endif
+
+	if $shinum<1 then
+		$shinum=$shiftMax-1
+		$shiLimit=$shiftMax-1
+		Return
+	endif
+endfunc
+
 
 
 func sender($ix,$value,$state,$btype,$specialkey)
@@ -527,11 +739,161 @@ endswitch
 	return $val
 endfunc
 
-
 func sendertext($ix,$value, $state)
+	if $state=0 then send($value)
+endfunc
 
-if $state=0 then send($value)
+func statsstart()
+	if not $splashreload then $statsOn=not $statsOn
 
+if $statsOn then
+	$stats=SplashTextOn($inifile,$textstats,@DesktopWidth/3,@DesktopHeight/2.4,0,0,4,"Consolas",@DesktopWidth/174.545)
+	;$stats2=SplashTextOn("",$textstats,@DesktopWidth/6,@DesktopHeight/3,@DesktopWidth/6,0,4,"Consolas",11)
+	adlibregister(stats,50)
+endif
+if not $statsOn and not $splashreload  then
+	SplashOff()
+	adlibunregister(stats)
+endif
+
+
+endfunc
+
+func statsvar()
+
+
+	global $deadzoneshapetext, $AnalogToMouseText, $MouseDeadzoneTypeText, $Mousedeadzonetext, $MouseAxisInvertedText, $AnalogsDeadzoneTypeText, $AnalogsDeadzoneText, $AnalogsAxisInvertedText, $assignmentstext, $sendkeystypetext
+
+	if $deadzoneshape=1 and $Mousedeadzonetype=1 then $deadzoneshapetext="Square"
+	if $deadzoneshape=1 and $Mousedeadzonetype<>1 then $deadzoneshapetext="Rectangular"
+	if $deadzoneshape=2 then $deadzoneshapetext="Circular"
+	if $deadzoneshape=3 then $deadzoneshapetext="Circular with rescale"
+
+
+	if $MouseDeadzoneType=1 Then
+	$MouseDeadzoneTypeText="Both axis"
+	$MouseDeadzoneText=$MouseDeadzone
+	endif
+
+	if $MouseDeadzoneType=2 Then
+	$MouseDeadzoneTypeText="Per axis"
+	$MouseDeadzoneText="X: " & $Xdeadzone & " Y:" & $Ydeadzone
+	endif
+
+	if $MouseDeadzoneType=3 Then
+	$MouseDeadzoneTypeText="Per direction"
+	$MouseDeadzoneText="Left: " & $Xleftdeadzone & " Right:" & $Xrightdeadzone  &  " Up: " & $Yupdeadzone & " Down: " & $Ydowndeadzone
+	endif
+
+	$MouseAxisInvertedText="No"
+	if $LSXInverted=1 or $LSYInverted=1 or $RSXInverted=1 or $RSYInverted=1 then $MouseAxisInvertedText=""
+
+	if ($LSXInverted=1 and $Stick="LS") or ($RSXInverted=1 and $Stick="RS") then $MouseAxisInvertedText&="X "
+	if ($LSYInverted=1 and $Stick="LS") or ($RSYInverted=1 and $Stick="RS") then $MouseAxisInvertedText&="Y "
+
+
+	if $AnalogToMouse=1 then $AnalogToMouseText="Yes"
+	if $AnalogToMouse<>1 then $AnalogToMouseText="  "
+
+	if $AnalogsDeadzoneType=1 then
+		$AnalogsDeadzoneTypeText="Global"
+		$AnalogsDeadzoneText= $AnalogsDeadzone
+	endif
+	if $AnalogsDeadzoneType=2 then
+		$AnalogsDeadzoneTypeText="Per stick"
+		$AnalogsDeadzoneText= "LS: " & $LSdeadzone & " RS: " & $RSdeadzone
+	endif
+	if $AnalogsDeadzoneType=3 then
+		$AnalogsDeadzoneTypeText="Per axis"
+		$AnalogsDeadzoneText= "LSx: " & $LSXdeadzone & " LSy: " & $LSYdeadzone & " RSx: " & $RSxdeadzone & " RSy: " & $RSydeadzone
+	endif
+	if $AnalogsDeadzoneType=4 then
+		$AnalogsDeadzoneTypeText="Per direction"
+		$AnalogsDeadzoneText= "LSleft: " & $LSleft & " LSright: " & $LSright & 	" LSup: " & $LSup & " LSdown: " & $LSdown	 &  		"RSleft: " & $RSleft & " RSright: " & $RSright & " RSup: " & $RSup & " RSdown: " & $RSdown
+	endif
+
+
+	$AnalogsAxisInvertedText="No"
+	if $LSXaxisInverted=1 or $LSYaxisInverted=1 or $RSXaxisInverted=1 or $RSYaxisInverted=1 then $AnalogsAxisInvertedText=""
+	if $LSXaxisInverted=1 then $AnalogsAxisInvertedText&="LSX "
+	if $LSYaxisInverted=1 then $AnalogsAxisInvertedText&="LSY "
+	if $RSXaxisInverted=1 then $AnalogsAxisInvertedText&="RSX "
+	if $RSYaxisInverted=1 then $AnalogsAxisInvertedText&="RSY "
+
+	if $SendKeysType=1 then $sendkeystypetext=" (Game)"
+	if $SendKeysType=2 then $sendkeystypetext=" (Desktop)"
+
+
+endfunc
+
+
+Func stats()
+
+
+for $i=0 to ubound($values)-1
+$assignmentstext&=$values[$i] & @CRLF
+next
+
+
+			   $textstat = _
+			   StringFormat("LSX: %-6s RSX: %-6s LT: %-6s", $LSX, $RSX, $LT) & @CRLF & _
+			   StringFormat("LSY: %-6s RSY: %-6s RT: %-6s", $LSY, $RSY, $RT) & @CRLF   _
+			   & @CRLF _
+			   & "[Mouse]"  & @CRLF _
+			   & "AnalogToMouse: " & $AnalogToMouseText & "   | Stick:" & $Stick & @CRLF _
+			   & "DeadzoneShape: " & $DeadzoneShapetext & @CRLF _
+			   & "DeadzoneType:  " & $MouseDeadzoneTypeText  & @CRLF _
+			   & "Deadzone:      " & $Mousedeadzone &  @CRLF _
+			   & "AxisInverted:  " & $MouseAxisInvertedText  & @CRLF _
+			   &  @CRLF _
+			   & "[Analogs]" & "                          " & @CRLF _
+			   & "DeadzoneType:  " & $AnalogsDeadzoneTypeText & @CRLF _
+			   & "Deadzone:      " & $AnalogsDeadzoneText & @CRLF _
+			   & "AxisInverted:  " & $AnalogsAxisInvertedText & @CRLF _
+			   &  @CRLF _
+			   & "[Other]" & @CRLF _
+			   & "SendKeysType:    " & $SendKeysType & $sendkeystypetext & @CRLF _
+			   & "TurboRepeatTime: " & $repeatTime & @CRLF _
+			   & "ComboAsyncDelay: " & $combotime & @CRLF _
+			   & "SequenceTime:    " & $SequenceTime & @CRLF _
+			   & "HoldTime:        " & $HoldTime & @CRLF _
+			   & "FastPressTime:   " & $FastPressTime & @CRLF _
+			   & "ShiftTogKeybVal: " & $ShiftModeToggleKVal
+
+$textstat3=""
+local $pressedText[$asize]
+
+
+for $i=0 to 24
+	if $keys[$i] then $pressedText[$i]=">"
+	if not $keys[$i] then $pressedText[$i]=" "
+
+ $textstat3 &= $pressedText[$i] & " " & $buttonsname[$i] & ": " & $actionnameS[$i] & "" & stringleft($values[$i],25) & @CRLF
+next
+
+
+local $textleft[100], $textright[100]
+
+$textLeftN = StringSplit($textstat, @CRLF)
+$textRightN = StringSplit($textstat3, @CRLF)
+
+
+for $i=1 to $textLeftN[0]
+$textleft[$i]=$textLeftN[$i]
+next
+
+for $i=1 to $textRightN[0]
+$textRight[$i]=$textRightN[$i]
+next
+
+
+local $newtextstat=""
+
+for $i=1 to $textrightN[0] step 2
+ $newtextstat &= StringFormat("%-35s %-15s", $textleft[$i], $textright[$i]) & @CRLF
+next
+
+	ControlSetText($stats, "", "Static1", $newtextstat)
 endfunc
 
 func scrollwheelT($ix,$value)
@@ -663,6 +1025,20 @@ switch $baction
 		Sequence($ix,$value,$state,$btype)
 	case 11; Text
 		senderText($ix,$value,$state)
+	case 12; Hold
+		Hold($ix,$value,$state,$btype)
+	case 13; Fastpress
+		Fastpress($ix,$value,$state,$btype)
+	case 14; Shiftmode
+		ShiftMode($ix,$value,$state,$btype)
+	case 15; ShiftModeToggle
+		ShiftModeToggle($ix,$value,$state,$btype)
+	case 16; ShiftModeCycle-
+		ShiftModeCycleMinus($ix,$value,$state,$btype)
+	case 17; ShiftModeCycle+
+		ShiftModeCyclePlus($ix,$value,$state,$btype)
+	case 18; Shift
+		shift($ix,$value,$state,$btype)
 endswitch
 
 endfunc
@@ -742,10 +1118,114 @@ if $comboasyncOn[$ix]=True then
 	endif
 
 endif
-;consolewrite("On: "&$comboAsyncOn[$ix] &" Num: "&$comboasyncNum[$ix]& " counter: "&$combK[$ix] & " key: "& $combokeysasync[$ix][$combK[$ix]]& @CRLF)
+
 endfunc
 
 
+
+
+func Hold($ix,$value,$state,$btype)
+
+switch $HoldNum[$ix]
+
+case 1
+		sender($ix,$HoldKeys[$ix][1],3,$btype,$specialkeys2DHold[$ix][1])
+		return
+
+case 2
+
+	if $HoldOn[$ix]=False then
+		if $state=0 then
+		$holdtimer[$ix]=Timerinit()
+		$HoldOn[$ix]=True
+		endif
+	endif
+
+	if $HoldOn[$ix]=True then
+		if timerdiff($holdtimer[$ix])<$HoldTime Then
+			if $state=1 then
+				sender($ix,$HoldKeys[$ix][1],3,$btype,$specialkeys2DHold[$ix][1])
+				$HoldOn[$ix]=False
+				$holdtimer[$ix]=0
+				return
+			endif
+		endif
+		if timerdiff($holdtimer[$ix])>=$HoldTime then
+			sender($ix,$HoldKeys[$ix][2],3,$btype,$specialkeys2DHold[$ix][2])
+			$holdtimer[$ix]=0
+			$HoldOn[$ix]=False
+		endif
+	endif
+
+case 3
+
+	if $HoldOn[$ix]=False then
+		if $state=0 then
+		$holdtimer[$ix]=Timerinit()
+		$HoldOn[$ix]=True
+		endif
+	endif
+
+	if $HoldOn[$ix]=True then
+		if timerdiff($holdtimer[$ix])<$HoldTime Then
+
+			if $state=1 then
+				sender($ix,$HoldKeys[$ix][1],3,$btype,$specialkeys2DHold[$ix][1])
+				$HoldOn[$ix]=False
+				$holdtimer[$ix]=0
+				return
+			endif
+		endif
+
+	if $state=1 then
+		if timerdiff($holdtimer[$ix])>=$HoldTime and timerdiff($holdtimer[$ix])<($HoldTime*2.5) then
+			sender($ix,$HoldKeys[$ix][2],3,$btype,$specialkeys2DHold[$ix][2])
+			$holdtimer[$ix]=0
+			$HoldOn[$ix]=False
+			return
+		endif
+	endif
+		if timerdiff($holdtimer[$ix])>=($HoldTime*2.5) then
+			sender($ix,$HoldKeys[$ix][3],3,$btype,$specialkeys2DHold[$ix][3])
+			$holdtimer[$ix]=0
+			$HoldOn[$ix]=False
+		endif
+	endif
+
+endswitch
+endfunc
+
+
+func holdbak($ix,$value,$state,$btype)
+
+if $HoldOn[$ix]=False then
+	if $state=0 then
+	$holdtimer[$ix]=Timerinit()
+	$HoldOn[$ix]=True
+	endif
+endif
+
+	if $HoldOn[$ix]=True then
+
+		if timerdiff($holdtimer[$ix])<300 Then
+
+			if $state=1 then
+				sender($ix,$HoldKeys[$ix][1],3,$btype,$specialkeys2DHold[$ix][1])
+				$HoldOn[$ix]=False
+			endif
+
+		endif
+
+
+
+		if timerdiff($holdtimer[$ix])>=300 then
+			sender($ix,$HoldKeys[$ix][2],3,$btype,$specialkeys2DHold[$ix][2])
+			$holdtimer[$ix]=0
+			$HoldOn[$ix]=False
+		endif
+
+	endif
+endfunc
 
 func Sequence($ix,$value,$state,$btype)
 
@@ -782,7 +1262,7 @@ if $simpleMacroOn[$ix]=True then
 	endif
 
 endif
-;consolewrite("SeqOn: "&$simpleMacroOn[$ix] &" Num: "&$sequenceNum& " counter: "&$SmacroK[$ix] & " key: "&$simpleMacrokeys[$ix][$SmacroK[$ix]] & @CRLF)
+
 
 endfunc
 
@@ -849,6 +1329,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]= stringreplace ($values[$i],"[Toggle]","")
 		$values[$i]= StringStripWS($values[$i],8)
 		$buttonaction[$i]=1
+		$actionName[$i]="TOGGLE"
+		$actionNameS[$i]="[TOGGLE]"
 		endif
 
 	if (StringInStr($values[$i], "[TURBO]")) Then
@@ -857,6 +1339,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]= stringreplace($values[$i],"[Turbo]","")
 		$values[$i]= StringStripWS($values[$i],8)
 		$buttonaction[$i]=2
+		$actionName[$i]="TURBO"
+		$actionNameS[$i]="[TURBO]"
 	endif
 
 	if (StringInStr($values[$i], "[TURBOtoggle]")) Then
@@ -865,6 +1349,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]= stringreplace($values[$i],"[TurboToggle]","")
 		$values[$i]= StringStripWS($values[$i],8)
 		$buttonaction[$i]=3
+		$actionName[$i]="TURBOTOGGLE"
+		$actionNameS[$i]="[TURBOTOGGLE]"
 	endif
 
 
@@ -873,6 +1359,8 @@ for $i=0 to Ubound($values)-1
 	$values[$i]= stringreplace($values[$i],"[execute]","")
 	$values[$i]= StringStripWS($values[$i],3)
 	$buttonaction[$i]=4
+	$actionName[$i]="EXECUTE"
+	$actionNameS[$i]="[EXECUTE]"
 	endif
 
 
@@ -900,6 +1388,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]=$keysfromcombo[$i]
 
 	$buttonaction[$i]=5
+	$actionName[$i]="COMBO"
+	$actionNameS[$i]="[COMBO]"
 	endif
 
 
@@ -932,6 +1422,8 @@ for $i=0 to Ubound($values)-1
 	$async[$i] = True
 
 	$buttonaction[$i]=6
+	$actionName[$i]="COMBOASYNC"
+	$actionNameS[$i]="[COMBOASYNC]"
 
 	endif
 
@@ -962,6 +1454,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]=$Togglekeysfromcombo[$i]
 
 	$buttonaction[$i]=7
+	$actionName[$i]="TOGGLECOMBO"
+	$actionNameS[$i]="[TOGGLECOMBO]"
 	endif
 
 
@@ -990,6 +1484,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]=$Turbokeysfromcombo[$i]
 
 	$buttonaction[$i]=8
+	$actionName[$i]="TURBOCOMBO"
+	$actionNameS[$i]="[TURBOCOMBO]"
 	endif
 
 
@@ -1020,7 +1516,8 @@ for $i=0 to Ubound($values)-1
 
 		$values[$i]=$Turbokeysfromcombo[$i]
 	$buttonaction[$i]=9
-
+	$actionName[$i]="TURBOTOGGLECOMBO"
+	$actionNameS[$i]="[T.T.Combo]"
 		endif
 
 
@@ -1048,6 +1545,8 @@ for $i=0 to Ubound($values)-1
 		$values[$i]=$KeysFromSimpleMacro[$i]
 
 	$buttonaction[$i]=10
+	$actionName[$i]="SEQUENCE"
+	$actionNameS[$i]="[SEQUENCE]"
 		endif
 
 
@@ -1058,7 +1557,158 @@ for $i=0 to Ubound($values)-1
 		if stringlen($values[$i])>=$stringmax then $values[$i]=Stringleft($values[$i],$stringmax)
 
 		$buttonaction[$i]=11
+		$actionName[$i]="TEXT"
+		$actionNameS[$i]="[TEXT]"
 		endif
+
+
+
+		if (StringInStr($values[$i], "[Hold]")) Then
+		$Hold[$i]=True
+		$values[$i]=stringreplace($values[$i],"[Hold]","")
+		local $HoldkeysL=StringSplit($values[$i],",")
+			if $HoldkeysL[0]>$HoldMax-1 then $HoldkeysL[0]=$HoldMax-1
+				$HoldNum[$i]=$HoldkeysL[0]
+
+		for $j=1 to $HoldkeysL[0]
+			$HoldKeys[$i][$j]=$HoldKeysL[$j]
+			$HoldKeys[$i][$j]=StringStripWS($HoldKeys[$i][$j],8)
+			$KeysFromHold[$i]&= "{" & ($HoldKeys[$i][$j]) & "}"
+
+			local $val=buttontype($HoldKeys,$Holdtype,$i,$j)
+			$HoldKeys[$i][$j]=$val[0]
+			$Holdtype[$i][$j]=$val[1]
+
+			if $HoldKeys[$i][$j]= "Lctrl" or $HoldKeys[$i][$j]="Lalt" or $HoldKeys[$i][$j]="Lwin" or $HoldKeys[$i][$j]="Rwin" or $HoldKeys[$i][$j]="Rctrl" or $HoldKeys[$i][$j]="Ralt" then $specialkeys2DHold[$i][$j]=True
+
+		next
+
+		$values[$i]=$KeysFromHold[$i]
+
+	$buttonaction[$i]=12
+	$actionName[$i]="HOLD"
+	$actionNameS[$i]="[HOLD]"
+		endif
+
+
+	if (StringInStr($values[$i], "[Fastpress]")) Then
+		$Fastpress[$i]=True
+		$values[$i]=stringreplace($values[$i],"[Fastpress]","")
+		local $FastpresskeysL=StringSplit($values[$i],",")
+			if $FastpresskeysL[0]>$FastpressMax-1 then $FastpresskeysL[0]=$FastpressMax-1
+				$FastpressNum[$i]=$FastpresskeysL[0]
+
+		for $j=1 to $FastpresskeysL[0]
+			$FastpressKeys[$i][$j]=$FastpressKeysL[$j]
+			$FastpressKeys[$i][$j]=StringStripWS($FastpressKeys[$i][$j],8)
+			$KeysFromFastpress[$i]&= "{" & ($FastpressKeys[$i][$j]) & "}"
+
+			local $val=buttontype($FastpressKeys,$Fastpresstype,$i,$j)
+			$FastpressKeys[$i][$j]=$val[0]
+			$Fastpresstype[$i][$j]=$val[1]
+
+			if $FastpressKeys[$i][$j]= "Lctrl" or $FastpressKeys[$i][$j]="Lalt" or $FastpressKeys[$i][$j]="Lwin" or $FastpressKeys[$i][$j]="Rwin" or $FastpressKeys[$i][$j]="Rctrl" or $FastpressKeys[$i][$j]="Ralt" then $specialkeys2DFastPress[$i][$j]=True
+
+		next
+
+		$values[$i]=$KeysFromFastpress[$i]
+
+	$buttonaction[$i]=13
+	$actionName[$i]="Fastpress"
+	$actionNameS[$i]="[Fastpress]"
+		endif
+
+
+		if (StringInStr($values[$i], "[ShiftMode]")) Then
+		$ShiftMode[$i]=True
+	$values[$i]=stringreplace($values[$i],"[ShiftMode]","")
+	$values[$i]= StringStripWS($values[$i],8)
+	if $values[$i]="" then $values[$i]=2
+	if $values[$i]>$ShiftMax-1 then $values[$i]=$ShiftMax-1
+
+
+	$buttonaction[$i]=14
+	$actionName[$i]="Shiftmode"
+	$actionNameS[$i]="[Shiftmode]"
+		endif
+
+		if (StringInStr($values[$i], "[ShiftModeToggle]")) Then
+		$ShiftModeToggle[$i]=True
+	$values[$i]=stringreplace($values[$i],"[ShiftModeToggle]","")
+	$values[$i]= StringStripWS($values[$i],8)
+
+	$buttonaction[$i]=15
+	$actionName[$i]="ShiftmodeToggle"
+	$actionNameS[$i]="[ShiftmodeToggle]"
+		endif
+
+		if (StringInStr($values[$i], "[ShiftModeCycle-]")) Then
+		$ShiftModeCycle[$i]=True
+		$values[$i]=" "
+
+	$buttonaction[$i]=16
+	$actionName[$i]="ShiftmodeCycle-"
+	$actionNameS[$i]="[ShiftmodeCycle-]"
+		endif
+
+
+	if (StringInStr($values[$i], "[ShiftModeCycle+]")) Then
+		$ShiftModeCycle[$i]=True
+		$values[$i]=" "
+
+	$buttonaction[$i]=17
+	$actionName[$i]="ShiftmodeCycle+"
+	$actionNameS[$i]="[ShiftmodeCycle+]"
+	endif
+
+	if (StringInStr($values[$i], "[ShiftModeCycle]")) Then
+		$ShiftModeCycle[$i]=True
+		$values[$i]=" "
+
+	$buttonaction[$i]=17
+	$actionName[$i]="ShiftModeCycle"
+	$actionNameS[$i]="[ShiftModeCycle]"
+		endif
+
+	if (StringInStr($values[$i], "[Shift]")) Then
+		$Shift[$i]=True
+		$values[$i]=stringreplace($values[$i],"[Shift]","")
+		local $ShiftKeysL=StringSplit($values[$i],",")
+		if $ShiftkeysL[0]>$shiftmax-1 then $ShiftkeysL[0]=$shiftmax-1
+		$shiftnum[$i]=$ShiftkeysL[0]
+
+		for $j=1 to $ShiftkeysL[0]
+			$ShiftKeys[$i][$j]=$ShiftkeysL[$j]
+			$ShiftKeys[$i][$j]=StringStripWS($ShiftKeys[$i][$j],8)
+			$KeysFromShift[$i]&= "{" & ($ShiftKeys[$i][$j]) & "}"
+
+			local $val=buttontype($ShiftKeys,$ShiftType,$i,$j)
+			$ShiftKeys[$i][$j]=$val[0]
+			$Shifttype[$i][$j]=$val[1]
+
+			if $ShiftKeys[$i][$j]= "Lctrl" or $ShiftKeys[$i][$j]="Lalt" or $ShiftKeys[$i][$j]="Lwin" or $ShiftKeys[$i][$j]="Rwin" or $ShiftKeys[$i][$j]="Rctrl" or $ShiftKeys[$i][$j]="Ralt" then $specialkeys2DShift[$i][$j]=True
+
+		next
+
+		$values[$i]=$KeysFromShift[$i]
+
+	$buttonaction[$i]=18
+	$actionName[$i]="Shift"
+	$actionNameS[$i]="[Shift]"
+		endif
+
+
+
+		if (StringInStr($values[$i], "[LayerMode]")) Then
+		;$Mode[$i]=True
+	$values[$i]=stringreplace($values[$i],"[LayerMode]","")
+	$values[$i]= StringStripWS($values[$i],8)
+
+	$buttonaction[$i]=19
+	$actionName[$i]="Mode"
+	$actionNameS[$i]="[Mode]"
+		endif
+
 
 
 
@@ -1414,20 +2064,63 @@ global $wheelstepup=IniRead($inifile,"Wheel","WheelStepUp",1), $wheelstepdown=In
 Global $WheelSpeedLimiterUp = IniRead($inifile,"Wheel","WheelSpeedLimiterUp",8500), $WheelSpeedlimiterDown = IniRead($inifile,"Wheel","WheelSpeedLimiterDown",8500)
 Global $UseSameWheelSpeedLimiter = IniRead($inifile,"Wheel","UseSameWheelSpeedLimiter",1), $WheelSpeedLimiter = IniRead($inifile,"Wheel","WheelSpeedLimiter",8500)
 Global $WheelAnalogMode = IniRead($inifile,"Wheel","WheelAnalogMode",1), $Digitalscrollrepeat = IniRead($inifile,"Wheel","DigitalScrollrepeat",1),$Analogscrollrepeat = IniRead($inifile,"Wheel","AnalogScrollrepeat",1)
-global $dir, $steps
+global $dir, $steps, $td=128
 
 global $deadzoneshape = IniRead($inifile,"Mouse","DeadzoneShape",1)
 global $repeatTime = IniRead($inifile,"Other","TurboRepeatTime",50)
-global $combotime = IniRead($inifile,"Other","ComboAsyncDelay",50), $SimpleMacroTime= IniRead($inifile,"Other","SimpleMacroTime",50)
+global $combotime = IniRead($inifile,"Other","ComboAsyncDelay",50), $SequenceTime= IniRead($inifile,"Other","SequenceTime",50), $HoldTime= IniRead($inifile,"Other","HoldTime",300)
+global $fastPressTime = IniRead($inifile,"Other","fastPressTime",150)
 
 If $AnalogToMouse <> "1" and $AnalogToMouse <> "0" Then	$AnalogToMouse=0
 if $MouseDeadzoneType<> 1 and $MouseDeadzoneType <>  2 and $MouseDeadzoneType <>  4 then  $MouseDeadzoneType=1
 if $AnalogsDeadzoneType<> 1 and $AnalogsDeadzoneType <>  2 and $AnalogsDeadzoneType <>  4 and $AnalogsDeadzoneType <> 8 then $AnalogsDeadzoneType=1
 
+
 global $sendkeystype = Iniread($inifile, "Other","SendKeysType",1)
-global $hotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","Hotkey","^+5") 	;default: Ctrl+Shift+5
+;global $ReloadHotkeyEnabledWasTrue=False, $StatsHotkeyEnabledWasTrue=False, $KeyboardShiftEnabledWasTrue=False, $KeyboardShiftCycleEnabledWasTrue=False
+global $ReloadHotkeyEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ReloadHotkeyEnabled","True"), $StatsHotkeyEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","StatsHotkeyEnabled","True")
+
+if $ReloadHotkeyEnabled="True" then
+global $hotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ReloadHotkey","^+5") 	  ;default: Ctrl+Shift+5
 $hotkey=String($hotkey)
 HotKeySet($hotkey, reloadini)
+$ReloadHotkeyEnabledWasTrue=True
+elseif $ReloadHotkeyEnabledWasTrue=True Then
+	HotKeySet($hotkey)
+endif
+
+if $StatsHotkeyEnabled="True" then
+global $statshotkey =Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","StatsHotkey","^+6") ;default: Ctrl+Shift+6
+$statshotkey=String($statshotkey)
+HotKeySet($statshotkey, statsstart)
+$StatsHotkeyEnabledWasTrue=True
+elseif $StatsHotkeyEnabledWasTrue=True Then
+	HotKeySet($statshotkey)
+endif
+
+global $KeyboardShiftEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","KeyboardShiftEnabled","False") , $KeyboardShiftCycleEnabled=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","KeyboardShiftCycleEnabled","False")
+if $KeyboardShiftEnabled="True" then
+	global $ShiftModeTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeToggle","^+9")
+	hotkeyset(String($ShiftModeTogglehotkey),ShiftModeToggleK)
+	global $ShiftModeToggleKOn=false, $ShiftModeToggleKVal=IniRead($inifile,"Other","ShiftToggleKeyboardValue",3)
+	$KeyboardShiftEnabledWasTrue=True
+elseif $KeyboardShiftEnabledWasTrue=True Then
+	HotKeySet($ShiftModeTogglehotkey)
+endif
+
+if $KeyboardShiftCycleEnabled="True" then
+global $ShiftModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeCycle-","^+7"), $ShiftModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","ShiftModeCycle+","^+8")
+hotkeyset(String($ShiftModeCycleMinushotkey),ShiftModeCycleMinusK)
+hotkeyset(String($ShiftModeCyclePlushotkey),ShiftModeCyclePlusK)
+$KeyboardShiftCycleEnabledWasTrue=True
+elseif $KeyboardShiftCycleEnabledWasTrue=True Then
+	HotKeySet($ShiftModeCycleMinushotkey)
+	HotKeySet($ShiftModeCyclePlushotkey)
+endif
+
+
+;global $LayerModeTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeToggle","^+3"), $LayerModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeCycleMinus","^+1"), $LayerModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","LayerModeCyclePlus","^+2")
+;global $SetTogglehotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeToggle","!^+3"), $SetModeCycleMinushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeCycleMinus","!^+1"), $SetModeCyclePlushotkey=Iniread(@ScriptDir & "\" & $programName &".config","Hotkey","SetModeCyclePlus","!^+2")
 
 global $lx=1,$ly=1,	$rx=1,$ry=1, $sticks=0, $mx=1, $my=1
 
@@ -1476,6 +2169,8 @@ global $pressed=$ef
 global $values[16+1+8]=[iniR("A"),IniR("B"),IniR("X"),IniR("Y"),IniR("LB"),IniR("RB"),IniR("LT"),IniR("RT"),IniR("Back"),IniR("Start"),IniR("LS"),IniR("RS") _
 ,IniR("Dup"),IniR("Ddown"),IniR("Dleft"),IniR("Dright"),IniR("Home"),IniR("LSup"),IniR("LSdown"),IniR("LSleft"),IniR("LSright"),IniR("RSup"),IniR("RSdown"),IniR("RSleft"),IniR("RSright")]
 
+global $buttonsname=["A","B","X","Y","LB","RB","LT","RT","Back","Start","LS","RS","Dup","Ddown","Dleft","Dright","Home","LSup","LSdown","LSleft","LSright","RSup","RSdown","RSleft","RSright"]
+
 global $toggle=$ef, $toggleOn=$ef,	$Turbo=$ef, $TurboToggle=$ef, $TurboToggleOn=$ef, $TurboOn=$ef, $alreadytimer=$ef, $alreadytimer2=$ef,		$TurboComboalreadyTimer=$ef, $TurboToggleComboalreadyTimer=$ef
 global $TimerT[$asize], $TimerT2[$asize], $Timer[$asize], $timersplash,		$TurboComboTimerT[$asize]
 global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $combosize=11,	$SequenceMax=16,		$comboasyncOn=$ef,	$simpleMacroOn=$ef
@@ -1483,7 +2178,7 @@ global $released=$ef, $combo=$ef, $Comboasync=$ef,	$toup=$ef,		$comboOn=$ef, $co
 global $ToggleComboOn=$ef, $ToggleCombo=$ef, $TurboCombo=$ef, $TurboToggleCombo=$ef,	$TurboComboOn=$ef, $TurboToggleOn=$ef, $TurboToggleComboOn=$ef
 global $keysfromcombo[$asize], $combokeys[$asize][$combosize], $keysfromcomboup[$asize], $keysfromcombodown[$asize]
 global $keysfromcomboasync[$asize], $combokeysasync[$asize][$combosize], $keysfromcomboupasync[$asize], $keysfromcombodownasync[$asize], $combK[$asize]
-global $MacroOn=$ef, $macrosize=25, $Macrokeys[$asize][$macrosize]
+global $MacroOn=$ef, $macrosize=26, $Macrokeys[$asize][$macrosize]
 global $stringmax=200,  $text=$ef ; $textOn=$ef, $textkeys[$asize][$stringsize]
 
 global $Togglekeysfromcombo[$asize],$Togglecombokeys[$asize][$combosize],$Togglekeysfromcomboup[$asize],$Togglekeysfromcombodown[$asize]
@@ -1507,6 +2202,16 @@ global $alreadytimerscroll=$ef, $timerscroll[$asize]
 Global $hNTDLL = DllOpen("ntdll.dll")
 global $fkeys, $DW=@DesktopWidth/15,$DH=@DesktopHeight/18
 global $specialkeys=$ef, $specialkeys2DCombo[$asize][$combosize], $specialkeys2DSequence[$asize][$SequenceMax]
+global $textstats, $textstats2, $stats, $statstime[$asize], $statstimer ;, $statsOn=False
+global $holdmax=3+(1), $holdnum[$asize], $holdtype[$asize][$Holdmax],$hold=$ef,$holdOn=$ef, $KeysfromHold[$asize], $HoldKeys[$asize][$Holdmax], $specialkeys2DHold[$asize][$holdmax], $holdtimer=$ef
+global $shiftmax=5+1, $shiftNum[$asize], $shift=$ef, $ShiftKeys[$asize][$shiftmax], $KeysfromShift[$asize], $ShiftType[$asize][$shiftmax], $specialkeys2DShift[$asize][$shiftmax]
+global $ShiftMode=$ef, $ShiftModeToggle=$ef, $ShiftmodeCycle=$ef
+global $actionName=$ee, $actionNameS=$ee
+global $shinum=1, $tempshinum, $shiftModeToggleOn=$ef, $newshinum=1, $shilimit, $previouslimit
+global $FastpressMax=3+1, $FastpressNum=$ez, $Fastpress=$ef, $Fastpresstimer[$asize], $fastpressOn=$ef, $FastpressKeys[$asize][$FastpressMax], $fastpressOnH=$ef
+global $keysfromFastpress[$asize], $FastpressType[$asize][$FastpressMax], $specialkeys2DFastPress[$asize][$FastpressMax], $tap=$ez, $oldtap=$ez, $fastpressSent=$ef
+global $statepress=$ee
+
 
 
 parse()
@@ -1532,10 +2237,13 @@ $fkeys="keys"
 endif
 
 
+statsvar()
+
 endfunc
 
 func timeout()
 	if timerdiff($timersplash)>750 then
+		$splashreload=False
 		SplashOff()
 		AdlibUnRegister(timeout)
 	endif
@@ -1543,12 +2251,52 @@ endfunc
 
 func reloadini()
 	loadini()
-	if $splash=1 then
+	if $splash=1 and not $statsOn then
+	$splashreload=True
 	$ST=SplashTextOn("","Config reloaded!",$DW,$DH,@DesktopWidth-$DW,@DesktopHeight-$DH,1,13*@DesktopWidth/2000,"",400)
 	$timersplash=timerinit()
 	AdlibRegister("timeout",50)
 	endif
 endfunc
+
+
+
+;;;;;;;;;;;;;;KEYBOARD
+func shiftmodeToggleK()
+	if $ShiftModeToggleKOn = False then
+$ShiftModeToggleKOn = True
+$shinum=$ShiftModeToggleKval
+$newshinum=$shinum
+	elseif $ShiftModeToggleKOn = True then
+		$shinum=1
+		$newshinum=$shinum
+		$ShiftModeToggleKOn = False
+	endif
+endfunc
+
+func shiftmodeCycleMinusK()
+	if $shinum>=1 then
+		$shinum-=1
+		$previouslimit=""
+	endif
+
+	if $shinum<1 then
+		$shinum=$shiftMax-1
+		$shiLimit=$shiftMax-1
+		Return
+	endif
+endfunc
+
+func shiftmodeCyclePlusK()
+$shinum+=1
+	if $shinum>$shiLimit then
+		$shinum=1
+		$shiLimit=$shiftMax-1
+		$previouslimit=""
+		Return
+	endif
+endfunc
+;;;;;;;;;;;;;;;;
 
 
 func onexit()
