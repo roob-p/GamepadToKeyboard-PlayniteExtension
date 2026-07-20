@@ -62,3 +62,9 @@ Packages:
       - "ShiftModeToggle: Ctrl Shift 9"
       - "---------------------"
       - "Added a live stats system (default hotkey: Ctrl Shift 6)"
+  - Version: 1.2.5
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2026-07-20
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.5/GamepadToKeyboard_v1.2.5.pext
+    Changelog:
+      - Fixed game activation detection. The extension now checks the launched game's ID instead of the selected game's ID, preventing GamepadToKeyboard from starting for the wrong game.
