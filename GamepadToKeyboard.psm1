@@ -29,10 +29,6 @@ function OnGameStarted()
 	if ($global:ProgramActive -eq 1) {
 	
 
-$gamel  = $PlayniteApi.MainView.SelectedGames
-$gamed = $gamel.id
-
-
 	#$ini=get-content "$PSScriptRoot\gamelist.ini" -EA 0 |ForEach-Object { ($_ -replace '\s*#.*$','').Trim() } | Where-Object { $_ -match '=' } | ConvertFrom-StringData
 		$ini=get-content "$PSScriptRoot\gamelist.ini" -EA 0
 	$ini = $ini -replace("\\","\\")
@@ -52,9 +48,9 @@ $global:initoload= '"'+$global:initoload+'"'
 	}
 	else {
 	
-	if ($ini.$gamed -eq 1){ 
-	start-process "$PSScriptRoot\$global:program_filename.exe" -Argument "$PSScriptRoot\$gamed.ini"
-	#start-process "$PSScriptRoot\GamepadToKeyboard.exe" -Argument "$PSScriptRoot\$($args.Game.id).ini"
+	if ($ini.$($args.Game.id) -eq 1){
+
+	start-process "$PSScriptRoot\$global:program_filename.exe" -Argument "$PSScriptRoot\$($args.Game.id).ini"
 	
 	}
 	
