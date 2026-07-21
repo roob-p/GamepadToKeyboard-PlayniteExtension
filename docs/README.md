@@ -135,7 +135,7 @@ Values you can assign to the buttons:
 - Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - Download last version:
-[v1.2.2](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.2/GamepadToKeyboard_v1.2.2.pext)
+[v1.2.5](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.5/GamepadToKeyboard_v1.2.5.pext)
 
 
 <br>
