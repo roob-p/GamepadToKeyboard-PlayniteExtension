@@ -131,10 +131,10 @@ Values you can assign to the buttons:
 
 <br>
 
-- Github repo: 🐙 [roop-p/GamepadToKeyboard-PlayniteExtension](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/)
-- Install directly:
+- 🐙 Github repo: [roop-p/GamepadToKeyboard-PlayniteExtension](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/)
+- 🧩 Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
-- Download last version:
+- 📥 Download last version:
 [v1.2.5](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.5/GamepadToKeyboard_v1.2.5.pext)
 
 
