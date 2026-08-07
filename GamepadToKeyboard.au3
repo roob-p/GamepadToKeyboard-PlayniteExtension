@@ -53,6 +53,7 @@ endif
 	endif
 
 
+
 #Region Var
 global $analogdeadzone=1, $sentKeys[256], $ignoreIndices[4]
 global $A=$buttons[12],$B=$buttons[13],$X=$buttons[14],$Y=$buttons[15],$start=$buttons[5],$back=$buttons[6],$LS=$buttons[7],$RS=$buttons[8],$LB=$buttons[9],$RB=$buttons[10],$Home=$buttons[11],$Up=$buttons[1],$Down=$buttons[2],$Left=$buttons[3],$Right=$buttons[4]
@@ -621,7 +622,7 @@ endfunc
 
 #Region Inpt() e InptD()
 func inpt($ix,$value,$state,$btype,$baction,$specialkey)
-
+consolewrite($buttonaction[$l][$ix] & @CRLF)
 switch $baction
 	case 0 ; normal key
 		sender($ix,$value,$state,$btype,$specialkey)
@@ -2110,7 +2111,7 @@ if $values[$cl][$i]="WheelUp" then $values[$cl][$i]="up"
 if $values[$cl][$i]="WheelDown" then $values[$cl][$i]="down"
 
 
-if $values[$cl][$i]= "Lctrl" or $values[$cl][$i]="Lalt" or $values[$cl][$i]="Lwin" or $values[$cl][$i]="Rwin" or $values[$cl][$i]="Rctrl" or $values[$cl][$i]="Ralt" then $specialkeys[$l][$i]=True
+if $values[$cl][$i]= "Lctrl" or $values[$cl][$i]="Lalt" or $values[$cl][$i]="Lwin" or $values[$cl][$i]="Rwin" or $values[$cl][$i]="Rctrl" or $values[$cl][$i]="Ralt" then $specialkeys[$cl][$i]=True
 
 
 endif
@@ -2485,11 +2486,27 @@ return $val
 endfunc
 
 
+func LayerpreviousOLD($ix,$cl,$sectionname,$sectiontype)
+	;msgbox("","","ee")
+for $i=1 to 5
+ $buttonaction[$i][$ix] = $buttonaction[0][$ix]
+ ;$buttontype[$i][$ix]=0
+  ;$buttontype[$i][$ix]=0
+ $buttontype[$cl][$ix]=$buttontype[0][$ix]
+
+;$buttonaction[$cl][$ix]=$buttonaction[0][$ix]
+;$buttontype[$cl][$ix]=$buttontype[0][$ix]
+next
+endfunc
+
+
 func Layerprevious($ix,$cl,$sectionname,$sectiontype)
 	;msgbox("","","ee")
 for $i=1 to 5
  $buttonaction[$i][$ix] = $buttonaction[0][$ix]
- $buttontype[$i][$ix]=0
+ ;$buttontype[$i][$ix]=0
+  ;$buttontype[$i][$ix]=0
+ $buttontype[$cl][$ix]=$buttontype[0][$ix]
 
 ;$buttonaction[$cl][$ix]=$buttonaction[0][$ix]
 ;$buttontype[$cl][$ix]=$buttontype[0][$ix]
@@ -2522,7 +2539,8 @@ endif
  next
 
  $buttonaction[$cl][$ix] = $buttonaction[0][$ix]
- $buttontype[$cl][$ix]=0
+ ;;$buttontype[$cl][$ix]=0
+ $buttontype[$cl][$ix]=$buttontype[0][$ix] ;
  $buttonL[$cl][$ix] = $buttonL[0][$ix]
 
 
@@ -2543,14 +2561,15 @@ if $buttonaction[0][$ix]=23 then $actionNameS[$cl][$ix]="[LayerCycle+]"
 
 
 
-if $cl>5 then Layerprevious($ix,$cl,$sectionname,$sectiontype)
+;if $cl>5 then Layerprevious($ix,$cl,$sectionname,$sectiontype)
 	elseif $sectiontype=1 then
  for $i=0 to $asize-1
 	if ($buttonaction[0][$i]<20 or $buttonaction[0][$i]>23)  then $values[$cl][$i]=iniRset($buttonsname[$i],$sectionname,$i, $cl)
  next
 
  $buttonaction[$cl][$ix] = $buttonaction[0][$ix]
- $buttontype[$cl][$ix]=0
+  ;;$buttontype[$cl][$ix]=0
+ $buttontype[$cl][$ix]=$buttontype[0][$ix] ;
 
  $buttonL[$cl][$ix] = $buttonL[0][$ix]
 
@@ -2568,7 +2587,7 @@ if $buttonaction[0][$ix]=21 then $actionNameS[$cl][$ix]="[SetModeToggle]"
 if $buttonaction[0][$ix]=22 then $actionNameS[$cl][$ix]="[LayerCycle-]"
 if $buttonaction[0][$ix]=23 then $actionNameS[$cl][$ix]="[LayerCycle+]"
 
-if $cl> 5 then Layerprevious($ix,$cl,$sectionname,$sectiontype)
+;if $cl> 5 then Layerprevious($ix,$cl,$sectionname,$sectiontype)
 endif
 
 endfunc
@@ -2585,7 +2604,8 @@ func LayerK($i,$cl,$sectionname,$sectiontype)
 
 
  $buttonaction[$cl][$i] = $buttonaction[0][$i]
- $buttontype[$cl][$i]=0
+  ;$buttontype[$cl][$i]=0
+ $buttontype[$cl][$i]=$buttontype[0][$i]
  $buttonL[$cl][$i] = $buttonL[0][$i]
 
 
