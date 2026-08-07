@@ -1,19 +1,21 @@
  # 🎮 GamepadToKeyboard-PlayniteExtension    
  ![GitHub Downloads](https://img.shields.io/github/downloads/roob-p/GamepadToKeyboard-PlayniteExtension/total)   
  
-🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable manner.*  
+🕹️ *Emulate mouse and keyboard input with your gamepad in a quick, easy and highly customizable way.*  
 
 - This extension lets you send mouse and keyboard input with your controller, so you can use it in games without gamepad support, or where some controller buttons (in particular `LT` and `RT`) do not work.  
 ***Perfect for old games without native controller support or with incomplete Xinput functionality.***  
 - The program is very easy to use and configure: just edit the assignments in the `.ini` file and the application will be started automatically after launching the game. 
 - A dedicated config can be created per game, or a global config can be used for all games.
 - It's also possible to browse the config to use directly from the menu panel, or create a list of favourite configs that can be switched via sub-menu.
-- Multiple games can be selected at once. Every new config will be created.
+- Multiple games can be selected at once, and a config will be created for each of them.
 - The program's functionalities can be changed with a click through the menu.
 - Clear and intuitive: "LED" icons indicate the state of the program, the active config and much more.
 - Config files can be edited and reloaded on-the-fly using a hotkey, without restarting the application.
 - **The program allows fine control over several controller aspects: deadzone types (square/rectangular, circular with and without rescale), deadzone values (per stick, axis, or direction), axis inversion, modifiers (`[Toggle], [Turbo], [TurboToggle], [Execute], [Combo], [Sequence]` and others) and more.**
-- Future updates will include a more advanced `[MACRO]` modifier.
+- Supports switchable key assignment groups: `Layer` (with fallback support) and `Set` (without fallback).
+- Includes a customizable rumble system with per-button vibration effects.
+- Future updates will include `[Chord]` a more advanced `[MACRO]` modifier.
 
 ##### ⚠️ `GamepadToKeyboard` requires an Xinput controller (native or emulated via tools like DS4Windows, DualSenseX, x360ce, etc.). 
 #### 🚀 Standalone version
@@ -113,13 +115,59 @@ Values you can assign to the buttons:
 
 <br>    
 
- ### ⌨️ Hotkeys  
+  ### ⌨️ Hotkeys                                                
 The program supports several configurable hotkeys. They can be set in `GamepadToKeyboard.config` and disabled if needed.
-- **Configuration reload**: `Shift + Ctrl + 5` (already described above).  
-- **Stats system**: `Shift + Ctrl + 6` (default)
-- **ShiftMode controls**: `ShiftModeToggle`, `ShiftModeCycle-`, `ShiftModeCycle+`, disabled by default.
+- **Configuration reload**: `Shift + Ctrl + 5` (enabled by default). 
+- **Stats system**: `Shift + Ctrl + 6` (enabled by default).
+- **ShiftMode controls**: `ShiftModeCycle-` *(Shift + Ctrl + 7)*, `ShiftModeCycle+` *(Shift + Ctrl + 8)*, `ShiftModeToggle` *(Shift + Ctrl + 9)*, disabled by default.
+- **Layer controls**: `LayerCycle-` *(Shift + Ctrl + 1)*, `LayerCycle+` *(Shift + Ctrl + 2)*, `LayerToggle` *(Shift + Ctrl + 3)*, disabled by default.
 - To enable/disable a hotkey, use the corresponding boolean flag in `GamepadToKeyboard.config`:
-  e.g. `KeyboardShiftEnabled = False`
+  e.g. `KeyboardShiftEnabled = False`.  
+
+<br>
+
+## 🖼️ Layers
+- GamepadToKeyboard supports multiple switchable slots of key assignments through Layer and Set.
+- `Layer` supports fallback (if a key doens't have an assignment, the correspondent value is taken from the Button section), while `Set` does not. 
+- You can define a Layer adding a section in the .INI file using square brackets (e.g. `[inventorymenu]`).
+- Adding the prefix `layer:` or `set:` to the name section set its initial type (Layer or Set) (e.g. `[set:inventorymenu], [layer:inventorymenu]`). Types can be overridden using the Layer/Set modifiers. If no prefix is added the default type is layer.
+- Use `[LayerMode]`, `[SetMode]`, `[LayerModeToggle]`, `[SetModeToggle]` followed by the Layer/Set name in button assignments to load that Layer/Set.
+- You can also define up to 5 Layers/Sets using `LayerToCycle` in `Other` section and switch between them using `[LayerCycle+]` and `[LayerCycle-]`. These can reference existing Layers/Sets already used by the mode modifiers, or completely different ones.
+- Each Layer/Set assignment uses one available slot, even if it references an already existing Layer/Set.
+- The maximum number of active Layer/Set assignments is 15.
+- When you assign a Layer/Set modifier to a button, that "activator" key will have the same function in the called layer/set (even if you try to reassign it to a new value). 
+- **Please use Layer/Set modifiers only in the Buttons section.**
+- Check the `LayerExample.ini` to see how layers/set work.
+
+<br>
+
+## 〰️ Vibration feature
+- GamepadToKeyboard lets you create customizable vibration effects for every button.
+- Three different vibration modes are available:
+   - `Hold`: vibration continues while the button is held down.
+   - `Single`: send a single vibration each time the button is pressed (duration can be configured in ms using `SingleDuration` variable).
+   - `Repeat`: vibration is repeated while the button is held down with an interval time (RepeatDuration and RepeatInterval are available).
+- You can define the buttons to vibrate with VibrateButtonN in the `[Vibration]` section (e.g. `VibrateButton1 = X`, `$VibrateButton2 = LB` etc.) and specify the properties adding a dot and the variable to the name:  
+ >   
+ > - VibrateButton2                   = Y
+ > - VibrateButton2.Style             = 1
+ > - VibrateButton2.LeftMotorStrength = 50
+ > - VibrateButton2.SingleDuration    = 300
+- If a property is not set, the corresponding global value is used.
+- You can also define `Modifier` buttons: the vibration only starts when this button is pressed together with a VibrateButton, e.g.:
+ >   
+ > - VibrateButton3                   = X
+ > - VibrateButton3.Modifier          = LB 
+- Common properties available:
+ >   
+ > - VibrateButtonN.Style: (0, 1, 2) 
+ > - VibrateButtonN.Motor: (Left, Right, Both)
+ > - VibrateButtonN.LeftMotorStrength: (Value), VibrateButtonN.RightMotorStrength: (Value)
+ > - VibrateButtonN.SingleDuration, VibrateButtonN.RepeatDuration, VibrateButtonN.RepeatInterval  
+- If `VibrateButtonN.LeftMotorStrength` or `VibrateButtonN.RightMotorStrength` are not available, GamepadToKeyboard looks up the global variables `LeftMotorStrength` and `RightMotorStrength`. If `UseSameStrengthVal = 1` then the `Strength` global variable is used.
+- You can enable progressive vibration strength with `ProgressiveTrigger = 1` (in this mode, Style is ignored for analog triggers).
+- GamepadToKeyboard supports simultaneous vibration effects from multiple buttons by automatically combining the left and right motor strengths.
+- **By combining styles, durations, intervals and motor strengths, you can create a wide variety of vibration effects.**
                                                                    
 
 <br>  
