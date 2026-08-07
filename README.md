@@ -202,7 +202,7 @@ The program supports several configurable hotkeys. They can be set in `GamepadTo
 - 🧩 Install directly:
   [GamepadToKeyboard](https://playnite.link/addons.html#GamepadToKeyboard)
 - 📥 Download last version:
-[v1.2.4](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.4/GamepadToKeyboard_v1.2.4.pext)
+[v1.2.6](https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.6/GamepadToKeyboard_v1.2.6.pext)
 
 
 <br>
