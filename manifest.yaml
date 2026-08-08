@@ -45,7 +45,7 @@ Packages:
   - Version: 1.2.4
     RequiredApiVersion: 6.0.0
     ReleaseDate: 2026-06-19
-    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.4/GamepadToKeyboard_v1.2.4.pext
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.3/GamepadToKeyboard_v1.2.3.pext
     Changelog:
       - "Added new modifiers:"
       - "[Hold]: perform different actions depending on how long the button is held. Short press sends the 1st key, medium press sends the 2nd key, long press sends the 3rd key. (e.g. [Hold] a, b, c)"
@@ -67,4 +67,35 @@ Packages:
     ReleaseDate: 2026-07-20
     PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.5/GamepadToKeyboard_v1.2.5.pext
     Changelog:
-      - Fixed game activation detection. The extension now checks the launched game's ID instead of the selected game's ID, preventing GamepadToKeyboard from starting for the wrong game.
+      - Fixed game activation detection. The extension now checks the launched game's ID instead of the selected game's ID, preventing GamepadToKeyboard from starting for the wrong game.      
+  - Version: 1.2.6
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2026-08-07
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.6/GamepadToKeyboard_v1.2.6.pext
+    Changelog:
+      - Added `Layer` and `Set` support as new groups of switchable key assignments.
+      - "`Layer` supports fallback to the main `Buttons` section, while `Set` does not."
+      - "Added new modifiers:" 
+      - "`[LayerCycle+]`, `[LayerCycle-]`" 
+      - "`[LayerMode]`, `[SetMode]`" 
+      - "`[LayerModeToggle]`, `[SetModeToggle]`"
+      - Up to 5 Layers/Sets can be defined in `LayerToCycle` under the `Other` section and switch between them using `[LayerCycle+]` and `[LayerCycle-]`.
+      - Layers/Sets can also be accessed directly using mode modifiers, whether they are included in the cycle list or not.
+      - Each Layer/Set assignment uses one available slot, even when referencing an already existing Layer/Set.
+      - The maximum number of active Layer/Set assignments is 15.
+      - Create Layer/Set sections in the INI file using square brackets. 
+      - "You can specify the type by adding the prefix  `layer:` or `set:`  (e.g `[inventorymenu]`, `[layer:inventorymenu]`, `[set:inventorymenu]`)" 
+      - If no prefix is added, the section type defaults to `Layer`.
+      - Modifiers override the section type (e.g `[LayerMode] extrakeys` loads the section as a layer, even if it is defined as  `[set:extrakeys]`). 
+      - Layer/Set modifiers should only be added in the Buttons section.
+      - "---------------------"
+      - Added customizable vibration support (see the INI examples and README for configuration details).
+      - Better `StatsOn` support. 
+      - Fixed a crash caused by the scroll function. 
+      - Other bug fixes.
+  - Version: 1.2.7
+    RequiredApiVersion: 6.0.0
+    ReleaseDate: 2026-08-08
+    PackageUrl: https://github.com/roob-p/GamepadToKeyboard-PlayniteExtension/releases/download/v1.2.7/GamepadToKeyboard_v1.2.7.pext
+    Changelog:
+      - Fixed bugs affecting cyclable Layers/Sets and special keys such as `Lctrl`, `Lalt` etc.
